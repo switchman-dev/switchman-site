@@ -3,8 +3,47 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Switchman — Stop your AI agents from overwriting each other</title>
-  <meta name="description" content="Switchman coordinates parallel AI coding agents so they never step on each other's work. Native Claude Code integration. CLI-compatible with Cursor, Windsurf, and any agent.">
+
+  <!-- Primary SEO -->
+  <title>Switchman — Coordinate Parallel Claude Code Agents Without File Conflicts</title>
+  <meta name="description" content="Run multiple Claude Code agents in parallel without them overwriting each other. Switchman adds a shared task queue and file locking so your agent teams stay in sync. Free, open source, native MCP integration.">
+  <link rel="canonical" href="https://switchman.dev">
+
+  <!-- Open Graph (Twitter/X, Slack, LinkedIn previews) -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://switchman.dev">
+  <meta property="og:title" content="Switchman — Coordinate Parallel Claude Code Agents Without File Conflicts">
+  <meta property="og:description" content="Run multiple Claude Code agents in parallel without them overwriting each other. Shared task queue, file locking, native MCP integration. Free and open source.">
+  <meta property="og:image" content="https://switchman.dev/og-image.png">
+
+  <!-- Twitter card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@switchmandev">
+  <meta name="twitter:title" content="Switchman — Coordinate Parallel Claude Code Agents Without File Conflicts">
+  <meta name="twitter:description" content="Run multiple Claude Code agents in parallel without them overwriting each other. Shared task queue, file locking, native MCP integration.">
+  <meta name="twitter:image" content="https://switchman.dev/og-image.png">
+
+  <!-- Structured data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Switchman",
+    "url": "https://switchman.dev",
+    "description": "Coordinate parallel Claude Code agents so they never overwrite each other. Shared task queue, file locking, and native MCP integration for multi-agent coding workflows.",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "macOS, Linux, Windows",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "license": "https://opensource.org/licenses/MIT",
+    "codeRepository": "https://github.com/switchman-dev/switchman",
+    "keywords": "parallel agents, Claude Code, multi-agent, git worktrees, file locking, MCP, AI coding agents"
+  }
+  </script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -35,7 +74,7 @@
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-kicker"><div class="kicker-dot"></div>v0.1.0 · open source · MIT</div>
+<div class="hero-kicker"><div class="kicker-dot"></div>v0.1.2 · open source · MIT</div>
   <h1>Your AI agents work harder<br><em>when they don't collide.</em></h1>
   <p class="hero-sub">
     Running multiple Claude Code instances in parallel is fast — until two agents 

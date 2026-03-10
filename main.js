@@ -86,3 +86,14 @@
   new IntersectionObserver(([e]) => {
     if (e.isIntersecting) { setTimeout(next, 300); }
   }, { threshold: 0.15 }).observe(document.querySelector('.terminal-outer'));
+
+  // Auto-update version badge from npm
+fetch('https://registry.npmjs.org/switchman-dev/latest')
+  .then(r => r.json())
+  .then(data => {
+    const badge = document.querySelector('.hero-kicker');
+    if (badge && data.version) {
+      badge.innerHTML = `<div class="kicker-dot"></div>v${data.version} · open source · MIT`;
+    }
+  })
+  .catch(() => {}); // silently fail, static text remains as fallback
