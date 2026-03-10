@@ -1,0 +1,22 @@
+<svg width="256" height="256" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="256" height="256" rx="52" fill="#161b25"/>
+  <!-- Subtle inner border -->
+  <rect x="6" y="6" width="244" height="244" rx="48" fill="none" stroke="rgba(103,232,249,0.15)" stroke-width="2"/>
+
+  <!-- Track in from left -->
+  <line x1="38" y1="128" x2="94" y2="128" stroke="#67e8f9" stroke-width="11" stroke-linecap="round"/>
+
+  <!-- Junction dot -->
+  <circle cx="94" cy="128" r="12" fill="#67e8f9"/>
+
+  <!-- Active route — upper fork -->
+  <line x1="94" y1="128" x2="218" y2="68" stroke="#67e8f9" stroke-width="11" stroke-linecap="round"/>
+  <!-- Active end cap -->
+  <circle cx="218" cy="68" r="12" fill="#67e8f9"/>
+
+  <!-- Inactive route — straight -->
+  <line x1="94" y1="128" x2="218" y2="128" stroke="#67e8f9" stroke-width="11" stroke-linecap="round" opacity="0.2"/>
+  <!-- Inactive end cap -->
+  <circle cx="218" cy="128" r="12" fill="#67e8f9" opacity="0.2"/>
+</svg>
