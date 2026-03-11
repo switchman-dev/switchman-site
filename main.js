@@ -5,12 +5,12 @@
 
   // Copy install command
   function copyInstall(el) {
-    navigator.clipboard.writeText('npm install -g switchman').then(() => {
+    navigator.clipboard.writeText('npm install -g switchman-dev').then(() => {
       el.classList.add('copied');
       el.textContent = '✓  copied to clipboard';
       setTimeout(() => {
         el.classList.remove('copied');
-        el.textContent = '$ npm install -g switchman';
+        el.textContent = '$ npm install -g switchman-dev';
       }, 2000);
     });
   }

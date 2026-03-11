@@ -4,33 +4,30 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Primary SEO -->
-  <title>Switchman — Coordinate Parallel Claude Code Agents Without File Conflicts</title>
-  <meta name="description" content="Run multiple Claude Code agents in parallel without them overwriting each other. Switchman adds a shared task queue and file locking so your agent teams stay in sync. Free, open source, native MCP integration.">
-  <link rel="canonical" href="https://switchman.dev">
+ <title>Switchman — Run Multiple AI Coding Agents Without Merge Chaos</title>
+<meta name="description" content="Run AI coding agents without merge chaos. Switchman coordinates tasks, governs execution, and protects merges so teams can work safely in one repository.">
 
-  <!-- Open Graph (Twitter/X, Slack, LinkedIn previews) -->
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://switchman.dev">
-  <meta property="og:title" content="Switchman — Coordinate Parallel Claude Code Agents Without File Conflicts">
-  <meta property="og:description" content="Run multiple Claude Code agents in parallel without them overwriting each other. Shared task queue, file locking, native MCP integration. Free and open source.">
-  <meta property="og:image" content="https://switchman.dev/og-image.png">
+<link rel="canonical" href="https://switchman.dev">
 
-  <!-- Twitter card -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:site" content="@switchmandev">
-  <meta name="twitter:title" content="Switchman — Coordinate Parallel Claude Code Agents Without File Conflicts">
-  <meta name="twitter:description" content="Run multiple Claude Code agents in parallel without them overwriting each other. Shared task queue, file locking, native MCP integration.">
-  <meta name="twitter:image" content="https://switchman.dev/og-image.png">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://switchman.dev">
+<meta property="og:title" content="Switchman — Run Multiple AI Coding Agents Without Merge Chaos">
+<meta property="og:description" content="Run AI coding agents without merge chaos. Coordination, enforcement, and merge safety for teams working in one repository.">
+<meta property="og:image" content="https://switchman.dev/og-image.png">
 
-  <!-- Structured data -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@switchmandev">
+<meta name="twitter:title" content="Switchman — Run Multiple AI Coding Agents Without Merge Chaos">
+<meta name="twitter:description" content="Run AI coding agents without merge chaos in one shared repository.">
+<meta name="twitter:image" content="https://switchman.dev/og-image.png">
+
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
     "name": "Switchman",
     "url": "https://switchman.dev",
-    "description": "Coordinate parallel Claude Code agents so they never overwrite each other. Shared task queue, file locking, and native MCP integration for multi-agent coding workflows.",
+    "description": "Switchman helps teams run multiple AI agents safely in one shared codebase with coordination, enforcement, and merge safety.",
     "applicationCategory": "DeveloperApplication",
     "operatingSystem": "macOS, Linux, Windows",
     "offers": {
@@ -40,18 +37,17 @@
     },
     "license": "https://opensource.org/licenses/MIT",
     "codeRepository": "https://github.com/switchman-dev/switchman",
-    "keywords": "parallel agents, Claude Code, multi-agent, git worktrees, file locking, MCP, AI coding agents"
+    "keywords": "AI agents, autonomous coding, multi-agent development, Claude Code, MCP, merge gate, shared codebase"
   }
   </script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-<!-- NAV -->
 <nav id="nav">
   <a href="#" class="logo">
     <img src="switchman-logo.svg" width="24" height="24" alt="Switchman">
@@ -59,197 +55,168 @@
   </a>
   <ul class="nav-center">
     <li><a href="#how">How it works</a></li>
-    <li><a href="#features">Features</a></li>
-    <li><a href="#claude-code">Claude Code</a></li>
+    <li><a href="#features">Why it matters</a></li>
+    <li><a href="#claude-code">Integrations</a></li>
     <li><a href="https://github.com/switchman-dev/switchman">Docs</a></li>
   </ul>
   <div class="nav-end">
-    <a href="https://github.com/switchman-dev/switchman" class="btn-nav-ghost">
-      <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
-      GitHub
-    </a>
+    <a href="https://github.com/switchman-dev/switchman" class="btn-nav-ghost">GitHub</a>
     <a href="https://npmjs.com/package/switchman-dev" class="btn-nav-solid">Get started</a>
   </div>
 </nav>
 
-<!-- HERO -->
 <section class="hero">
-<div class="hero-kicker"><div class="kicker-dot"></div>v0.1.2 · open source · MIT</div>
-  <h1>Your AI agents work harder<br><em>when they don't collide.</em></h1>
+  <div class="hero-kicker">
+    <div class="kicker-dot"></div>open source · MIT · built for AI coding teams
+  </div>
+
+ <h1>
+  Run AI coding agents
+  <br><em>without merge chaos.</em>
+</h1>
+
   <p class="hero-sub">
-    Running multiple Claude Code instances in parallel is fast — until two agents 
-    touch the same file and one quietly undoes the other's work. 
-    Switchman stops that from happening, so every agent 
-    makes progress and nothing gets lost.
-  </p>
+  Coordinate AI agents safely in one repository.
+</p>
+
   <div class="hero-actions">
     <a href="https://github.com/switchman-dev/switchman" class="btn-cta">★ &nbsp;Star on GitHub</a>
     <a href="#how" class="btn-outline">See how it works ↓</a>
   </div>
+
   <div class="hero-install">
-    <div class="install-cmd" onclick="copyInstall(this)">$ npm install -g switchman-dev</div>
+    <div class="install-cmd">$ npm install -g switchman-dev</div>
     <span class="install-hint">then run switchman init in your repo</span>
   </div>
 </section>
 
-<!-- PROBLEM -->
 <div class="problem-band reveal">
   <div class="problem-inner">
-    <span class="tag">Sound familiar?</span>
+    <span class="tag">The problem</span>
     <p class="problem-lead">
-      You spin up three agents to ship faster.
-      <span class="bad">Two of them touch the same file and one silently undoes the other's work.</span>
-      <span class="good">Switchman catches that before the first line is written.</span>
+      Running one AI agent is easy.
+      <span class="bad">Running several in the same codebase without collisions, drift, or unsafe merges is not.</span>
+      <span class="good">That is what Switchman is for.</span>
     </p>
     <div class="problem-list">
-      <div class="problem-item"><span class="x">✗</span><span>One agent undoes another's work without either of them knowing</span></div>
-      <div class="problem-item"><span class="x">✗</span><span>You spend an hour resolving merge conflicts that never needed to happen</span></div>
-      <div class="problem-item"><span class="x">✗</span><span>No single view of which agent is doing what, right now</span></div>
-      <div class="problem-item"><span class="x">✗</span><span>Your agents have no shared coordination layer — they just don't know about each other</span></div>
+      <div class="problem-item"><span class="x">✗</span><span>Two agents touch the same code and quietly undo each other’s work</span></div>
+      <div class="problem-item"><span class="x">✗</span><span>AI changes bypass normal coordination and only get caught at merge time</span></div>
+      <div class="problem-item"><span class="x">✗</span><span>Teams cannot tell which agent work is governed and which is not</span></div>
+      <div class="problem-item"><span class="x">✗</span><span>Engineers become traffic controllers instead of reviewers</span></div>
     </div>
   </div>
 </div>
 
-<!-- TERMINAL -->
 <div class="terminal-outer reveal">
-  <span class="tag">Watch it work</span>
-  <h2>Conflict caught. Both agents keep going.</h2>
-  <p class="section-sub">Agent 1 locks a file. Agent 2 tries to grab the same one. Switchman blocks it with a clear message and Agent 2 claims something else — no lost work, no awkward merge.</p>
+  <span class="tag">The core loop</span>
+  <h2>Multiple AI agents. One shared system.</h2>
+  <p class="section-sub">
+    Switchman coordinates the work, enforces the rules, and checks what is safe to merge,
+    so teams can scale AI development without giving up control of the codebase.
+  </p>
   <div class="terminal-card">
     <div class="term-bar">
       <div class="tdot tdot-r"></div><div class="tdot tdot-y"></div><div class="tdot tdot-g"></div>
-      <span class="term-label">switchman demo — 3 agents, 1 codebase</span>
+      <span class="term-label">switchman</span>
     </div>
-    <div class="term-body" id="term"></div>
+    <div class="term-body">
+<pre>
+Task queue
+  ↓
+Parallel agents
+  ↓
+Claims + enforcement
+  ↓
+Monitoring + validation
+  ↓
+Merge gate
+  ↓
+Safe review
+</pre>
+    </div>
   </div>
 </div>
 
-<!-- HOW IT WORKS -->
 <section class="section reveal" id="how">
   <span class="tag">How it works</span>
-  <h2>One command to set up. Then it runs itself.</h2>
-  <p class="section-sub">Switchman sits at the git level — not inside any specific editor. That's why it works across tools without any plugins.</p>
+  <h2>Coordination, enforcement, and merge safety in one layer.</h2>
+  <p class="section-sub">
+    Switchman sits underneath your AI agents and makes sure work is assigned clearly, changes stay governed, and unsafe code does not move forward silently.
+  </p>
   <div class="steps-grid">
     <div class="step-card">
       <div class="step-n">step 01</div>
-      <h3>Init your repo</h3>
-      <p>Run <code>switchman init</code> once. It finds your branches and sets up a shared task queue that all your agents read from.</p>
+      <h3>Assign work clearly</h3>
+      <p>Tasks are tracked centrally so agents do not pick up the same work or drift into each other’s scope.</p>
     </div>
     <div class="step-card">
       <div class="step-n">step 02</div>
-      <h3>Agents pick up work</h3>
-      <p>Each agent calls <code>task next</code> to get its assignment. Tasks are handed out one at a time — no two agents ever get the same job.</p>
+      <h3>Claim before editing</h3>
+      <p>Agents claim files and operate under leases, so the system can tell who owns what and prevent ungoverned edits.</p>
     </div>
     <div class="step-card">
       <div class="step-n">step 03</div>
-      <h3>Lock files before editing</h3>
-      <p>Before touching a file, agents call <code>claim</code>. If someone else has it, they're told straight away and pick a different file instead.</p>
+      <h3>Enforce execution</h3>
+      <p>Managed write paths, runtime monitoring, compliance checks, and commit gates make it clear when work is safe and when it is bypassing the rules.</p>
     </div>
     <div class="step-card">
       <div class="step-n">step 04</div>
-      <h3>Done — next agent's turn</h3>
-      <p>When a task finishes, <code>task done</code> marks it complete and frees up the locked files so the next agent can get started.</p>
+      <h3>Review before merge</h3>
+      <p>Switchman checks the resulting changes, flags integration risk, and helps teams review AI output before it reaches main.</p>
     </div>
   </div>
 </section>
 
-<!-- FEATURES -->
 <section class="features-bg reveal" id="features">
   <div class="features-inner">
-    <span class="tag">Features</span>
-    <h2>Everything you need. Nothing in the way.</h2>
-    <p class="section-sub">No server to run. No Docker. No daemon. A single file in your repo and a CLI you already know how to use.</p>
+    <span class="tag">Why it matters</span>
+    <h2>The missing control layer for AI coding teams.</h2>
+    <p class="section-sub">
+      AI can generate code quickly. The hard part is making parallel AI work safe, reviewable, and trustworthy in a real shared repository.
+    </p>
     <div class="features-grid">
 
       <div class="feat">
-        <div class="feat-icon">
-          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="1" y="2" width="7" height="9" rx="1.5" stroke="#67e8f9" stroke-width="1.4"/>
-            <line x1="3" y1="5" x2="6.5" y2="5" stroke="#67e8f9" stroke-width="1.2" stroke-linecap="round"/>
-            <line x1="3" y1="7" x2="5.5" y2="7" stroke="#67e8f9" stroke-width="1.2" stroke-linecap="round" opacity="0.45"/>
-            <rect x="10" y="2" width="7" height="9" rx="1.5" stroke="#67e8f9" stroke-width="1.4" opacity="0.28"/>
-            <line x1="12" y1="5" x2="15.5" y2="5" stroke="#67e8f9" stroke-width="1.2" stroke-linecap="round" opacity="0.28"/>
-            <line x1="12" y1="7" x2="14.5" y2="7" stroke="#67e8f9" stroke-width="1.2" stroke-linecap="round" opacity="0.2"/>
-            <path d="M3.5 14.5l2 1.5 4-5" stroke="#67e8f9" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </div>
-        <h3>No double-assignments</h3>
-        <p>Every task goes to exactly one agent. Even with a dozen running at once, no two agents ever pick up the same work.</p>
+        <div class="feat-icon"></div>
+        <h3>Parallel AI agents</h3>
+        <p>Run multiple agents at once in one shared repo without turning coordination into manual project management.</p>
       </div>
 
       <div class="feat">
-        <div class="feat-icon">
-          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="3.5" y="8" width="11" height="8" rx="1.5" stroke="#67e8f9" stroke-width="1.4"/>
-            <path d="M6 8V6a3 3 0 0 1 6 0v2" stroke="#67e8f9" stroke-width="1.4" stroke-linecap="round"/>
-            <circle cx="9" cy="12" r="1.4" fill="#67e8f9"/>
-            <line x1="9" y1="13.4" x2="9" y2="15" stroke="#67e8f9" stroke-width="1.3" stroke-linecap="round"/>
-          </svg>
-        </div>
-        <h3>File locking that works</h3>
-        <p>Agents lock files before they edit them. If a file is already taken, the request is blocked immediately — not after the damage is done.</p>
+        <div class="feat-icon"></div>
+        <h3>Governed execution</h3>
+        <p>Leases, claims, write gateways, monitoring, and commit gates create a real enforcement layer instead of relying on prompts alone.</p>
       </div>
 
       <div class="feat">
-        <div class="feat-icon">
-          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M1.5 9s3-6 7.5-6 7.5 6 7.5 6-3 6-7.5 6-7.5-6-7.5-6z" stroke="#67e8f9" stroke-width="1.4" stroke-linejoin="round"/>
-            <circle cx="9" cy="9" r="2.5" stroke="#67e8f9" stroke-width="1.4"/>
-            <circle cx="9" cy="9" r="0.9" fill="#67e8f9"/>
-          </svg>
-        </div>
-        <h3>See everything at once</h3>
-        <p>One command shows every agent, every active task, and every locked file — updated live so you always know what's happening.</p>
+        <div class="feat-icon"></div>
+        <h3>Merge safety</h3>
+        <p>Switchman surfaces unsafe overlaps, unmanaged changes, and integration risk before bad work quietly reaches main.</p>
       </div>
 
       <div class="feat">
-        <div class="feat-icon">
-          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="4" cy="4" r="2.2" stroke="#67e8f9" stroke-width="1.4"/>
-            <circle cx="14" cy="4" r="2.2" stroke="#67e8f9" stroke-width="1.4" opacity="0.35"/>
-            <circle cx="9" cy="14" r="2.2" stroke="#67e8f9" stroke-width="1.4"/>
-            <path d="M4 6.2V11a2 2 0 0 0 2 2h1.2" stroke="#67e8f9" stroke-width="1.3" stroke-linecap="round"/>
-            <path d="M14 6.2v1.5" stroke="#67e8f9" stroke-width="1.3" stroke-linecap="round" opacity="0.35"/>
-            <path d="M11.5 12l1.5 1.5 3-3.5" stroke="#67e8f9" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" opacity="0.35"/>
-          </svg>
-        </div>
-        <h3>Check before you merge</h3>
-        <p>Run a scan before merging any branches. Switchman tells you exactly what would conflict so you can sort it out first.</p>
+        <div class="feat-icon"></div>
+        <h3>AI merge gate</h3>
+        <p>Changes can be checked for semantic risk, subsystem overlap, missing tests, and other signals normal CI does not catch.</p>
       </div>
 
       <div class="feat">
-        <div class="feat-icon">
-          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="4" cy="3.5" r="2" stroke="#67e8f9" stroke-width="1.4"/>
-            <circle cx="4" cy="14.5" r="2" stroke="#67e8f9" stroke-width="1.4"/>
-            <circle cx="14" cy="7" r="2" stroke="#67e8f9" stroke-width="1.4"/>
-            <path d="M4 5.5v7" stroke="#67e8f9" stroke-width="1.4" stroke-linecap="round"/>
-            <path d="M5.8 4.2C7 4.2 14 4.2 14 7" stroke="#67e8f9" stroke-width="1.4" stroke-linecap="round" fill="none"/>
-          </svg>
-        </div>
-        <h3>Each agent on its own branch</h3>
-        <p>Every agent gets an isolated branch to work in. Changes stay separate until you're ready to review and merge.</p>
+        <div class="feat-icon"></div>
+        <h3>Full visibility</h3>
+        <p>See which agents are active, which files are claimed, which worktrees are compliant, and where enforcement is being bypassed.</p>
       </div>
 
-      <div class="feat">
-        <div class="feat-icon">
-          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M9 1.5L16 4.5V9c0 4-3.2 7-7 8C1.8 16 2 9 2 9V4.5L9 1.5z" stroke="#67e8f9" stroke-width="1.4" stroke-linejoin="round"/>
-            <path d="M6 9l2 2 4-4.5" stroke="#67e8f9" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </div>
-        <h3>Nothing extra to install</h3>
-        <p>Uses Node's built-in database. No packages to compile, no native binaries, no surprises on Mac, Linux, or Windows.</p>
-      </div>
-
-    </div>
+     <div class="feat">
+  <div class="feat-icon"></div>
+  <h3>Built for real teams</h3>
+  <p>Engineers stay in the loop as reviewers and decision-makers instead of spending their time coordinating agents by hand.</p>
+</div>
   </div>
 </section>
 
-<!-- EDITORS -->
 <section class="editors-strip reveal">
   <div class="editors-inner">
-    <p class="editors-note">native Claude Code integration · CLI-compatible with any agent</p>
+    <p class="editors-note">native Claude Code integration · works with CLI-based agent workflows</p>
     <div class="editors-pills">
       <div class="pill pill-featured"><span class="pill-dot"></span>Claude Code <span class="pill-badge">native MCP</span></div>
       <div class="pill"><span class="pill-dot pill-dot-dim"></span>Cursor</div>
@@ -258,65 +225,64 @@
       <div class="pill"><span class="pill-dot pill-dot-dim"></span>Cline</div>
       <div class="pill"><span class="pill-dot pill-dot-dim"></span>Any CLI agent</div>
     </div>
-    <p class="editors-sub">Cursor and Windsurf MCP support coming soon — use the CLI today</p>
+    <p class="editors-sub">Use Switchman underneath the tools your team already uses.</p>
   </div>
 </section>
 
-<!-- CLAUDE CODE / MCP -->
 <section class="mcp-bg reveal" id="claude-code">
   <div class="mcp-inner">
     <div class="mcp-text">
-      <span class="tag">Claude Code</span>
-      <h2 style="font-size:clamp(20px,2.8vw,28px);margin-bottom:14px;">Your agents coordinate without any extra prompting</h2>
-      <p>Switchman ships with a native Claude Code integration via MCP. Add two lines to your config and your agents will automatically pick up tasks, check for file conflicts, and release their locks when they finish — no coordination logic needed on your end.</p>
-      <p>Running Cursor or Windsurf? You can use the Switchman CLI directly from any terminal — the same task queue, the same file locking, just without the automatic MCP hooks. Native integrations are on the roadmap.</p>
+      <span class="tag">Integrations</span>
+      <h2 style="font-size:clamp(20px,2.8vw,28px);margin-bottom:14px;">Native where possible. Consistent everywhere.</h2>
+      <p>
+        Claude Code connects directly through MCP, so agents can work through Switchman without extra prompting.
+        Other agents can use the CLI and wrapper paths to get the same coordination and enforcement model.
+      </p>
+      <p>
+        The goal is simple: if multiple AI agents are working in one codebase, teams should know what is governed, what changed, and what is safe to merge.
+      </p>
       <div class="mcp-tools-list">
-        <div class="mcp-tool"><span class="tc">task_next</span> — picks up the next available task</div>
-        <div class="mcp-tool"><span class="tc">task_claim</span> — locks a file before editing it</div>
-        <div class="mcp-tool"><span class="tc">task_done</span> — marks complete, releases all locks</div>
-        <div class="mcp-tool"><span class="tc">scan</span> — checks for conflicts before merging</div>
-        <div class="mcp-tool"><span class="tc">status</span> — shows what every agent is doing right now</div>
+        <div class="mcp-tool"><span class="tc">task + pipeline tools</span> — coordinate work across agents</div>
+        <div class="mcp-tool"><span class="tc">claims + leases</span> — track ownership before editing</div>
+        <div class="mcp-tool"><span class="tc">managed write tools</span> — enforce safe mutation paths</div>
+        <div class="mcp-tool"><span class="tc">status + scan</span> — inspect live compliance and conflicts</div>
+        <div class="mcp-tool"><span class="tc">merge gates</span> — block unsafe or unmanaged changes</div>
       </div>
     </div>
     <div>
       <div class="code-block">
         <div class="code-header">
-          <span>~/.claude/claude_desktop_config.json</span>
+          <span>what Switchman gives you</span>
         </div>
         <div class="code-body">
-<span class="cp">{</span>
-  <span class="ck">"mcpServers"</span><span class="cp">: {</span>
-    <span class="ck">"switchman"</span><span class="cp">: {</span>
-      <span class="ck">"command"</span><span class="cp">:</span> <span class="cv">"switchman-mcp"</span><span class="cp">,</span>
-      <span class="ck">"args"</span><span class="cp">:</span> <span class="cv">[]</span>
-    <span class="cp">}</span>
-  <span class="cp">}</span>
-<span class="cp">}</span>
+Multiple AI agents
+  -> one task system
+  -> one enforcement layer
+  -> one merge boundary
+  -> one shared codebase
         </div>
       </div>
-      <p class="code-hint">Add this, restart Claude Code, and your agents are coordinated.</p>
+      <p class="code-hint">Run AI agents in parallel. Keep the codebase under control.</p>
     </div>
   </div>
 </section>
 
-<!-- CTA -->
 <section class="cta-section reveal">
   <div class="cta-glow"></div>
-  <h2>Run more agents.<br>Ship faster. Merge clean.</h2>
-  <p>Free and open source. Works with the tools you already use.</p>
+  <h2>Let AI agents move faster.<br>Without losing control of the repo.</h2>
+  <p>Switchman helps teams run multiple AI agents safely in one codebase.</p>
   <div class="cta-btns">
     <a href="https://github.com/switchman-dev/switchman" class="btn-cta">★ &nbsp;Star on GitHub</a>
     <a href="https://github.com/switchman-dev/switchman#readme" class="btn-outline">Read the docs ↗</a>
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer>
   <span>switchman.dev — MIT License</span>
   <div class="footer-links">
     <a href="https://github.com/switchman-dev/switchman">GitHub</a>
     <a href="https://github.com/switchman-dev/switchman/issues">Issues</a>
-    <a href="https://npmjs.com/package/switchman">npm</a>
+    <a href="https://npmjs.com/package/switchman-dev">npm</a>
   </div>
 </footer>
 
