@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Switchman Pro — Unlimited agents, team coordination, cloud sync</title>
-  <meta name="description" content="Switchman Pro gives you unlimited parallel AI agents, cloud-synced team coordination, and 90-day history. £19/seat/month.">
+  <meta name="description" content="Switchman Pro gives you unlimited parallel AI agents, cloud-synced team coordination, and 90-day history. $25/seat/month.">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
@@ -203,7 +203,7 @@
     <button class="modal-close" onclick="closeModal()" aria-label="Close">&#x2715;</button>
     <div class="modal-plan-badge" id="modal-plan-name">Monthly</div>
     <h3>Get started with Pro</h3>
-    <p class="modal-sub" id="modal-sub">£19 / seat / month · cancel anytime</p>
+    <p class="modal-sub" id="modal-sub">425 / seat / month · cancel anytime</p>
     <hr>
     <div class="modal-step-label">Step 1 — sign in to continue</div>
     <button class="btn-github" id="github-btn" onclick="handleGitHubSignIn()">
@@ -266,7 +266,7 @@
   <div class="pricing-wrap">
     <div class="plan-card">
       <div class="plan-name">Monthly</div>
-      <div class="plan-price"><span>£</span>19</div>
+      <div class="plan-price"><span>$</span>25</div>
       <div class="plan-period">per seat / month</div>
       <hr class="plan-divider">
       <ul class="plan-features">
@@ -282,7 +282,7 @@
     <div class="plan-card featured">
       <div class="plan-badge">Best value</div>
       <div class="plan-name">Annual</div>
-      <div class="plan-price"><span>£</span>190</div>
+      <div class="plan-price"><span>$</span>250</div>
       <div class="plan-period">per seat / year</div>
       <div class="plan-saving">2 months free</div>
       <ul class="plan-features">
@@ -456,20 +456,7 @@
 </footer>
 
 <!-- ─── SUPABASE + LOGIC ──────────────────────────────────────────────────── -->
-<!--
-  SETUP INSTRUCTIONS:
-  1. Create a Supabase project at supabase.com
-  2. Go to Authentication > Providers > GitHub and enable it
-     - Create a GitHub OAuth App at github.com/settings/developers
-     - Homepage URL: https://switchman.dev
-     - Callback URL: https://YOUR_PROJECT_REF.supabase.co/auth/v1/callback
-     - Copy the Client ID and Secret into Supabase
-  3. Go to Authentication > URL Configuration
-     - Add https://switchman.dev/pro/callback to Redirect URLs
-  4. Replace the two placeholder values below with your real values
-  5. In Polar.sh, create two products (Monthly £19, Annual £190)
-     and replace the checkout URLs below with your real product URLs
--->
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
   // ─── CONFIG — replace these two values ────────────────────────────────────
@@ -490,10 +477,10 @@
     const sub      = document.getElementById('modal-sub')
     if (plan === 'annual') {
       planName.textContent = 'Annual — Best value'
-      sub.textContent      = '£190 / seat / year · 2 months free'
+      sub.textContent      = '$250 / seat / year · 2 months free'
     } else {
       planName.textContent = 'Monthly'
-      sub.textContent      = '£19 / seat / month · cancel anytime'
+      sub.textContent      = '$25 / seat / month · cancel anytime'
     }
     document.getElementById('modal').classList.add('open')
     document.getElementById('modal').dataset.plan = plan
