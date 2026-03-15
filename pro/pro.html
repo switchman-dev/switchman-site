@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Switchman Pro — Unlimited agents, team coordination, cloud sync</title>
+  <meta name="description" content="Switchman Pro gives you unlimited parallel AI agents, cloud-synced team coordination, and 90-day history. £19/seat/month.">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg:#0b1020; --bg-card:#121a2b; --bg-raised:#182235; --border:#223047;
+      --border-2:#2c3d58; --text:#e6eef8; --text-2:#93a4ba; --text-3:#5f7189;
+      --accent:#5CF2C7; --accent-hover:#7EF7D3; --accent-dim:rgba(92,242,199,0.08);
+      --accent-border:rgba(92,242,199,0.22); --green:#4ade80; --amber:#fbbf24; --blue:#7dd3fc;
+      --mono:'JetBrains Mono','Fira Code',monospace; --sans:'Inter',system-ui,sans-serif;
+    }
+    html { scroll-behavior: smooth; }
+    body { background:var(--bg); color:var(--text); font-family:var(--sans); font-size:15px; line-height:1.65; overflow-x:hidden; -webkit-font-smoothing:antialiased; }
+
+    nav { position:fixed; top:0; left:0; right:0; z-index:100; height:58px; display:flex; align-items:center; justify-content:space-between; padding:0 36px; background:rgba(11,16,32,0.65); border-bottom:1px solid rgba(255,255,255,0.08); backdrop-filter:blur(24px) saturate(180%); -webkit-backdrop-filter:blur(24px) saturate(180%); }
+    .logo { font-family:var(--mono); font-size:15px; font-weight:500; color:var(--text); text-decoration:none; display:flex; align-items:center; gap:9px; }
+    .nav-end { display:flex; gap:10px; align-items:center; }
+    .btn-nav-ghost { color:var(--text-2); text-decoration:none; font-size:13px; font-family:var(--mono); border:1px solid var(--border-2); padding:6px 18px; border-radius:99px; display:flex; align-items:center; gap:6px; transition:color 0.15s,border-color 0.15s,background 0.15s; }
+    .btn-nav-ghost:hover { color:var(--text); border-color:var(--accent-border); background:rgba(255,255,255,0.02); }
+    .btn-nav-solid { background:var(--accent); color:#061016; font-size:13px; font-family:var(--mono); font-weight:700; padding:6px 20px; border-radius:99px; text-decoration:none; transition:background 0.15s; }
+    .btn-nav-solid:hover { background:var(--accent-hover); }
+
+    /* MODAL */
+    .modal-overlay { display:none; position:fixed; inset:0; z-index:200; background:rgba(6,10,22,0.85); backdrop-filter:blur(8px); align-items:center; justify-content:center; padding:24px; }
+    .modal-overlay.open { display:flex; }
+    .modal { background:var(--bg-card); border:1px solid var(--border-2); border-radius:20px; padding:40px 36px; width:100%; max-width:440px; position:relative; animation:up 0.25s ease forwards; }
+    .modal-close { position:absolute; top:16px; right:16px; background:none; border:none; color:var(--text-3); font-size:20px; cursor:pointer; line-height:1; transition:color 0.15s; }
+    .modal-close:hover { color:var(--text); }
+    .modal-plan-badge { font-family:var(--mono); font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:var(--accent); margin-bottom:8px; }
+    .modal h3 { font-size:22px; font-weight:600; letter-spacing:-0.02em; color:var(--text); margin-bottom:6px; }
+    .modal-sub { font-size:13px; color:var(--text-3); font-family:var(--mono); margin-bottom:28px; }
+    .modal hr { border:none; border-top:1px solid var(--border); margin-bottom:24px; }
+    .modal-step-label { font-size:12px; color:var(--text-3); font-family:var(--mono); margin-bottom:12px; text-transform:uppercase; letter-spacing:0.06em; }
+
+    .btn-github { display:flex; align-items:center; justify-content:center; gap:10px; width:100%; background:var(--bg-raised); border:1px solid var(--border-2); color:var(--text); font-family:var(--mono); font-size:13px; font-weight:600; padding:13px 28px; border-radius:99px; text-decoration:none; transition:all 0.15s; cursor:pointer; margin-bottom:10px; position:relative; }
+    .btn-github:hover:not(:disabled) { border-color:var(--accent-border); background:var(--bg-card); color:var(--accent); }
+    .btn-github:disabled { opacity:0.5; cursor:not-allowed; }
+    .btn-github svg { width:16px; height:16px; fill:currentColor; flex-shrink:0; }
+    .btn-github .spinner { width:16px; height:16px; border:2px solid rgba(92,242,199,0.3); border-top-color:var(--accent); border-radius:50%; animation:spin 0.7s linear infinite; flex-shrink:0; }
+
+    .modal-note { font-size:11px; color:var(--text-3); font-family:var(--mono); text-align:center; line-height:1.6; }
+    .modal-security { display:flex; align-items:center; justify-content:center; gap:6px; margin-top:20px; font-size:11px; color:var(--text-3); font-family:var(--mono); }
+    .modal-error { font-size:12px; color:#f87171; font-family:var(--mono); text-align:center; margin-top:10px; display:none; }
+    .modal-error.show { display:block; }
+
+    /* HERO */
+    .pro-hero { padding:140px 36px 80px; text-align:center; position:relative; overflow:hidden; }
+    .pro-hero::before { content:''; position:absolute; inset:0; background-image:linear-gradient(rgba(34,48,71,0.48) 1px,transparent 1px),linear-gradient(90deg,rgba(34,48,71,0.48) 1px,transparent 1px); background-size:52px 52px; mask-image:radial-gradient(ellipse 80% 70% at 50% 40%,black 0%,transparent 100%); pointer-events:none; }
+    .pro-kicker { display:inline-flex; align-items:center; gap:8px; background:var(--accent-dim); border:1px solid var(--accent-border); border-radius:99px; padding:5px 16px; font-size:12px; font-family:var(--mono); color:var(--accent); margin-bottom:28px; animation:up 0.4s ease forwards; }
+    .kicker-dot { width:6px; height:6px; border-radius:50%; background:var(--accent); animation:pulse 2.4s ease infinite; }
+    .pro-hero h1 { font-size:clamp(34px,4.5vw,62px); font-weight:600; line-height:1.1; letter-spacing:-0.03em; color:var(--text); margin-bottom:20px; animation:up 0.4s ease forwards 0.1s; opacity:0; }
+    .pro-hero h1 em { font-style:normal; color:var(--accent); }
+    .pro-hero-sub { font-size:clamp(15px,1.6vw,18px); color:var(--text-2); max-width:500px; margin:0 auto 20px; animation:up 0.4s ease forwards 0.2s; opacity:0; }
+
+    /* SOCIAL PROOF */
+    .social-proof { display:flex; align-items:center; justify-content:center; gap:24px; flex-wrap:wrap; margin:0 auto 44px; animation:up 0.4s ease forwards 0.25s; opacity:0; }
+    .proof-stat { font-family:var(--mono); font-size:13px; color:var(--text-3); }
+    .proof-stat strong { color:var(--text-2); font-weight:600; }
+    .proof-dot { width:3px; height:3px; border-radius:50%; background:var(--border-2); }
+
+    /* QUOTES */
+    .proof-quotes { max-width:840px; margin:0 auto 56px; display:grid; grid-template-columns:repeat(3,1fr); gap:16px; animation:up 0.5s ease forwards 0.3s; opacity:0; }
+    .quote-card { background:var(--bg-card); border:1px solid var(--border); border-radius:12px; padding:22px 24px; text-align:left; }
+    .quote-text { font-size:14px; color:var(--text-2); line-height:1.6; margin-bottom:14px; font-style:italic; }
+    .quote-author { display:flex; align-items:center; gap:10px; }
+    .quote-avatar { width:28px; height:28px; border-radius:50%; background:var(--accent-dim); border:1px solid var(--accent-border); display:flex; align-items:center; justify-content:center; font-family:var(--mono); font-size:11px; color:var(--accent); font-weight:700; flex-shrink:0; }
+    .quote-name { font-size:12px; font-family:var(--mono); color:var(--text-3); }
+    .quote-name strong { color:var(--text-2); display:block; font-size:13px; }
+
+    /* PRICING */
+    .pricing-wrap { max-width:760px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:16px; animation:up 0.5s ease forwards 0.35s; opacity:0; }
+    .plan-card { background:var(--bg-card); border:1px solid var(--border); border-radius:16px; padding:36px 32px; text-align:left; position:relative; transition:border-color 0.2s; }
+    .plan-card:hover { border-color:var(--border-2); }
+    .plan-card.featured { border-color:var(--accent-border); background:linear-gradient(160deg,rgba(92,242,199,0.05) 0%,var(--bg-card) 60%); }
+    .plan-badge { position:absolute; top:-12px; left:50%; transform:translateX(-50%); background:var(--accent); color:#061016; font-family:var(--mono); font-size:10px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; padding:4px 14px; border-radius:99px; white-space:nowrap; }
+    .plan-name { font-family:var(--mono); font-size:12px; letter-spacing:0.08em; text-transform:uppercase; color:var(--accent); margin-bottom:16px; }
+    .plan-price { font-size:48px; font-weight:700; letter-spacing:-0.03em; color:var(--text); line-height:1; margin-bottom:4px; }
+    .plan-price span { font-size:20px; font-weight:400; color:var(--text-3); vertical-align:top; padding-top:10px; display:inline-block; }
+    .plan-period { font-size:13px; color:var(--text-3); font-family:var(--mono); margin-bottom:28px; }
+    .plan-saving { display:inline-block; background:rgba(92,242,199,0.12); border:1px solid var(--accent-border); border-radius:99px; padding:3px 10px; font-size:11px; font-family:var(--mono); color:var(--accent); margin-bottom:28px; }
+    .plan-divider { border:none; border-top:1px solid var(--border); margin-bottom:24px; }
+    .plan-features { list-style:none; margin-bottom:32px; }
+    .plan-features li { display:flex; align-items:flex-start; gap:10px; font-size:14px; color:var(--text-2); padding:6px 0; }
+    .plan-features .check { color:var(--accent); font-size:14px; margin-top:1px; flex-shrink:0; }
+    .btn-plan { display:block; width:100%; text-align:center; font-family:var(--mono); font-size:13px; font-weight:700; padding:13px 24px; border-radius:99px; text-decoration:none; transition:all 0.15s; cursor:pointer; border:none; }
+    .btn-plan-primary { background:var(--accent); color:#061016; }
+    .btn-plan-primary:hover { background:var(--accent-hover); }
+    .btn-plan-ghost { background:transparent; color:var(--text-2); border:1px solid var(--border-2); }
+    .btn-plan-ghost:hover { color:var(--text); border-color:var(--accent-border); background:rgba(255,255,255,0.02); }
+
+    /* TERMINAL DEMO */
+    .demo-section { background:var(--bg-card); border-top:1px solid var(--border); border-bottom:1px solid var(--border); padding:80px 36px; }
+    .demo-inner { max-width:780px; margin:0 auto; }
+    .demo-header { text-align:center; margin-bottom:36px; }
+    .demo-sub { font-size:15px; color:var(--text-2); margin-top:8px; }
+    .demo-tabs { display:flex; gap:8px; margin-bottom:16px; flex-wrap:wrap; }
+    .demo-tab { font-family:var(--mono); font-size:12px; padding:6px 16px; border-radius:99px; border:1px solid var(--border); background:none; color:var(--text-3); cursor:pointer; transition:all 0.15s; }
+    .demo-tab.active { border-color:var(--accent-border); background:var(--accent-dim); color:var(--accent); }
+    .demo-tab:hover:not(.active) { color:var(--text-2); border-color:var(--border-2); }
+    .demo-panel { display:none; }
+    .demo-panel.active { display:block; }
+    .terminal-card { background:rgba(11,16,32,0.8); border:1px solid rgba(255,255,255,0.08); border-top:1px solid rgba(255,255,255,0.14); border-radius:12px; overflow:hidden; box-shadow:0 24px 48px rgba(0,0,0,0.4); }
+    .term-bar { background:rgba(24,34,53,0.6); border-bottom:1px solid rgba(255,255,255,0.06); padding:11px 16px; display:flex; align-items:center; gap:7px; }
+    .term-body { padding:22px 24px; font-family:var(--mono); font-size:13px; line-height:1.9; }
+    .tdot { width:11px; height:11px; border-radius:50%; }
+    .tdot-r { background:#f87171; opacity:.7; } .tdot-y { background:#fbbf24; opacity:.7; } .tdot-g { background:#4ade80; opacity:.7; }
+    .term-label { margin-left:8px; font-family:var(--mono); font-size:12px; color:var(--text-3); }
+    .tl { display:flex; }
+    .t-prompt { color:var(--text-3); margin-right:8px; } .t-cmd { color:var(--accent); } .t-out { color:var(--text-2); } .t-ok { color:var(--green); } .t-dim { color:var(--text-3); }
+    .t-a1 { color:var(--accent); font-weight:600; } .t-a2 { color:var(--amber); font-weight:600; } .t-a3 { color:var(--blue); font-weight:600; } .t-a4 { color:#c084fc; font-weight:600; }
+    .t-blank { height:10px; }
+
+    /* INCLUDED */
+    .included-section { max-width:960px; margin:0 auto; padding:100px 36px; }
+    .included-header { text-align:center; margin-bottom:56px; }
+    .tag { display:inline-block; font-family:var(--mono); font-size:11px; color:var(--accent); letter-spacing:0.08em; text-transform:uppercase; margin-bottom:12px; }
+    h2 { font-size:clamp(24px,3vw,38px); font-weight:600; letter-spacing:-0.025em; color:var(--text); line-height:1.2; margin-bottom:12px; }
+    .included-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--border); border:1px solid var(--border); border-radius:12px; overflow:hidden; }
+    .inc-item { background:var(--bg-card); padding:32px 28px; transition:background 0.15s; }
+    .inc-item:hover { background:var(--bg-raised); }
+    .inc-tag { font-family:var(--mono); font-size:10px; letter-spacing:0.08em; text-transform:uppercase; color:var(--accent); opacity:0.72; margin-bottom:12px; }
+    .inc-item h3 { font-size:15px; font-weight:600; color:var(--text); margin-bottom:8px; letter-spacing:-0.01em; }
+    .inc-item p { font-size:14px; color:var(--text-2); line-height:1.6; }
+
+    /* COMPARE */
+    .compare-section { max-width:760px; margin:0 auto; padding:0 36px 100px; }
+    .compare-header { text-align:center; margin-bottom:40px; }
+    .compare-table { width:100%; border-collapse:collapse; border:1px solid var(--border); border-radius:12px; overflow:hidden; }
+    .compare-table th { background:var(--bg-card); padding:16px 24px; font-family:var(--mono); font-size:12px; font-weight:600; color:var(--text-2); text-align:left; letter-spacing:0.04em; border-bottom:1px solid var(--border); }
+    .compare-table th:not(:first-child) { text-align:center; }
+    .compare-table td { padding:14px 24px; border-bottom:1px solid var(--border); font-size:14px; color:var(--text-2); }
+    .compare-table tr:last-child td { border-bottom:none; }
+    .compare-table td:not(:first-child) { text-align:center; }
+    .compare-table tr:hover td { background:rgba(255,255,255,0.01); }
+    .col-pro { color:var(--accent); font-weight:600; } .col-free { color:var(--text-3); }
+    .tick { color:var(--green); font-size:16px; } .cross { color:var(--text-3); font-size:16px; }
+    .highlight-col { background:rgba(92,242,199,0.03); }
+
+    /* ACTIVATE */
+    .activate-section { background:var(--bg-card); border-top:1px solid var(--border); border-bottom:1px solid var(--border); padding:100px 36px; }
+    .activate-inner { max-width:680px; margin:0 auto; text-align:center; }
+    .activate-inner h2 { margin-bottom:12px; }
+    .activate-sub { font-size:15px; color:var(--text-2); margin-bottom:40px; max-width:460px; margin-left:auto; margin-right:auto; }
+    .cli-steps { display:flex; flex-direction:column; gap:12px; text-align:left; }
+    .cli-step { display:flex; align-items:flex-start; gap:16px; background:var(--bg); border:1px solid var(--border); border-radius:10px; padding:18px 20px; }
+    .cli-step-num { width:24px; height:24px; border-radius:50%; border:1px solid var(--accent-border); display:flex; align-items:center; justify-content:center; font-family:var(--mono); font-size:11px; color:var(--accent); font-weight:600; flex-shrink:0; margin-top:1px; }
+    .cli-step-content { flex:1; }
+    .cli-step-label { font-size:13px; color:var(--text-2); margin-bottom:6px; }
+    .cli-step-cmd { font-family:var(--mono); font-size:13px; color:var(--accent); background:var(--bg-card); border:1px solid var(--border); border-radius:6px; padding:8px 14px; display:inline-block; }
+    .cli-step-note { font-size:12px; color:var(--text-3); font-family:var(--mono); margin-top:6px; }
+
+    /* FAQ */
+    .faq-section { max-width:640px; margin:0 auto; padding:100px 36px; }
+    .faq-header { text-align:center; margin-bottom:48px; }
+    .faq-item { border-bottom:1px solid var(--border); padding:24px 0; }
+    .faq-item:first-of-type { border-top:1px solid var(--border); }
+    .faq-q { font-size:15px; font-weight:600; color:var(--text); margin-bottom:10px; }
+    .faq-a { font-size:14px; color:var(--text-2); line-height:1.7; }
+    .faq-a code { font-family:var(--mono); font-size:12px; color:var(--accent); background:var(--accent-dim); border:1px solid var(--accent-border); border-radius:4px; padding:1px 6px; }
+
+    /* CTA */
+    .cta-section { border-top:1px solid var(--border); padding:100px 36px; text-align:center; }
+    .cta-section h2 { font-size:clamp(26px,4vw,44px); margin-bottom:12px; }
+    .cta-section p { color:var(--text-2); font-size:15px; font-family:var(--mono); margin-bottom:36px; }
+    .cta-btns { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
+    .btn-cta { background:var(--accent); color:#061016; font-family:var(--mono); font-size:13px; font-weight:700; padding:12px 24px; border-radius:99px; text-decoration:none; display:inline-flex; align-items:center; gap:8px; transition:background 0.15s; cursor:pointer; border:none; }
+    .btn-cta:hover { background:var(--accent-hover); }
+    .btn-outline { background:transparent; color:var(--text-2); font-family:var(--mono); font-size:13px; padding:12px 24px; border-radius:99px; text-decoration:none; display:inline-flex; align-items:center; gap:8px; border:1px solid var(--border-2); transition:color 0.15s,border-color 0.15s,background 0.15s; }
+    .btn-outline:hover { color:var(--text); border-color:var(--accent-border); background:rgba(255,255,255,0.02); }
+
+    footer { border-top:1px solid var(--border); padding:32px 36px; display:flex; justify-content:space-between; align-items:center; font-size:14px; color:var(--text-3); font-family:var(--sans); flex-wrap:wrap; gap:12px; }
+    footer a { color:var(--text-3); text-decoration:none; transition:color 0.15s; }
+    footer a:hover { color:var(--text-2); }
+    .footer-links { display:flex; gap:22px; }
+
+    @keyframes up { from{opacity:0;transform:translateY(14px)} to{opacity:1;transform:translateY(0)} }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.55;transform:scale(.85)} }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    @media (max-width:800px) { .proof-quotes { grid-template-columns:1fr; } }
+    @media (max-width:700px) {
+      .pricing-wrap { grid-template-columns:1fr; }
+      .included-grid { grid-template-columns:1fr; }
+      nav { padding:0 20px; }
+      .pro-hero,.included-section,.compare-section,.demo-section,.activate-section,.faq-section,.cta-section { padding-left:20px; padding-right:20px; }
+      footer { padding:28px 20px; }
+      .modal { padding:28px 20px; }
+      .social-proof { gap:12px; }
+      .proof-dot { display:none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ─── CHECKOUT MODAL ─────────────────────────────────────────────────────── -->
+<div class="modal-overlay" id="modal" onclick="closeModalOutside(event)">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()" aria-label="Close">&#x2715;</button>
+    <div class="modal-plan-badge" id="modal-plan-name">Monthly</div>
+    <h3>Get started with Pro</h3>
+    <p class="modal-sub" id="modal-sub">£19 / seat / month · cancel anytime</p>
+    <hr>
+    <div class="modal-step-label">Step 1 — sign in to continue</div>
+    <button class="btn-github" id="github-btn" onclick="handleGitHubSignIn()">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+      <span id="github-btn-text">Continue with GitHub</span>
+    </button>
+    <p class="modal-note">Sign in with GitHub · then complete checkout via Polar.sh<br>Takes about 60 seconds</p>
+    <p class="modal-error" id="modal-error"></p>
+    <div class="modal-security">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      Secure payment via Polar.sh · VAT handled automatically
+    </div>
+  </div>
+</div>
+
+<!-- ─── NAV ───────────────────────────────────────────────────────────────── -->
+<nav>
+  <a href="/" class="logo">
+    <img src="/switchman-logo.svg" width="24" height="24" alt="Switchman">
+    switchman
+  </a>
+  <div class="nav-end">
+    <a href="https://github.com/switchman-dev/switchman" class="btn-nav-ghost">GitHub</a>
+    <a href="https://npmjs.com/package/switchman-dev" class="btn-nav-solid">Install free</a>
+  </div>
+</nav>
+
+<!-- ─── HERO ──────────────────────────────────────────────────────────────── -->
+<section class="pro-hero">
+  <div class="pro-kicker"><div class="kicker-dot"></div>switchman pro</div>
+  <h1>Run <em>unlimited agents.</em><br>Coordinate as a team.</h1>
+  <p class="pro-hero-sub">Everything in the free tier, plus unlimited agents, cloud-synced team coordination, and 90-day history. All in the terminal.</p>
+
+  <div class="social-proof">
+    <div class="proof-stat"><strong>1,000+</strong> developers</div>
+    <div class="proof-dot"></div>
+    <div class="proof-stat"><strong>r/ClaudeAI</strong> community pick</div>
+    <div class="proof-dot"></div>
+    <div class="proof-stat">Works with <strong>Claude Code, Cursor &amp; Aider</strong></div>
+    <div class="proof-dot"></div>
+    <div class="proof-stat">Built by <strong>Recio Ltd</strong></div>
+  </div>
+
+  <div class="proof-quotes">
+    <div class="quote-card">
+      <div class="quote-text">"Finally something that stops my agents from trampling each other. Ran 8 agents on a refactor yesterday, zero conflicts at merge."</div>
+      <div class="quote-author"><div class="quote-avatar">TK</div><div class="quote-name"><strong>Tom K.</strong> r/ClaudeAI</div></div>
+    </div>
+    <div class="quote-card">
+      <div class="quote-text">"The file locking just works. The claim system catches collisions before they happen, not after. That's the key difference."</div>
+      <div class="quote-author"><div class="quote-avatar">SR</div><div class="quote-name"><strong>S. Ramos</strong> Discord</div></div>
+    </div>
+    <div class="quote-card">
+      <div class="quote-text">"switchman merge at the end of a multi-agent run is genuinely satisfying. Everything lands cleanly every time."</div>
+      <div class="quote-author"><div class="quote-avatar">JP</div><div class="quote-name"><strong>J. Park</strong> r/ClaudeAI</div></div>
+    </div>
+  </div>
+
+  <!-- PRICING CARDS -->
+  <div class="pricing-wrap">
+    <div class="plan-card">
+      <div class="plan-name">Monthly</div>
+      <div class="plan-price"><span>£</span>19</div>
+      <div class="plan-period">per seat / month</div>
+      <hr class="plan-divider">
+      <ul class="plan-features">
+        <li><span class="check">✓</span> Unlimited concurrent agents</li>
+        <li><span class="check">✓</span> Cloud-synced team coordination</li>
+        <li><span class="check">✓</span> Team invites and shared queues</li>
+        <li><span class="check">✓</span> 90-day task and lease history</li>
+        <li><span class="check">✓</span> Email support within 48 hours</li>
+        <li><span class="check">✓</span> Everything in the free tier</li>
+      </ul>
+      <button class="btn-plan btn-plan-ghost" onclick="openModal('monthly')">Get started monthly</button>
+    </div>
+    <div class="plan-card featured">
+      <div class="plan-badge">Best value</div>
+      <div class="plan-name">Annual</div>
+      <div class="plan-price"><span>£</span>190</div>
+      <div class="plan-period">per seat / year</div>
+      <div class="plan-saving">2 months free</div>
+      <ul class="plan-features">
+        <li><span class="check">✓</span> Unlimited concurrent agents</li>
+        <li><span class="check">✓</span> Cloud-synced team coordination</li>
+        <li><span class="check">✓</span> Team invites and shared queues</li>
+        <li><span class="check">✓</span> 90-day task and lease history</li>
+        <li><span class="check">✓</span> Email support within 48 hours</li>
+        <li><span class="check">✓</span> Everything in the free tier</li>
+      </ul>
+      <button class="btn-plan btn-plan-primary" onclick="openModal('annual')">Get started annual</button>
+    </div>
+  </div>
+</section>
+
+<!-- ─── TERMINAL DEMO ─────────────────────────────────────────────────────── -->
+<section class="demo-section">
+  <div class="demo-inner">
+    <div class="demo-header">
+      <span class="tag">Pro in action</span>
+      <h2>What Pro looks like in your terminal.</h2>
+      <p class="demo-sub">Free tier shows your own agents. Pro shows your whole team's agents in one shared view.</p>
+    </div>
+    <div class="demo-tabs">
+      <button class="demo-tab active" onclick="switchTab('team',this)">Team status</button>
+      <button class="demo-tab" onclick="switchTab('invite',this)">Team invite</button>
+      <button class="demo-tab" onclick="switchTab('plan',this)">AI planning</button>
+    </div>
+    <div class="demo-panel active" id="tab-team">
+      <div class="terminal-card">
+        <div class="term-bar"><div class="tdot tdot-r"></div><div class="tdot tdot-y"></div><div class="tdot tdot-g"></div><span class="term-label">switchman status</span></div>
+        <div class="term-body">
+          <div class="tl"><span class="t-ok">✦ Pro</span><span class="t-dim"> — ned@recio.co · team: Recio Engineering · 4 seats</span></div>
+          <div class="t-blank"></div>
+          <div class="tl"><span class="t-dim">HEALTHY  [agents: 4]  [tasks: 6 queued]  [conflicts: 0]</span></div>
+          <div class="t-blank"></div>
+          <div class="tl"><span class="t-a1">agent1</span><span class="t-dim"> → ned    </span><span class="t-out">"Add JWT middleware"    </span><span class="t-dim">src/middleware/auth.js</span></div>
+          <div class="tl"><span class="t-a2">agent2</span><span class="t-dim"> → alice  </span><span class="t-out">"Build user routes"    </span><span class="t-dim">src/routes/users.js</span></div>
+          <div class="tl"><span class="t-a3">agent3</span><span class="t-dim"> → ned    </span><span class="t-out">"Write auth tests"     </span><span class="t-dim">tests/auth.test.js</span></div>
+          <div class="tl"><span class="t-a4">agent4</span><span class="t-dim"> → bob    </span><span class="t-out">"Add rate limiting"    </span><span class="t-dim">src/middleware/rate.js</span></div>
+          <div class="t-blank"></div>
+          <div class="tl"><span class="t-ok">✓  No conflicts detected across 4 worktrees</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="demo-panel" id="tab-invite">
+      <div class="terminal-card">
+        <div class="term-bar"><div class="tdot tdot-r"></div><div class="tdot tdot-y"></div><div class="tdot tdot-g"></div><span class="term-label">switchman team invite</span></div>
+        <div class="term-body">
+          <div class="tl"><span class="t-prompt">$</span><span class="t-cmd"> switchman team invite alice@recio.co</span></div>
+          <div class="t-blank"></div>
+          <div class="tl"><span class="t-ok">✓  Invite sent to alice@recio.co</span></div>
+          <div class="tl"><span class="t-dim">   They can join with: </span><span class="t-cmd">switchman login --invite tk_8f3a2c</span></div>
+          <div class="t-blank"></div>
+          <div class="tl"><span class="t-prompt">$</span><span class="t-cmd"> switchman team list</span></div>
+          <div class="t-blank"></div>
+          <div class="tl"><span class="t-ok">   ✓ ned  </span><span class="t-dim"> (owner)   2 agents active</span></div>
+          <div class="tl"><span class="t-ok">   ✓ alice</span><span class="t-dim"> (member)  1 agent active</span></div>
+          <div class="tl"><span class="t-dim">   ○ bob   (invited)  awaiting login</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="demo-panel" id="tab-plan">
+      <div class="terminal-card">
+        <div class="term-bar"><div class="tdot tdot-r"></div><div class="tdot tdot-y"></div><div class="tdot tdot-g"></div><span class="term-label">switchman plan</span></div>
+        <div class="term-body">
+          <div class="tl"><span class="t-prompt">$</span><span class="t-cmd"> switchman plan</span></div>
+          <div class="t-blank"></div>
+          <div class="tl"><span class="t-dim">   Reading repo context...</span></div>
+          <div class="tl"><span class="t-dim">   Found: branch feature/47-add-auth, CLAUDE.md, 3 recent auth commits</span></div>
+          <div class="tl"><span class="t-dim">   Suggested plan based on: branch name + CLAUDE.md</span></div>
+          <div class="t-blank"></div>
+          <div class="tl"><span class="t-ok">   ✓ </span><span class="t-dim">JWT middleware          </span><span class="t-dim">agent1  p9  src/middleware/</span></div>
+          <div class="tl"><span class="t-ok">   ✓ </span><span class="t-dim">Login + logout routes   </span><span class="t-dim">agent1  p9  src/routes/auth.js</span></div>
+          <div class="tl"><span class="t-ok">   ✓ </span><span class="t-dim">Refresh token endpoint  </span><span class="t-dim">agent2  p8  src/routes/auth.js</span></div>
+          <div class="tl"><span class="t-ok">   ✓ </span><span class="t-dim">Auth tests              </span><span class="t-dim">agent3  p6  tests/</span></div>
+          <div class="t-blank"></div>
+          <div class="tl"><span class="t-dim">   Create these tasks? [Y/n]  </span><span class="t-out">Y</span></div>
+          <div class="tl"><span class="t-ok">   ✓  4 tasks queued. Run: switchman setup --agents 3</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── INCLUDED ──────────────────────────────────────────────────────────── -->
+<section class="included-section">
+  <div class="included-header">
+    <span class="tag">What you get</span>
+    <h2>Built for teams running parallel agents.</h2>
+  </div>
+  <div class="included-grid">
+    <div class="inc-item"><div class="inc-tag">Agents</div><h3>Unlimited concurrent agents</h3><p>Free tier caps at 3. Pro removes the limit entirely — run as many agents as your codebase needs across as many worktrees as you have.</p></div>
+    <div class="inc-item"><div class="inc-tag">Cloud sync</div><h3>Shared coordination state</h3><p>Free tier coordination lives in a local SQLite file. Pro syncs task queues, file claims, and lease state to the cloud so your whole team shares one view.</p></div>
+    <div class="inc-item"><div class="inc-tag">Team</div><h3>Invite and coordinate teammates</h3><p>Add teammates with a single terminal command. Everyone's agents coordinate through the same shared queue — no duplicate work, no hidden collisions.</p></div>
+    <div class="inc-item"><div class="inc-tag">History</div><h3>90-day audit trail</h3><p>Free tier keeps 7 days of history. Pro extends to 90 days — full task history, lease logs, pipeline run records, and conflict events.</p></div>
+    <div class="inc-item"><div class="inc-tag">Planning</div><h3>AI task planning from repo context</h3><p>Run <code style="font-family:var(--mono);font-size:12px;color:var(--accent)">switchman plan</code> — it reads your branch, CLAUDE.md, and recent commits and proposes parallel tasks automatically.</p></div>
+    <div class="inc-item"><div class="inc-tag">Support</div><h3>Email support within 48 hours</h3><p>Direct email access — not a forum, not a bot. If something breaks or you need help with a complex coordination setup, you get a real reply within 48 hours.</p></div>
+  </div>
+</section>
+
+<!-- ─── COMPARE ───────────────────────────────────────────────────────────── -->
+<section class="compare-section">
+  <div class="compare-header"><span class="tag">Compare</span><h2>Free vs Pro</h2></div>
+  <table class="compare-table">
+    <thead><tr><th>Feature</th><th class="col-free">Free</th><th class="col-pro">Pro</th></tr></thead>
+    <tbody>
+      <tr><td>Concurrent agents</td><td class="col-free">Up to 3</td><td class="highlight-col col-pro">Unlimited</td></tr>
+      <tr><td>Full CLI and MCP server</td><td><span class="tick">✓</span></td><td class="highlight-col"><span class="tick">✓</span></td></tr>
+      <tr><td>File locking and conflict detection</td><td><span class="tick">✓</span></td><td class="highlight-col"><span class="tick">✓</span></td></tr>
+      <tr><td>Lease and heartbeat management</td><td><span class="tick">✓</span></td><td class="highlight-col"><span class="tick">✓</span></td></tr>
+      <tr><td>switchman merge</td><td><span class="tick">✓</span></td><td class="highlight-col"><span class="tick">✓</span></td></tr>
+      <tr><td>Claude Code native MCP</td><td><span class="tick">✓</span></td><td class="highlight-col"><span class="tick">✓</span></td></tr>
+      <tr><td>Task history retention</td><td class="col-free">7 days</td><td class="highlight-col col-pro">90 days</td></tr>
+      <tr><td>Cloud-synced state</td><td><span class="cross">—</span></td><td class="highlight-col"><span class="tick">✓</span></td></tr>
+      <tr><td>Team invites</td><td><span class="cross">—</span></td><td class="highlight-col"><span class="tick">✓</span></td></tr>
+      <tr><td>AI task planning</td><td><span class="cross">—</span></td><td class="highlight-col"><span class="tick">✓</span></td></tr>
+      <tr><td>Email support</td><td class="col-free">Community</td><td class="highlight-col col-pro">48-hour reply</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ─── HOW IT WORKS ──────────────────────────────────────────────────────── -->
+<section class="activate-section" id="activate">
+  <div class="activate-inner">
+    <span class="tag">How it works</span>
+    <h2>Pay once, activate in the terminal.</h2>
+    <p class="activate-sub">No dashboard to manage. No settings to configure. The browser opens for payment and sign-in, then you're back in the terminal permanently.</p>
+    <div class="cli-steps">
+      <div class="cli-step"><div class="cli-step-num">1</div><div class="cli-step-content"><div class="cli-step-label">Click a plan above — sign in with GitHub, then complete checkout via Polar.sh</div><div class="cli-step-note">Polar acts as merchant of record — VAT and tax handled automatically</div></div></div>
+      <div class="cli-step"><div class="cli-step-num">2</div><div class="cli-step-content"><div class="cli-step-label">After payment, run in your terminal:</div><div class="cli-step-cmd">switchman login</div><div class="cli-step-note">Opens GitHub sign-in, saves credentials locally for 24 hours</div></div></div>
+      <div class="cli-step"><div class="cli-step-num">3</div><div class="cli-step-content"><div class="cli-step-label">Pro activates immediately — run as many agents as you need:</div><div class="cli-step-cmd">switchman setup --agents 10</div><div class="cli-step-note">Works offline for up to 7 days before requiring a reconnect</div></div></div>
+      <div class="cli-step"><div class="cli-step-num">4</div><div class="cli-step-content"><div class="cli-step-label">Invite teammates from the terminal:</div><div class="cli-step-cmd">switchman team invite alice@example.com</div><div class="cli-step-note">They run switchman login --invite &lt;token&gt; and join your shared coordination</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FAQ ───────────────────────────────────────────────────────────────── -->
+<section class="faq-section">
+  <div class="faq-header"><span class="tag">FAQ</span><h2>Common questions</h2></div>
+  <div class="faq-item"><div class="faq-q">Does the free tier still work exactly as before?</div><div class="faq-a">Yes, completely unchanged. The MIT core — full CLI, MCP server, file locking, task queues, lease management, and <code>switchman merge</code> — stays free forever. Pro is additive.</div></div>
+  <div class="faq-item"><div class="faq-q">Will this break our existing git workflow?</div><div class="faq-a">No. Switchman doesn't change how git works and doesn't touch your branches outside its own worktrees. Removing it is as simple as deleting the <code>.switchman</code> folder. Your repo, branches, and history are completely unaffected.</div></div>
+  <div class="faq-item"><div class="faq-q">What happens if I go over 3 agents without Pro?</div><div class="faq-a">The CLI shows a clear message with the upgrade command. Nothing breaks silently — you see exactly what the limit is and how to fix it. Run <code>switchman upgrade</code> to open this page.</div></div>
+  <div class="faq-item"><div class="faq-q">Does Pro require a constant internet connection?</div><div class="faq-a">No. The licence check caches locally for 24 hours. If you're offline, Switchman uses the cached credentials for up to 7 days before requiring a reconnect. Cloud sync requires connectivity but local coordination still works offline.</div></div>
+  <div class="faq-item"><div class="faq-q">How does team billing work?</div><div class="faq-a">Each seat is billed individually. The developer who installs Pro pays for their own seat. There is no admin console — teammates join via a terminal invite command and set up their own billing through the same flow.</div></div>
+  <div class="faq-item"><div class="faq-q">Can I cancel anytime?</div><div class="faq-a">Yes. Cancel through Polar.sh — your subscription runs until the end of the billing period then stops. No fees, no questions. Your local SQLite data is always yours.</div></div>
+  <div class="faq-item"><div class="faq-q">Is this safe to use on a company codebase?</div><div class="faq-a">Yes. Switchman only stores coordination metadata in the cloud — task titles, file names, lease states. It never reads or stores your actual code. All file operations happen locally. Recio Ltd is GDPR compliant, data stored in EU region.</div></div>
+  <div class="faq-item"><div class="faq-q">What if I need more than email support?</div><div class="faq-a">For enterprise requirements — SSO, audit logs, RBAC, dedicated SLAs — get in touch at <a href="mailto:hello@switchman.dev" style="color:var(--accent);text-decoration:none;">hello@switchman.dev</a>.</div></div>
+</section>
+
+<!-- ─── BOTTOM CTA ────────────────────────────────────────────────────────── -->
+<section class="cta-section">
+  <h2>Start with free.<br>Upgrade when your team needs it.</h2>
+  <p>Open source · MIT licensed · Built by Recio Ltd</p>
+  <div class="cta-btns">
+    <button class="btn-cta" onclick="openModal('annual')">Get Pro</button>
+    <a href="https://npmjs.com/package/switchman-dev" class="btn-outline">Install free ↗</a>
+  </div>
+</section>
+
+<!-- ─── FOOTER ────────────────────────────────────────────────────────────── -->
+<footer>
+  <span>switchman.dev — MIT License — Recio Ltd</span>
+  <div class="footer-links">
+    <a href="/">Home</a>
+    <a href="https://github.com/switchman-dev/switchman">GitHub</a>
+    <a href="https://discord.gg/pnT8BEC4D">Discord</a>
+    <a href="https://github.com/switchman-dev/switchman/issues">Issues</a>
+    <a href="mailto:hello@switchman.dev">hello@switchman.dev</a>
+  </div>
+</footer>
+
+<!-- ─── SUPABASE + LOGIC ──────────────────────────────────────────────────── -->
+<!--
+  SETUP INSTRUCTIONS:
+  1. Create a Supabase project at supabase.com
+  2. Go to Authentication > Providers > GitHub and enable it
+     - Create a GitHub OAuth App at github.com/settings/developers
+     - Homepage URL: https://switchman.dev
+     - Callback URL: https://YOUR_PROJECT_REF.supabase.co/auth/v1/callback
+     - Copy the Client ID and Secret into Supabase
+  3. Go to Authentication > URL Configuration
+     - Add https://switchman.dev/pro/callback to Redirect URLs
+  4. Replace the two placeholder values below with your real values
+  5. In Polar.sh, create two products (Monthly £19, Annual £190)
+     and replace the checkout URLs below with your real product URLs
+-->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+  // ─── CONFIG — replace these two values ────────────────────────────────────
+  const SUPABASE_URL  = 'https://afilbolhlkiingnsupgr.supabase.co'
+  const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFmaWxib2xobGtpaW5nbnN1cGdyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM1OTIzOTIsImV4cCI6MjA4OTE2ODM5Mn0.8TBfHfRB0vEyKPMWBd6i1DNwx1nS9UqprIAsJf35n88'
+
+  // Polar.sh product checkout URLs — replace with your real product URLs
+  // Get these from your Polar.sh dashboard > Products > Share link
+  const POLAR_MONTHLY = 'https://buy.polar.sh/polar_cl_i17GENDFPcqmphxNckeir6YCDlsEnTyPTJZoI0hWPXS'
+  const POLAR_ANNUAL  = 'https://buy.polar.sh/polar_cl_i17GENDFPcqmphxNckeir6YCDlsEnTyPTJZoI0hWPXS'
+  // ──────────────────────────────────────────────────────────────────────────
+
+  const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON)
+
+  // Modal
+  function openModal(plan) {
+    const planName = document.getElementById('modal-plan-name')
+    const sub      = document.getElementById('modal-sub')
+    if (plan === 'annual') {
+      planName.textContent = 'Annual — Best value'
+      sub.textContent      = '£190 / seat / year · 2 months free'
+    } else {
+      planName.textContent = 'Monthly'
+      sub.textContent      = '£19 / seat / month · cancel anytime'
+    }
+    document.getElementById('modal').classList.add('open')
+    document.getElementById('modal').dataset.plan = plan
+    document.body.style.overflow = 'hidden'
+    clearError()
+  }
+
+  function closeModal() {
+    document.getElementById('modal').classList.remove('open')
+    document.body.style.overflow = ''
+  }
+
+  function closeModalOutside(e) {
+    if (e.target === document.getElementById('modal')) closeModal()
+  }
+
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal() })
+
+  function setLoading(loading) {
+    const btn  = document.getElementById('github-btn')
+    const text = document.getElementById('github-btn-text')
+    btn.disabled = loading
+    if (loading) {
+      text.textContent = 'Redirecting to GitHub...'
+      btn.querySelector('svg').style.display = 'none'
+      const spinner = document.createElement('div')
+      spinner.className = 'spinner'
+      spinner.id = 'btn-spinner'
+      btn.insertBefore(spinner, text)
+    } else {
+      text.textContent = 'Continue with GitHub'
+      btn.querySelector('svg').style.display = ''
+      const s = document.getElementById('btn-spinner')
+      if (s) s.remove()
+    }
+  }
+
+  function showError(msg) {
+    const el = document.getElementById('modal-error')
+    el.textContent = msg
+    el.classList.add('show')
+  }
+
+  function clearError() {
+    document.getElementById('modal-error').classList.remove('show')
+  }
+
+  async function handleGitHubSignIn() {
+    const plan = document.getElementById('modal').dataset.plan || 'monthly'
+    clearError()
+    setLoading(true)
+
+    // Save chosen plan — callback page reads this after GitHub redirects back
+    sessionStorage.setItem('switchman_plan', plan)
+
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: 'github',
+      options: {
+        redirectTo: `${location.origin}/pro/callback`,
+        scopes: 'read:user user:email',
+      }
+    })
+
+    if (error) {
+      setLoading(false)
+      showError('Could not connect to GitHub. Please try again.')
+      console.error('Supabase OAuth error:', error)
+    }
+    // On success the browser navigates away — no need to reset loading state
+  }
+
+  // Tab switcher
+  function switchTab(name, btn) {
+    document.querySelectorAll('.demo-panel').forEach(p => p.classList.remove('active'))
+    document.querySelectorAll('.demo-tab').forEach(b => b.classList.remove('active'))
+    document.getElementById('tab-' + name).classList.add('active')
+    btn.classList.add('active')
+  }
+</script>
+
+</body>
+</html>
