@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Terms of Service — Switchman</title>
+  <meta name="description" content="Switchman Terms of Service — Recio Ltd">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0b1020; --bg-card: #121a2b; --bg-raised: #182235;
+      --border: #223047; --border-2: #2c3d58;
+      --text: #e6eef8; --text-2: #93a4ba; --text-3: #5f7189;
+      --accent: #5CF2C7; --accent-dim: rgba(92,242,199,0.08); --accent-border: rgba(92,242,199,0.22);
+      --mono: 'JetBrains Mono','Fira Code',monospace;
+      --sans: 'Inter',system-ui,sans-serif;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: var(--sans); font-size: 15px; line-height: 1.7; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; height: 58px; display: flex; align-items: center; justify-content: space-between; padding: 0 36px; background: rgba(11,16,32,0.65); border-bottom: 1px solid rgba(255,255,255,0.08); backdrop-filter: blur(24px) saturate(180%); }
+    .logo { font-family: var(--mono); font-size: 15px; font-weight: 500; color: var(--text); text-decoration: none; display: flex; align-items: center; gap: 9px; }
+    .nav-end { display: flex; gap: 10px; align-items: center; }
+    .btn-nav-ghost { color: var(--text-2); text-decoration: none; font-size: 13px; font-family: var(--mono); border: 1px solid var(--border-2); padding: 6px 18px; border-radius: 99px; transition: color 0.15s, border-color 0.15s; }
+    .btn-nav-ghost:hover { color: var(--text); border-color: var(--accent-border); }
+
+    .page { max-width: 720px; margin: 0 auto; padding: 120px 36px 100px; }
+
+    .page-kicker { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; }
+    .page-title { font-size: clamp(28px, 4vw, 42px); font-weight: 600; letter-spacing: -0.03em; color: var(--text); margin-bottom: 8px; line-height: 1.15; }
+    .page-meta { font-size: 13px; color: var(--text-3); font-family: var(--mono); margin-bottom: 56px; padding-bottom: 32px; border-bottom: 1px solid var(--border); }
+
+    h2 { font-size: 18px; font-weight: 600; color: var(--text); margin: 48px 0 16px; letter-spacing: -0.01em; }
+    h2:first-of-type { margin-top: 0; }
+    p { color: var(--text-2); margin-bottom: 16px; }
+    ul { color: var(--text-2); padding-left: 20px; margin-bottom: 16px; }
+    li { margin-bottom: 8px; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    strong { color: var(--text); font-weight: 600; }
+    code { font-family: var(--mono); font-size: 12px; color: var(--accent); background: var(--accent-dim); border: 1px solid var(--accent-border); border-radius: 4px; padding: 1px 6px; }
+
+    .divider { border: none; border-top: 1px solid var(--border); margin: 48px 0; }
+
+    footer { border-top: 1px solid var(--border); padding: 32px 36px; display: flex; justify-content: space-between; align-items: center; font-size: 14px; color: var(--text-3); flex-wrap: wrap; gap: 12px; }
+    footer a { color: var(--text-3); text-decoration: none; transition: color 0.15s; }
+    footer a:hover { color: var(--text-2); }
+    .footer-links { display: flex; gap: 22px; }
+
+    @media (max-width: 600px) { .page { padding: 100px 20px 80px; } nav { padding: 0 20px; } footer { padding: 28px 20px; } }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="logo">
+    <img src="../switchman-logo.svg" width="24" height="24" alt="Switchman">
+    switchman
+  </a>
+  <div class="nav-end">
+    <a href="https://github.com/switchman-dev/switchman" class="btn-nav-ghost">GitHub</a>
+  </div>
+</nav>
+
+<div class="page">
+  <div class="page-kicker">Legal</div>
+  <h1 class="page-title">Terms of Service</h1>
+  <div class="page-meta">
+    Recio Ltd · Last updated: March 2026 · Effective: March 2026
+  </div>
+
+  <h2>1. Who we are</h2>
+  <p>Switchman is a product of <strong>Recio Ltd</strong>, a company registered in England and Wales. References to "we", "us", or "our" in these terms refer to Recio Ltd. References to "you" refer to the individual or organisation using Switchman.</p>
+  <p>Contact: <a href="mailto:hello@switchman.dev">hello@switchman.dev</a></p>
+
+  <h2>2. What Switchman is</h2>
+  <p>Switchman is a CLI tool and coordination layer for parallel AI coding agents. It provides file locking, task queues, lease management, and merge coordination for software development workflows.</p>
+  <p>Switchman is offered in two tiers:</p>
+  <ul>
+    <li><strong>Free tier</strong> — open source, MIT licensed, no account required, up to 3 concurrent agents</li>
+    <li><strong>Pro tier</strong> — paid subscription, requires a GitHub account, provides unlimited agents and additional features</li>
+  </ul>
+
+  <h2>3. Accepting these terms</h2>
+  <p>By installing Switchman, creating an account, or using the Pro tier, you agree to these terms. If you are using Switchman on behalf of an organisation, you represent that you have authority to bind that organisation to these terms.</p>
+
+  <h2>4. Pro subscription and billing</h2>
+  <p>Pro subscriptions are billed through <strong>Polar.sh</strong>, our payment processor and merchant of record. By subscribing you agree to Polar's terms in addition to ours.</p>
+  <ul>
+    <li>Subscriptions renew automatically at the end of each billing period unless cancelled</li>
+    <li>You may cancel at any time through your Polar account — your access continues until the end of the paid period</li>
+    <li>Prices are shown in USD. Polar handles currency conversion, VAT, and sales tax automatically</li>
+    <li>We reserve the right to change pricing with 30 days notice to existing subscribers</li>
+    <li>Refunds are handled by Polar in accordance with their refund policy</li>
+  </ul>
+
+  <h2>5. Your account</h2>
+  <p>Pro access requires signing in with GitHub via OAuth. You are responsible for maintaining the security of your account and any API tokens stored locally by Switchman (<code>~/.switchman/credentials.json</code>).</p>
+  <p>You must not share your Pro licence or credentials with others. Each seat is for one individual developer.</p>
+
+  <h2>6. What we store</h2>
+  <p>The free tier stores all coordination data locally on your machine in a SQLite file (<code>.switchman/switchman.db</code>). We store nothing about free tier usage.</p>
+  <p>For Pro accounts we store:</p>
+  <ul>
+    <li>Your GitHub email address and user ID</li>
+    <li>Subscription status and plan information from Polar</li>
+    <li>Team membership and invite records if you use team features</li>
+    <li>Task titles, file names, and coordination metadata for cloud sync features</li>
+  </ul>
+  <p>We never store your source code. All file operations happen locally on your machine.</p>
+
+  <h2>7. Acceptable use</h2>
+  <p>You may not use Switchman to:</p>
+  <ul>
+    <li>Violate any applicable law or regulation</li>
+    <li>Attempt to reverse engineer, decompile, or extract the Pro licence validation system</li>
+    <li>Share, resell, or sublicence Pro access to others</li>
+    <li>Attempt to circumvent the agent count limit or other Pro gates</li>
+    <li>Use the product in a way that could harm or disrupt our infrastructure</li>
+  </ul>
+
+  <h2>8. Open source</h2>
+  <p>The core Switchman CLI is open source and available under the <strong>MIT licence</strong> at <a href="https://github.com/switchman-dev/switchman">github.com/switchman-dev/switchman</a>. The MIT licence governs your use of the open source components. These terms of service govern your use of the Pro tier and any hosted services.</p>
+
+  <h2>9. Availability and support</h2>
+  <p>We provide Switchman Pro on a best-effort basis. We do not guarantee any specific uptime for hosted services. Pro subscribers receive email support at <a href="mailto:hello@switchman.dev">hello@switchman.dev</a> with a target response time of 48 hours.</p>
+
+  <h2>10. Limitation of liability</h2>
+  <p>To the maximum extent permitted by law, Recio Ltd shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising from your use of Switchman, including but not limited to data loss, lost profits, or business interruption.</p>
+  <p>Our total liability to you for any claim arising from these terms or your use of Switchman shall not exceed the amount you paid us in the three months preceding the claim.</p>
+
+  <h2>11. Disclaimer of warranties</h2>
+  <p>Switchman is provided "as is" without warranty of any kind. We do not warrant that the software will be error-free, uninterrupted, or that any defects will be corrected.</p>
+
+  <h2>12. Changes to these terms</h2>
+  <p>We may update these terms from time to time. We will notify Pro subscribers of material changes by email. Continued use of Switchman after changes take effect constitutes acceptance of the revised terms.</p>
+
+  <h2>13. Governing law</h2>
+  <p>These terms are governed by the laws of England and Wales. Any disputes shall be subject to the exclusive jurisdiction of the courts of England and Wales.</p>
+
+  <h2>14. Contact</h2>
+  <p>Questions about these terms: <a href="mailto:hello@switchman.dev">hello@switchman.dev</a></p>
+  <p>Recio Ltd, England and Wales</p>
+</div>
+
+<footer>
+  <span>switchman.dev — Recio Ltd</span>
+  <div class="footer-links">
+    <a href="/">Home</a>
+    <a href="/pro">Pro</a>
+    <a href="/privacy">Privacy</a>
+    <a href="https://github.com/switchman-dev/switchman">GitHub</a>
+    <a href="mailto:hello@switchman.dev">hello@switchman.dev</a>
+  </div>
+</footer>
+
+</body>
+</html>

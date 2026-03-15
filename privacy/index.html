@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy — Switchman</title>
+  <meta name="description" content="Switchman Privacy Policy — Recio Ltd">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0b1020; --bg-card: #121a2b; --bg-raised: #182235;
+      --border: #223047; --border-2: #2c3d58;
+      --text: #e6eef8; --text-2: #93a4ba; --text-3: #5f7189;
+      --accent: #5CF2C7; --accent-dim: rgba(92,242,199,0.08); --accent-border: rgba(92,242,199,0.22);
+      --mono: 'JetBrains Mono','Fira Code',monospace;
+      --sans: 'Inter',system-ui,sans-serif;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: var(--sans); font-size: 15px; line-height: 1.7; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; height: 58px; display: flex; align-items: center; justify-content: space-between; padding: 0 36px; background: rgba(11,16,32,0.65); border-bottom: 1px solid rgba(255,255,255,0.08); backdrop-filter: blur(24px) saturate(180%); }
+    .logo { font-family: var(--mono); font-size: 15px; font-weight: 500; color: var(--text); text-decoration: none; display: flex; align-items: center; gap: 9px; }
+    .nav-end { display: flex; gap: 10px; align-items: center; }
+    .btn-nav-ghost { color: var(--text-2); text-decoration: none; font-size: 13px; font-family: var(--mono); border: 1px solid var(--border-2); padding: 6px 18px; border-radius: 99px; transition: color 0.15s, border-color 0.15s; }
+    .btn-nav-ghost:hover { color: var(--text); border-color: var(--accent-border); }
+
+    .page { max-width: 720px; margin: 0 auto; padding: 120px 36px 100px; }
+
+    .page-kicker { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; }
+    .page-title { font-size: clamp(28px, 4vw, 42px); font-weight: 600; letter-spacing: -0.03em; color: var(--text); margin-bottom: 8px; line-height: 1.15; }
+    .page-meta { font-size: 13px; color: var(--text-3); font-family: var(--mono); margin-bottom: 56px; padding-bottom: 32px; border-bottom: 1px solid var(--border); }
+
+    h2 { font-size: 18px; font-weight: 600; color: var(--text); margin: 48px 0 16px; letter-spacing: -0.01em; }
+    h2:first-of-type { margin-top: 0; }
+    p { color: var(--text-2); margin-bottom: 16px; }
+    ul { color: var(--text-2); padding-left: 20px; margin-bottom: 16px; }
+    li { margin-bottom: 8px; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    strong { color: var(--text); font-weight: 600; }
+    code { font-family: var(--mono); font-size: 12px; color: var(--accent); background: var(--accent-dim); border: 1px solid var(--accent-border); border-radius: 4px; padding: 1px 6px; }
+
+    .highlight-box {
+      background: var(--accent-dim); border: 1px solid var(--accent-border);
+      border-radius: 10px; padding: 20px 24px; margin-bottom: 32px;
+    }
+    .highlight-box p { color: var(--text-2); margin: 0; font-size: 14px; }
+    .highlight-box strong { color: var(--accent); }
+
+    footer { border-top: 1px solid var(--border); padding: 32px 36px; display: flex; justify-content: space-between; align-items: center; font-size: 14px; color: var(--text-3); flex-wrap: wrap; gap: 12px; }
+    footer a { color: var(--text-3); text-decoration: none; transition: color 0.15s; }
+    footer a:hover { color: var(--text-2); }
+    .footer-links { display: flex; gap: 22px; }
+
+    @media (max-width: 600px) { .page { padding: 100px 20px 80px; } nav { padding: 0 20px; } footer { padding: 28px 20px; } }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="logo">
+    <img src="../switchman-logo.svg" width="24" height="24" alt="Switchman">
+    switchman
+  </a>
+  <div class="nav-end">
+    <a href="https://github.com/switchman-dev/switchman" class="btn-nav-ghost">GitHub</a>
+  </div>
+</nav>
+
+<div class="page">
+  <div class="page-kicker">Legal</div>
+  <h1 class="page-title">Privacy Policy</h1>
+  <div class="page-meta">
+    Recio Ltd · Last updated: March 2026 · Effective: March 2026
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>The short version:</strong> The free tier collects nothing — all data stays on your machine. The Pro tier stores only what's needed to run your subscription: your email, plan status, and coordination metadata. We never store your source code.</p>
+  </div>
+
+  <h2>1. Who we are</h2>
+  <p><strong>Recio Ltd</strong> is the data controller for personal data processed in connection with Switchman. We are registered in England and Wales.</p>
+  <p>Contact: <a href="mailto:hello@switchman.dev">hello@switchman.dev</a></p>
+
+  <h2>2. What data we collect</h2>
+
+  <p><strong>Free tier — no data collected</strong></p>
+  <p>The free tier of Switchman is a local CLI tool. All coordination data (tasks, leases, file claims) is stored in a SQLite file on your machine at <code>.switchman/switchman.db</code>. We have no access to this data and collect nothing from free tier users.</p>
+
+  <p><strong>Pro tier — data we collect when you subscribe</strong></p>
+  <ul>
+    <li><strong>Account data:</strong> your GitHub email address and GitHub user ID, provided via OAuth when you sign in</li>
+    <li><strong>Subscription data:</strong> your plan (monthly or annual), subscription status, and billing period — provided by Polar.sh when you pay</li>
+    <li><strong>Team data:</strong> email addresses of teammates you invite, team membership records</li>
+    <li><strong>Coordination metadata:</strong> task titles, file names, lease states — for cloud sync features</li>
+  </ul>
+
+  <p><strong>We never collect:</strong></p>
+  <ul>
+    <li>Your source code or file contents</li>
+    <li>Your git history or commit messages</li>
+    <li>Passwords (we use GitHub OAuth only)</li>
+    <li>Payment card details (handled entirely by Polar.sh and Stripe)</li>
+  </ul>
+
+  <p><strong>Telemetry (opt-in only)</strong></p>
+  <p>Switchman includes optional anonymous telemetry for setup and workflow events. This is disabled by default and can be enabled with <code>switchman telemetry enable</code> or disabled with <code>switchman telemetry disable</code>. Telemetry events contain no personal data and no file contents.</p>
+
+  <h2>3. How we use your data</h2>
+  <ul>
+    <li><strong>Account data</strong> — to authenticate you and link your licence to your machine</li>
+    <li><strong>Subscription data</strong> — to verify your Pro licence when you run <code>switchman login</code></li>
+    <li><strong>Team data</strong> — to send team invites and manage shared coordination state</li>
+    <li><strong>Coordination metadata</strong> — to sync task and lease state across your team's machines</li>
+  </ul>
+  <p>We do not use your data for advertising, profiling, or any purpose beyond operating the service.</p>
+
+  <h2>4. Legal basis for processing (GDPR)</h2>
+  <p>For users in the UK and EU, we process your personal data on the following legal bases:</p>
+  <ul>
+    <li><strong>Contract performance</strong> — processing necessary to provide the Pro subscription you signed up for</li>
+    <li><strong>Legitimate interests</strong> — basic security logging and fraud prevention</li>
+    <li><strong>Consent</strong> — optional telemetry, which you can withdraw at any time</li>
+  </ul>
+
+  <h2>5. Data storage and security</h2>
+  <p>Pro account data is stored in <strong>Supabase</strong>, hosted in the EU (eu-west region). Supabase is SOC 2 Type II certified and GDPR compliant.</p>
+  <p>Credentials stored locally on your machine (<code>~/.switchman/credentials.json</code>) are written with restricted file permissions (mode 600 — readable only by you).</p>
+  <p>Payment data is processed and stored by <strong>Polar.sh</strong> and <strong>Stripe</strong>. We never see or store your payment card details.</p>
+
+  <h2>6. Data sharing</h2>
+  <p>We share your data only with the following third parties, solely to operate the service:</p>
+  <ul>
+    <li><strong>Supabase</strong> — database and authentication infrastructure (EU hosting)</li>
+    <li><strong>Polar.sh</strong> — payment processing and subscription management</li>
+    <li><strong>Stripe</strong> — payment processing (via Polar)</li>
+    <li><strong>GitHub</strong> — OAuth authentication</li>
+  </ul>
+  <p>We do not sell your data. We do not share your data with advertisers or data brokers.</p>
+
+  <h2>7. Data retention</h2>
+  <ul>
+    <li><strong>Active Pro accounts:</strong> data retained for the duration of your subscription</li>
+    <li><strong>Cancelled accounts:</strong> account data deleted within 90 days of cancellation</li>
+    <li><strong>Team invites:</strong> deleted after acceptance or 30 days, whichever comes first</li>
+    <li><strong>Coordination metadata:</strong> retained for 90 days (Pro) or 7 days (free tier, local only)</li>
+  </ul>
+
+  <h2>8. Your rights (GDPR)</h2>
+  <p>If you are in the UK or EU, you have the following rights regarding your personal data:</p>
+  <ul>
+    <li><strong>Access</strong> — request a copy of the data we hold about you</li>
+    <li><strong>Rectification</strong> — request correction of inaccurate data</li>
+    <li><strong>Erasure</strong> — request deletion of your data</li>
+    <li><strong>Portability</strong> — request your data in a machine-readable format</li>
+    <li><strong>Objection</strong> — object to processing based on legitimate interests</li>
+    <li><strong>Withdraw consent</strong> — withdraw consent for telemetry at any time</li>
+  </ul>
+  <p>To exercise any of these rights, email <a href="mailto:hello@switchman.dev">hello@switchman.dev</a>. We will respond within 30 days.</p>
+  <p>You also have the right to lodge a complaint with the <strong>Information Commissioner's Office (ICO)</strong> at <a href="https://ico.org.uk" target="_blank" rel="noopener">ico.org.uk</a>.</p>
+
+  <h2>9. Cookies</h2>
+  <p>The switchman.dev website uses no tracking cookies. The Pro sign-in page uses session storage (not cookies) to preserve your plan selection during the GitHub OAuth flow. This data is cleared after sign-in.</p>
+
+  <h2>10. Children</h2>
+  <p>Switchman is not directed at children under 16. We do not knowingly collect personal data from children.</p>
+
+  <h2>11. Changes to this policy</h2>
+  <p>We may update this privacy policy from time to time. We will notify Pro subscribers of material changes by email. The "last updated" date at the top of this page reflects the most recent revision.</p>
+
+  <h2>12. Contact</h2>
+  <p>For privacy questions or data requests: <a href="mailto:hello@switchman.dev">hello@switchman.dev</a></p>
+  <p>Recio Ltd, England and Wales</p>
+</div>
+
+<footer>
+  <span>switchman.dev — Recio Ltd</span>
+  <div class="footer-links">
+    <a href="/">Home</a>
+    <a href="/pro">Pro</a>
+    <a href="/terms">Terms</a>
+    <a href="https://github.com/switchman-dev/switchman">GitHub</a>
+    <a href="mailto:hello@switchman.dev">hello@switchman.dev</a>
+  </div>
+</footer>
+
+</body>
+</html>
