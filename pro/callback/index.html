@@ -134,7 +134,7 @@
   const POLAR_ANNUAL  = 'https://buy.polar.sh/polar_cl_i17GENDFPcqmphxNckeir6YCDlsEnTyPTJZoI0hWPXS'
   // ──────────────────────────────────────────────────────────────────────────
 
-  const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON)
+const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON)
 
   function showState(id) {
     document.querySelectorAll('.state').forEach(s => s.classList.remove('active'))
@@ -150,7 +150,7 @@
   async function init() {
     // Supabase JS automatically reads the OAuth code/token from the URL hash
     // and exchanges it for a session on page load.
-    const { data, error } = await supabase.auth.getSession()
+    const { data, error } = await sb.auth.getSession()
 
     if (error || !data?.session) {
       // Session exchange failed or timed out

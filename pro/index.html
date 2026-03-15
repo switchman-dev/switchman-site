@@ -482,7 +482,7 @@
   const POLAR_ANNUAL  = 'https://buy.polar.sh/polar_cl_i17GENDFPcqmphxNckeir6YCDlsEnTyPTJZoI0hWPXS'
   // ──────────────────────────────────────────────────────────────────────────
 
-  const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON)
+  const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON)
 
   // Modal
   function openModal(plan) {
@@ -549,7 +549,7 @@
     // Save chosen plan — callback page reads this after GitHub redirects back
     sessionStorage.setItem('switchman_plan', plan)
 
-    const { error } = await supabase.auth.signInWithOAuth({
+    const { error } = await sb.auth.signInWithOAuth({
       provider: 'github',
       options: {
         redirectTo: `${location.origin}/pro/callback`,
