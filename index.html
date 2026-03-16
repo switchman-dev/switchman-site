@@ -3,515 +3,175 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Switchman | Run 10+ AI Coding Agents on One Codebase with a Safe Path to Merge</title>
-  <meta name="description" content="Switchman helps AI-native software teams plan work, coordinate multiple coding agents, prevent overlap, govern merge risk, and safely land changes on main.">
+  <title>Switchman | The Operating System for Parallel AI Development</title>
+  <meta name="description" content="Plan work, coordinate multiple AI coding agents, prevent overlap, govern merge risk, and safely land changes on main. Free and open source.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
   :root {
-    --bg:           #0b1020;
-    --bg-card:      #121a2b;
-    --bg-raised:    #182235;
-    --bg-input:     #0f1728;
-    --border:       #223047;
-    --border-2:     #2c3d58;
-
-    --text:         #e6eef8;
-    --text-2:       #93a4ba;
-    --text-3:       #5f7189;
-
-    --accent:       #5CF2C7;
-    --accent-hover: #7EF7D3;
-    --accent-soft:  #CFFDF2;
-    --accent-dim:   rgba(92,242,199,0.08);
-    --accent-glow:  rgba(92,242,199,0.16);
-    --accent-border:rgba(92,242,199,0.22);
-
-    --green:        #4ade80;
-    --red:          #f87171;
-    --amber:        #fbbf24;
-    --blue:         #7dd3fc;
-
-    --mono: 'JetBrains Mono', 'Fira Code', monospace;
-    --sans: 'Inter', system-ui, sans-serif;
+    --bg:#0b1020; --bg-card:#121a2b; --bg-raised:#182235; --bg-input:#0f1728;
+    --border:#223047; --border-2:#2c3d58;
+    --text:#e6eef8; --text-2:#93a4ba; --text-3:#5f7189;
+    --accent:#5CF2C7; --accent-hover:#7EF7D3; --accent-soft:#CFFDF2;
+    --accent-dim:rgba(92,242,199,0.08); --accent-glow:rgba(92,242,199,0.16); --accent-border:rgba(92,242,199,0.22);
+    --green:#4ade80; --red:#f87171; --amber:#fbbf24; --blue:#7dd3fc;
+    --mono:'JetBrains Mono','Fira Code',monospace; --sans:'Inter',system-ui,sans-serif;
   }
-
   html { scroll-behavior: smooth; }
+  body { background:var(--bg); color:var(--text); font-family:var(--sans); font-size:15px; line-height:1.65; overflow-x:hidden; -webkit-font-smoothing:antialiased; }
 
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: var(--sans);
-    font-size: 15px;
-    line-height: 1.65;
-    overflow-x: hidden;
-    -webkit-font-smoothing: antialiased;
-  }
+  /* NAV */
+  nav { position:fixed; top:0; left:0; right:0; z-index:100; height:58px; display:flex; align-items:center; justify-content:space-between; padding:0 36px; border-bottom:1px solid transparent; transition:background 0.3s,border-color 0.3s; }
+  nav.scrolled { background:rgba(11,16,32,0.65); border-bottom:1px solid rgba(255,255,255,0.08); backdrop-filter:blur(24px) saturate(180%); -webkit-backdrop-filter:blur(24px) saturate(180%); box-shadow:0 4px 24px rgba(0,0,0,0.2); }
+  .logo { font-family:var(--mono); font-size:15px; font-weight:500; color:var(--text); text-decoration:none; display:flex; align-items:center; gap:9px; }
+  .nav-center { display:flex; gap:28px; list-style:none; }
+  .nav-center a { color:var(--text-2); text-decoration:none; font-size:14px; transition:color 0.15s; }
+  .nav-center a:hover { color:var(--text); }
+  .nav-end { display:flex; gap:10px; align-items:center; }
+  .btn-nav-ghost { color:var(--text-2); text-decoration:none; font-size:13px; font-family:var(--mono); border:1px solid var(--border-2); padding:6px 18px; border-radius:99px; display:flex; align-items:center; gap:6px; transition:color 0.15s,border-color 0.15s,background 0.15s; }
+  .btn-nav-ghost:hover { color:var(--text); border-color:var(--accent-border); background:rgba(255,255,255,0.02); }
+  .btn-nav-solid { background:var(--accent); color:#061016; font-size:13px; font-family:var(--mono); font-weight:700; padding:6px 20px; border-radius:99px; text-decoration:none; transition:background 0.15s; }
+  .btn-nav-solid:hover { background:var(--accent-hover); }
 
-  /* --- GLASS NAV --- */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    height: 58px;
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 0 36px;
-    border-bottom: 1px solid transparent;
-    transition: background 0.3s, border-color 0.3s, backdrop-filter 0.3s;
-  }
-  nav.scrolled {
-    background: rgba(11, 16, 32, 0.65);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    backdrop-filter: blur(24px) saturate(180%);
-    -webkit-backdrop-filter: blur(24px) saturate(180%);
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
-  }
+  /* HERO */
+  .hero { min-height:100vh; display:grid; grid-template-columns:1fr 1fr; padding-top:58px; position:relative; overflow:hidden; }
+  .hero::before { content:''; position:absolute; inset:0; background-image:linear-gradient(rgba(34,48,71,0.48) 1px,transparent 1px),linear-gradient(90deg,rgba(34,48,71,0.48) 1px,transparent 1px); background-size:52px 52px; mask-image:radial-gradient(ellipse 75% 65% at 55% 45%,black 0%,transparent 100%); pointer-events:none; }
+  .hero-left { display:flex; flex-direction:column; justify-content:center; padding:80px 52px 80px 72px; position:relative; z-index:2; }
+  .hero-right { display:flex; align-items:center; justify-content:center; padding:80px 72px 80px 16px; position:relative; z-index:2; min-height:0; }
 
-  .logo {
-    font-family: var(--mono); font-size: 15px; font-weight: 500;
-    color: var(--text); text-decoration: none;
-    display: flex; align-items: center; gap: 9px;
-  }
-  .logo-mark {
-    width: 22px; height: 22px;
-    border: 1.5px solid var(--accent); border-radius: 6px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 11px; color: var(--accent); font-weight: 600;
-  }
-
-  .nav-center { display: flex; gap: 28px; list-style: none; }
-  .nav-center a { color: var(--text-2); text-decoration: none; font-size: 14px; transition: color 0.15s; }
-  .nav-center a:hover { color: var(--text); }
-
-  .nav-end { display: flex; gap: 10px; align-items: center; }
-
-  /* --- PILL BUTTONS (FLAT APPLE STYLE) --- */
-  .btn-nav-ghost {
-    color: var(--text-2); text-decoration: none; font-size: 13px;
-    font-family: var(--mono); border: 1px solid var(--border-2);
-    padding: 6px 18px; border-radius: 99px;
-    display: flex; align-items: center; gap: 6px;
-    transition: color 0.15s, border-color 0.15s, background 0.15s;
-  }
-  .btn-nav-ghost:hover {
-    color: var(--text);
-    border-color: var(--accent-border);
-    background: rgba(255,255,255,0.02);
-  }
-
-  .btn-nav-solid {
-    background: var(--accent); color: #061016;
-    font-size: 13px; font-family: var(--mono); font-weight: 700;
-    padding: 6px 20px; border-radius: 99px;
-    text-decoration: none; 
-    transition: background 0.15s;
-  }
-  .btn-nav-solid:hover {
-    background: var(--accent-hover);
-  }
-
-  .hero {
-    min-height: 100vh;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding-top: 58px;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .hero::before {
-    content: '';
-    position: absolute; inset: 0;
-    background-image:
-      linear-gradient(rgba(34,48,71,0.48) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(34,48,71,0.48) 1px, transparent 1px);
-    background-size: 52px 52px;
-    mask-image: radial-gradient(ellipse 75% 65% at 55% 45%, black 0%, transparent 100%);
-    pointer-events: none;
-  }
-
-  .hero-left {
-    display: flex; flex-direction: column; justify-content: center;
-    padding: 80px 52px 80px 72px;
-    position: relative; z-index: 2;
-  }
-
-  .hero-right {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 80px 72px 80px 16px;
-    position: relative;
-    z-index: 2;
-    min-height: 0;
-  }
-
-  /* --- GLASS TERMINAL --- */
-  .terminal-card {
-    width: 100%;
-    height: 396px;
-    max-width: 500px;
-    background: rgba(18, 26, 43, 0.45); 
-    backdrop-filter: blur(28px) saturate(160%);
-    -webkit-backdrop-filter: blur(28px) saturate(160%);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-top: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: 12px;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    box-shadow:
-      0 32px 64px rgba(0, 0, 0, 0.5),
-      inset 0 1px 0 rgba(255, 255, 255, 0.05); 
-  }
-
-  .term-bar {
-    flex: 0 0 auto;
-    background: rgba(24, 34, 53, 0.35);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-    padding: 11px 16px;
-    display: flex;
-    align-items: center;
-    gap: 7px;
-  }
-
-  .term-body {
-    flex: 1 1 auto;
-    min-height: 0;
-    padding: 18px 20px;
-    font-family: var(--mono);
-    font-size: 12.5px;
-    line-height: 1.8;
-    overflow-y: auto;
-    overflow-x: hidden;
-  }
-
-  .tdot { width: 11px; height: 11px; border-radius: 50%; }
-  .tdot-r { background: #f87171; opacity: .7; }
-  .tdot-y { background: #fbbf24; opacity: .7; }
-  .tdot-g { background: #4ade80; opacity: .7; }
-
-  .term-label { margin-left: 8px; font-family: var(--mono); font-size: 12px; color: var(--text-3); }
-
-  .term-line { display: flex; gap: 8px; }
-  .tl-time { color: var(--text-3); min-width: 44px; font-size: 11px; padding-top: 1px; }
-  .tl-agent { font-weight: 500; min-width: 72px; }
-  .tl-agent.a1 { color: var(--accent); }
-  .tl-agent.a2 { color: var(--amber); }
-  .tl-agent.sys { color: var(--text-3); }
-
-  .tl-msg { color: var(--text-2); }
-  .tl-ok   { color: var(--green); }
-  .tl-warn { color: var(--amber); }
-  .tl-info { color: var(--accent); }
-  .tl-err  { color: var(--red); }
-
-  .tl-cursor {
-    display: inline-block; width: 7px; height: 13px;
-    background: var(--accent); animation: blink 1.1s step-end infinite;
-    vertical-align: middle; border-radius: 1px;
-  }
+  /* TERMINAL */
+  .terminal-card { width:100%; height:396px; max-width:500px; background:rgba(18,26,43,0.45); backdrop-filter:blur(28px) saturate(160%); -webkit-backdrop-filter:blur(28px) saturate(160%); border:1px solid rgba(255,255,255,0.08); border-top:1px solid rgba(255,255,255,0.15); border-radius:12px; overflow:hidden; display:flex; flex-direction:column; box-shadow:0 32px 64px rgba(0,0,0,0.5),inset 0 1px 0 rgba(255,255,255,0.05); }
+  .term-bar { flex:0 0 auto; background:rgba(24,34,53,0.35); border-bottom:1px solid rgba(255,255,255,0.06); padding:11px 16px; display:flex; align-items:center; gap:7px; }
+  .term-body { flex:1 1 auto; min-height:0; padding:18px 20px; font-family:var(--mono); font-size:12.5px; line-height:1.8; overflow-y:auto; overflow-x:hidden; }
+  .tdot { width:11px; height:11px; border-radius:50%; }
+  .tdot-r { background:#f87171; opacity:.7; } .tdot-y { background:#fbbf24; opacity:.7; } .tdot-g { background:#4ade80; opacity:.7; }
+  .term-label { margin-left:8px; font-family:var(--mono); font-size:12px; color:var(--text-3); }
+  .term-line { display:flex; gap:8px; }
+  .tl-time { color:var(--text-3); min-width:44px; font-size:11px; padding-top:1px; }
+  .tl-agent { font-weight:500; min-width:72px; }
+  .tl-agent.a1 { color:var(--accent); } .tl-agent.a2 { color:var(--amber); } .tl-agent.sys { color:var(--text-3); }
+  .tl-msg { color:var(--text-2); } .tl-ok { color:var(--green); } .tl-warn { color:var(--amber); } .tl-info { color:var(--accent); } .tl-err { color:var(--red); }
+  .tl-cursor { display:inline-block; width:7px; height:13px; background:var(--accent); animation:blink 1.1s step-end infinite; vertical-align:middle; border-radius:1px; }
   @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
 
-  .hero-kicker {
-    display: inline-flex; align-items: center; gap: 8px;
-    background: var(--accent-dim); border: 1px solid var(--accent-border);
-    border-radius: 99px; padding: 5px 16px;
-    font-size: 12px; font-family: var(--mono); color: var(--accent);
-    margin-bottom: 28px;
-    opacity: 0; animation: up 0.5s ease forwards 0.05s;
-  }
-
-  .kicker-dot {
-    width: 6px; height: 6px; border-radius: 50%;
-    background: var(--accent); animation: pulse 2.4s ease infinite;
-  }
-
+  /* HERO TEXT */
+  .hero-kicker { display:inline-flex; align-items:center; gap:8px; background:var(--accent-dim); border:1px solid var(--accent-border); border-radius:99px; padding:5px 16px; font-size:12px; font-family:var(--mono); color:var(--accent); margin-bottom:28px; opacity:0; animation:up 0.5s ease forwards 0.05s; }
+  .kicker-dot { width:6px; height:6px; border-radius:50%; background:var(--accent); animation:pulse 2.4s ease infinite; }
   @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.55;transform:scale(.85)} }
+  .hero h1 { font-size:clamp(28px,3.6vw,58px); font-weight:600; line-height:1.12; letter-spacing:-0.03em; color:var(--text); margin-bottom:22px; opacity:0; animation:up 0.5s ease forwards 0.15s; }
+  .hero h1 em { font-style:normal; color:var(--accent); }
+  .hero-sub { font-size:clamp(14px,1.5vw,17px); color:var(--text-2); line-height:1.6; max-width:440px; margin-bottom:16px; opacity:0; animation:up 0.5s ease forwards 0.25s; }
 
-  .hero h1 {
-    font-size: clamp(32px, 3.6vw, 58px);
-    font-weight: 600; line-height: 1.12;
-    letter-spacing: -0.03em; color: var(--text);
-    margin-bottom: 22px;
-    opacity: 0; animation: up 0.5s ease forwards 0.15s;
-  }
-  .hero h1 em { font-style: normal; color: var(--accent); }
+  /* PRO CALLOUT IN HERO */
+  .hero-pro-callout { display:inline-flex; align-items:center; gap:6px; margin-bottom:28px; margin-top:4px; font-size:13px; font-family:var(--mono); color:var(--text-3); opacity:0; animation:up 0.5s ease forwards 0.3s; }
+  .hero-pro-callout a { color:var(--accent); text-decoration:none; transition:color 0.15s; }
+  .hero-pro-callout a:hover { color:var(--accent-hover); }
 
-  .hero-sub {
-    font-size: clamp(15px, 1.5vw, 17px);
-    color: var(--text-2); line-height: 1.6;
-    max-width: 440px; margin-bottom: 38px;
-    opacity: 0; animation: up 0.5s ease forwards 0.25s;
-  }
+  .hero-actions { display:flex; gap:12px; flex-wrap:wrap; align-items:center; margin-bottom:24px; opacity:0; animation:up 0.5s ease forwards 0.35s; }
+  .btn-cta { background:var(--accent); color:#061016; font-family:var(--mono); font-size:13px; font-weight:700; padding:12px 24px; border-radius:99px; text-decoration:none; display:inline-flex; align-items:center; gap:8px; transition:background 0.15s; border:none; cursor:pointer; }
+  .btn-cta:hover { background:var(--accent-hover); }
+  .btn-outline { background:transparent; color:var(--text-2); font-family:var(--mono); font-size:13px; padding:12px 24px; border-radius:99px; text-decoration:none; display:inline-flex; align-items:center; gap:8px; border:1px solid var(--border-2); transition:color 0.15s,border-color 0.15s,background 0.15s; }
+  .btn-outline:hover { color:var(--text); border-color:var(--accent-border); background:rgba(255,255,255,0.02); }
 
-  .hero-actions {
-    display: flex; gap: 12px; flex-wrap: wrap; align-items: center;
-    margin-bottom: 28px;
-    opacity: 0; animation: up 0.5s ease forwards 0.35s;
-  }
+  .hero-install { display:flex; align-items:center; gap:12px; flex-wrap:wrap; opacity:0; animation:up 0.5s ease forwards 0.44s; }
+  .install-cmd { background:var(--bg-card); border:1px solid var(--border); border-radius:99px; padding:9px 20px; font-family:var(--mono); font-size:12px; color:var(--accent); cursor:pointer; transition:border-color 0.15s,color 0.15s; user-select:none; display:flex; align-items:center; gap:12px; max-width:100%; }
+  .install-cmd span:first-child { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .install-cmd:hover { border-color:var(--accent-border); }
+  .install-cmd.copied { border-color:var(--green); color:var(--green); }
+  .copy-hint { font-size:10px; color:var(--text-3); opacity:0; transition:opacity 0.15s; flex-shrink:0; }
+  .install-cmd:hover .copy-hint { opacity:1; }
+  .install-hint { font-size:13px; color:var(--text-3); font-family:var(--mono); }
 
-  .btn-cta {
-    background: var(--accent); color: #061016;
-    font-family: var(--mono); font-size: 13px; font-weight: 700;
-    padding: 12px 24px; border-radius: 99px;
-    text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
-    transition: background 0.15s;
-    border: none; cursor: pointer;
-  }
-  .btn-cta:hover {
-    background: var(--accent-hover);
-  }
+  /* SECTIONS */
+  .section { max-width:960px; margin:0 auto; padding:112px 36px; }
+  .section-header { margin-bottom:48px; }
+  .tag { display:inline-block; font-family:var(--mono); font-size:11px; color:var(--accent); letter-spacing:0.08em; text-transform:uppercase; margin-bottom:12px; }
+  h2 { font-size:clamp(24px,3vw,38px); font-weight:600; letter-spacing:-0.025em; color:var(--text); line-height:1.2; margin-bottom:12px; }
+  .section-sub { font-size:16px; color:var(--text-2); max-width:520px; line-height:1.65; margin-bottom:16px; }
+  .text-link { display:inline-flex; align-items:center; gap:6px; color:var(--accent); font-size:15px; font-weight:500; text-decoration:none; transition:gap 0.2s ease,opacity 0.2s ease; }
+  .text-link:hover { gap:10px; opacity:0.85; }
 
-  .btn-outline {
-    background: transparent; color: var(--text-2);
-    font-family: var(--mono); font-size: 13px;
-    padding: 12px 24px; border-radius: 99px;
-    text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
-    border: 1px solid var(--border-2);
-    transition: color 0.15s, border-color 0.15s, background 0.15s;
-  }
-  .btn-outline:hover {
-    color: var(--text);
-    border-color: var(--accent-border);
-    background: rgba(255,255,255,0.02);
-  }
+  /* STEPS */
+  .steps-grid { display:grid; grid-template-columns:repeat(4,1fr); border:1px solid var(--border); border-radius:12px; overflow:hidden; position:relative; }
+  .steps-grid::before { content:''; position:absolute; top:23px; left:calc(12.5% + 14px); right:calc(12.5% + 14px); height:1px; background:linear-gradient(90deg,rgba(92,242,199,0.16) 0%,rgba(92,242,199,0.34) 50%,rgba(92,242,199,0.16) 100%); pointer-events:none; }
+  .step-card { padding:32px 26px; border-right:1px solid var(--border); transition:background 0.15s; position:relative; z-index:1; }
+  .step-card:last-child { border-right:none; }
+  .step-card:hover { background:var(--bg-card); }
+  .step-n { width:28px; height:28px; border-radius:50%; border:1px solid rgba(92,242,199,0.28); background:var(--bg); display:flex; align-items:center; justify-content:center; font-family:var(--mono); font-size:11px; color:var(--accent); font-weight:600; margin-bottom:20px; }
+  .step-card h3 { font-size:15px; font-weight:600; color:var(--text); margin-bottom:10px; line-height:1.3; }
+  .step-card p  { font-size:14px; color:var(--text-2); line-height:1.6; }
 
-  .hero-install {
-    display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
-    opacity: 0; animation: up 0.5s ease forwards 0.44s;
+  /* FEATURES */
+  .features-bg { background:var(--bg-card); border-top:1px solid var(--border); border-bottom:1px solid var(--border); padding:112px 36px; }
+  .features-inner { max-width:960px; margin:0 auto; }
+  .features-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--border); border:1px solid var(--border); border-radius:12px; overflow:hidden; margin-top:48px; }
+  .feat { background:var(--bg-card); padding:32px 28px; transition:background 0.15s; }
+  .feat:hover { background:var(--bg-raised); }
+  .feat-tag { font-family:var(--mono); font-size:10px; letter-spacing:0.08em; text-transform:uppercase; color:var(--accent); opacity:0.72; margin-bottom:12px; }
+  .feat h3 { font-size:15px; font-weight:600; color:var(--text); margin-bottom:8px; letter-spacing:-0.01em; }
+  .feat p   { font-size:14px; color:var(--text-2); line-height:1.6; }
+
+  /* EDITORS */
+  .editors-strip { border-top:1px solid var(--border); padding:112px 36px; }
+  .editors-inner { max-width:640px; margin:0 auto; display:flex; flex-direction:column; align-items:center; text-align:center; }
+  .editors-note { font-size:15px; color:var(--text-2); line-height:1.7; margin:0 auto 36px; max-width:540px; }
+  .editors-pills { display:flex; gap:10px; flex-wrap:wrap; justify-content:center; }
+  .pill { background:var(--bg-card); border:1px solid var(--border); border-radius:99px; padding:8px 18px; font-size:13px; font-weight:500; color:var(--text-2); display:flex; align-items:center; gap:8px; transition:border-color 0.15s,color 0.15s,background 0.15s; }
+  .pill:hover { border-color:var(--accent-border); color:var(--text); background:rgba(255,255,255,0.02); }
+  .pill-dot { width:6px; height:6px; border-radius:50%; background:var(--accent); opacity:0.8; }
+  .pill-dot-dim { background:var(--accent); opacity:0.25; }
+  .pill-featured { border-color:rgba(92,242,199,0.32); background:rgba(92,242,199,0.06); color:var(--text); }
+  .pill-badge { font-size:10px; font-family:var(--mono); color:var(--accent); background:rgba(92,242,199,0.12); border:1px solid rgba(92,242,199,0.22); border-radius:99px; padding:2px 6px; margin-left:4px; }
+  .pill-badge-cli { font-size:10px; font-family:var(--mono); color:var(--text-3); background:rgba(255,255,255,0.04); border:1px solid var(--border); border-radius:99px; padding:2px 6px; margin-left:4px; }
+
+  /* CTA & FOOTER */
+  .cta-section { border-top:1px solid var(--border); padding:120px 36px; text-align:center; position:relative; overflow:hidden; }
+  .cta-section h2 { font-size:clamp(26px,4vw,44px); margin-bottom:12px; }
+  .cta-section p  { color:var(--text-2); font-size:15px; font-family:var(--mono); margin-bottom:36px; }
+  .cta-btns { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
+  footer { border-top:1px solid var(--border); padding:32px 36px; display:flex; justify-content:space-between; align-items:center; font-size:14px; color:var(--text-3); flex-wrap:wrap; gap:12px; }
+  footer a { color:var(--text-3); text-decoration:none; transition:color 0.15s; }
+  footer a:hover { color:var(--text-2); }
+  .footer-links { display:flex; gap:22px; flex-wrap:wrap; }
+
+  /* ANIMATIONS */
+  .reveal { opacity:0; transform:translateY(18px); transition:opacity 0.6s ease,transform 0.6s ease; }
+  .reveal.on { opacity:1; transform:translateY(0); }
+  @keyframes up { from{opacity:0;transform:translateY(14px)} to{opacity:1;transform:translateY(0)} }
+
+  /* RESPONSIVE */
+  @media (max-width:860px) {
+    .hero { grid-template-columns:1fr; }
+    .hero-right { display:none; }
+    .hero-left { padding:80px 24px 60px; }
+    .nav-center { display:none; }
   }
-
-  .install-cmd {
-    background: var(--bg-card); border: 1px solid var(--border);
-    border-radius: 99px; padding: 9px 20px;
-    font-family: var(--mono); font-size: 13px; color: var(--accent);
-    cursor: pointer; transition: border-color 0.15s, color 0.15s;
-    user-select: none; display: flex; align-items: center; gap: 12px;
+  @media (max-width:700px) {
+    .features-grid { grid-template-columns:1fr; }
+    .steps-grid { grid-template-columns:1fr 1fr; }
+    .steps-grid::before { display:none; }
+    .step-card:nth-child(odd) { border-right:1px solid var(--border); }
+    .step-card:nth-child(even) { border-right:none; }
+    .section,.features-bg,.editors-strip,.cta-section { padding-left:20px; padding-right:20px; }
+    footer { padding:28px 20px; }
+    .install-hint { display:none; }
   }
-  .install-cmd:hover {
-    border-color: var(--accent-border);
+  @media (max-width:640px) {
+    /* Hide install free button — nav too cramped on small phones */
+    .btn-nav-solid { display:none; }
+    nav { padding:0 20px; }
   }
-  .install-cmd.copied { border-color: var(--green); color: var(--green); }
-
-  .copy-hint { font-size: 10px; color: var(--text-3); opacity: 0; transition: opacity 0.15s; }
-  .install-cmd:hover .copy-hint { opacity: 1; }
-  .install-hint { font-size: 13px; color: var(--text-3); font-family: var(--mono); }
-
-  /* --- SPACIOUS SECTIONS & TEXT LINKS --- */
-  .section { max-width: 960px; margin: 0 auto; padding: 112px 36px; }
-  
-  .section-header { margin-bottom: 48px; }
-
-  .tag {
-    display: inline-block; font-family: var(--mono); font-size: 11px;
-    color: var(--accent); letter-spacing: 0.08em; text-transform: uppercase;
-    margin-bottom: 12px;
-  }
-
-  h2 {
-    font-size: clamp(24px, 3vw, 38px);
-    font-weight: 600; letter-spacing: -0.025em;
-    color: var(--text); line-height: 1.2; margin-bottom: 12px;
-  }
-
-  .section-sub {
-    font-size: 16px; color: var(--text-2); max-width: 520px;
-    line-height: 1.65; margin-bottom: 16px; 
-  }
-
-  .text-link {
-    display: inline-flex; align-items: center; gap: 6px;
-    color: var(--accent); font-family: var(--sans); font-size: 15px; font-weight: 500;
-    text-decoration: none; transition: gap 0.2s ease, opacity 0.2s ease;
-  }
-  .text-link:hover { gap: 10px; opacity: 0.85; }
-
-  /* Specific styling for the Discord link in the #how section */
-  #how .text-link {
-    font-size: 18px;
-    font-weight: 600;
-    color: var(--blue);
-  }
-
-  .steps-grid {
-    display: grid; grid-template-columns: repeat(4, 1fr);
-    border: 1px solid var(--border); border-radius: 12px;
-    overflow: hidden; 
-    position: relative;
+  @media (max-width:480px) {
+    .steps-grid { grid-template-columns:1fr; }
+    .step-card { border-right:none !important; border-bottom:1px solid var(--border); }
+    .hero h1 { font-size:28px; }
   }
 
-  .steps-grid::before {
-    content: '';
-    position: absolute;
-    top: 23px;
-    left: calc(12.5% + 14px);
-    right: calc(12.5% + 14px);
-    height: 1px;
-    background: linear-gradient(
-      90deg,
-      rgba(92,242,199,0.16) 0%,
-      rgba(92,242,199,0.34) 50%,
-      rgba(92,242,199,0.16) 100%
-    );
-    pointer-events: none;
-  }
-
-  .step-card {
-    padding: 32px 26px; border-right: 1px solid var(--border);
-    transition: background 0.15s; position: relative; z-index: 1;
-  }
-  .step-card:last-child { border-right: none; }
-  .step-card:hover { background: var(--bg-card); }
-
-  .step-n {
-    width: 28px; height: 28px; border-radius: 50%;
-    border: 1px solid rgba(92,242,199,0.28);
-    background: var(--bg);
-    display: flex; align-items: center; justify-content: center;
-    font-family: var(--mono); font-size: 11px; color: var(--accent);
-    font-weight: 600; margin-bottom: 20px;
-  }
-
-  .step-card h3 { font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 10px; line-height: 1.3; }
-  .step-card p  { font-size: 14px; color: var(--text-2); line-height: 1.6; }
-
-  .features-bg {
-    background: var(--bg-card);
-    border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
-    padding: 112px 36px;
-  }
-  .features-inner { max-width: 960px; margin: 0 auto; }
-
-  .features-grid {
-    display: grid; grid-template-columns: repeat(3, 1fr);
-    gap: 1px; background: var(--border);
-    border: 1px solid var(--border); border-radius: 12px;
-    overflow: hidden; margin-top: 48px;
-  }
-
-  .feat { background: var(--bg-card); padding: 32px 28px; transition: background 0.15s, border-color 0.15s; }
-  .feat:hover { background: var(--bg-raised); }
-
-  .feat-tag {
-    font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em;
-    text-transform: uppercase; color: var(--accent); opacity: 0.72; margin-bottom: 12px;
-  }
-  .feat h3 { font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 8px; letter-spacing: -0.01em; }
-  .feat p   { font-size: 14px; color: var(--text-2); line-height: 1.6; }
-
-  .editors-strip {
-    border-top: 1px solid var(--border);
-    padding: 112px 36px;
-  }
-
-  .editors-inner {
-    max-width: 640px; margin: 0 auto;
-    display: flex; flex-direction: column; align-items: center; text-align: center;
-  }
-
-  .editors-note {
-    font-size: 15px; color: var(--text-2);
-    line-height: 1.7; margin: 0 auto 36px auto; max-width: 540px;
-  }
-
-  .editors-pills { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
-
-  .pill {
-    background: var(--bg-card); border: 1px solid var(--border);
-    border-radius: 99px; padding: 8px 18px;
-    font-size: 13px; font-family: var(--sans); font-weight: 500; color: var(--text-2);
-    display: flex; align-items: center; gap: 8px;
-    transition: border-color 0.15s, color 0.15s, background 0.15s;
-  }
-  .pill:hover {
-    border-color: var(--accent-border);
-    color: var(--text);
-    background: rgba(255,255,255,0.02);
-  }
-
-  .pill-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); opacity: 0.8; }
-  .pill-dot-dim { background: var(--accent); opacity: 0.25; }
-
-  .pill-featured {
-    border-color: rgba(92,242,199,0.32);
-    background: rgba(92,242,199,0.06);
-    color: var(--text);
-  }
-
-  .pill-badge {
-    font-size: 10px; font-family: var(--mono); color: var(--accent);
-    background: rgba(92,242,199,0.12);
-    border: 1px solid rgba(92,242,199,0.22);
-    border-radius: 99px; padding: 2px 6px; margin-left: 4px;
-  }
-
-  .pill-badge-cli {
-    font-size: 10px; font-family: var(--mono); color: var(--text-3);
-    background: rgba(255,255,255,0.04); border: 1px solid var(--border);
-    border-radius: 99px; padding: 2px 6px; margin-left: 4px;
-  }
-
-  .cta-section {
-    border-top: 1px solid var(--border);
-    padding: 120px 36px; text-align: center; position: relative; overflow: hidden;
-  }
-
-  .cta-section h2 { font-size: clamp(26px, 4vw, 44px); margin-bottom: 12px; }
-  .cta-section p  { color: var(--text-2); font-size: 15px; font-family: var(--mono); margin-bottom: 36px; }
-  .cta-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
-
-  footer {
-    border-top: 1px solid var(--border);
-    padding: 32px 36px; display: flex; justify-content: space-between;
-    align-items: center; font-size: 14px; color: var(--text-3);
-    font-family: var(--sans); flex-wrap: wrap; gap: 12px;
-  }
-  footer a { color: var(--text-3); text-decoration: none; transition: color 0.15s; }
-  footer a:hover { color: var(--text-2); }
-
-  .footer-links { display: flex; gap: 22px; }
-
-  .reveal {
-    opacity: 0; transform: translateY(18px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
-  }
-  .reveal.on { opacity: 1; transform: translateY(0); }
-
-  @keyframes up {
-    from { opacity: 0; transform: translateY(14px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-
-  @media (max-width: 860px) {
-    .hero { grid-template-columns: 1fr; }
-    .hero-right { display: none; }
-    .hero-left { padding: 80px 24px; }
-    nav { padding: 0 20px; }
-    .nav-center { display: none; }
-  }
-
-  @media (max-width: 700px) {
-    .features-grid { grid-template-columns: 1fr; }
-    .steps-grid { grid-template-columns: 1fr 1fr; }
-    .steps-grid::before { display: none; }
-    .step-card:nth-child(odd) { border-right: 1px solid var(--border); }
-    .step-card:nth-child(even) { border-right: none; }
-    .section, .features-bg, .editors-strip, .cta-section {
-      padding-left: 20px; padding-right: 20px;
-    }
-    footer { padding: 28px 20px; }
-  }
-
-  @media (max-width: 480px) {
-    .steps-grid { grid-template-columns: 1fr; }
-    .step-card { border-right: none !important; border-bottom: 1px solid var(--border); }
-  }
-
-  ::-webkit-scrollbar { width: 5px; }
-  ::-webkit-scrollbar-track { background: var(--bg); }
-  ::-webkit-scrollbar-thumb { background: var(--border-2); border-radius: 99px; }
+  ::-webkit-scrollbar { width:5px; }
+  ::-webkit-scrollbar-track { background:var(--bg); }
+  ::-webkit-scrollbar-thumb { background:var(--border-2); border-radius:99px; }
 </style>
 </head>
 <body>
@@ -523,44 +183,40 @@
   </a>
   <ul class="nav-center">
     <li><a href="#how">How it works</a></li>
-    <li><a href="#workflow">Real workflow</a></li>
-    <li><a href="#features">Why teams use it</a></li>
+    <li><a href="#features">Features</a></li>
     <li><a href="#integrations">Integrations</a></li>
     <li><a href="https://github.com/switchman-dev/switchman">Docs</a></li>
   </ul>
   <div class="nav-end">
     <a href="https://github.com/switchman-dev/switchman" class="btn-nav-ghost">GitHub</a>
     <a href="pro/index.html" class="btn-nav-ghost">Pro</a>
-    <a href="https://npmjs.com/package/switchman-dev" class="btn-nav-solid">Get started</a>
+    <a href="https://npmjs.com/package/switchman-dev" class="btn-nav-solid">Install free</a>
   </div>
 </nav>
 
+<!-- ─── HERO ──────────────────────────────────────────────────────────────── -->
 <section class="hero" id="demo">
   <div class="hero-left">
     <div class="hero-kicker">
       <div class="kicker-dot"></div>
-      open source · 1,000+ developers
+      open source · 500+ installs 
     </div>
 
-    <h1>
-      Run multiple AI coding agents 
-      on one codebase
-      <em>with a safe path to merge.</em>
-    </h1>
+    <h1>The operating system<br>for <em>parallel AI development.</em></h1>
 
-    <p class="hero-sub">
-     Switchman helps AI-native software teams plan work, coordinate agents, prevent overlap, and land changes safely.
-    </p>
-    <p class="hero-sub" style="margin-top: -16px; max-width: 540px;">
-      No duplicate work. No hidden collisions. No guesswork about what should land next.
-    </p>
+    <p class="hero-sub">Plan work, coordinate multiple AI coding agents, prevent overlap, and land changes safely — all from the terminal.</p>
+    <p class="hero-sub">No duplicate work. No hidden collisions. No guesswork about what lands next.</p>
+
+    <div class="hero-pro-callout">
+      Running a team? →&nbsp;<a href="pro/index.html">Switchman Pro — unlimited agents, $25/month</a>
+    </div>
 
     <div class="hero-actions">
       <a href="https://npmjs.com/package/switchman-dev" class="btn-cta">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/></svg>
         Install free
       </a>
-      <a href="#workflow" class="btn-outline">See it working ↓</a>
+      <a href="#how" class="btn-outline">See how it works ↓</a>
     </div>
 
     <div class="hero-install">
@@ -575,10 +231,8 @@
   <div class="hero-right">
     <div class="terminal-card">
       <div class="term-bar">
-        <div class="tdot tdot-r"></div>
-        <div class="tdot tdot-y"></div>
-        <div class="tdot tdot-g"></div>
-        <span class="term-label">switchman — mission control for parallel software work</span>
+        <div class="tdot tdot-r"></div><div class="tdot tdot-y"></div><div class="tdot tdot-g"></div>
+        <span class="term-label">switchman status</span>
       </div>
       <div class="term-body" id="term-output">
         <span class="tl-cursor"></span>
@@ -587,130 +241,50 @@
   </div>
 </section>
 
+<!-- ─── HOW IT WORKS ──────────────────────────────────────────────────────── -->
 <section class="section reveal" id="how">
   <div class="section-header">
     <span class="tag">How it works</span>
-    <h2>Coordination and governance for parallel AI development.</h2>
-    <p class="section-sub">
-      Your agents can move fast. Switchman keeps the work planned, visible, and safe from task assignment to governed landing.
-    </p>
-    <p class="section-sub">Questions, feedback, or trying Switchman with your team? Join the Discord.</p>
-    <a href="https://discord.gg/pnT8BEC4D" class="text-link" style="color: #00EEF6; font-size: 20px;">
-      Join the community
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    <h2>From goal to governed merge — in the terminal.</h2>
+    <p class="section-sub">Your agents can move fast. Switchman keeps the work planned, visible, and safe from task assignment to landing.</p>
+    <a href="https://discord.gg/pnT8BEC4D" class="text-link" style="color:var(--blue);font-size:16px;">
+      Join the community on Discord
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
     </a>
   </div>
-
   <div class="steps-grid">
-    <div class="step-card">
-      <div class="step-n">01</div>
-      <h3>Plan from a single goal</h3>
-      <p>Describe what needs building. Switchman breaks it into parallel tasks automatically so agents never duplicate work or wander into the same problem.</p>
-    </div>
-    <div class="step-card">
-      <div class="step-n">02</div>
-      <h3>Prevent overlap early</h3>
-      <p>Claims and ownership rules catch file and task collisions before they turn into wasted effort or merge cleanup.</p>
-    </div>
-    <div class="step-card">
-      <div class="step-n">03</div>
-      <h3>Keep execution visible</h3>
-      <p>See what is running, blocked, stale, held back, or ready next from one terminal dashboard.</p>
-    </div>
-    <div class="step-card">
-      <div class="step-n">04</div>
-      <h3>Land changes under control</h3>
-      <p>Finished work goes through checks, policy gates, and a landing queue so the right changes reach main safely.</p>
-    </div>
+    <div class="step-card"><div class="step-n">01</div><h3>Plan from a goal</h3><p>Describe what needs building. Switchman breaks it into parallel tasks so agents never duplicate work or wander into the same problem.</p></div>
+    <div class="step-card"><div class="step-n">02</div><h3>Prevent overlap early</h3><p>File claims and ownership rules catch collisions before they turn into wasted effort or merge cleanup.</p></div>
+    <div class="step-card"><div class="step-n">03</div><h3>Keep execution visible</h3><p>See what is running, blocked, stale, or ready next from one terminal dashboard with <code style="font-family:var(--mono);font-size:12px;color:var(--accent)">switchman status</code>.</p></div>
+    <div class="step-card"><div class="step-n">04</div><h3>Land changes safely</h3><p>Finished work goes through checks, policy gates, and a landing queue so the right changes reach main cleanly.</p></div>
   </div>
 </section>
 
-<section class="section reveal" id="workflow">
-  <div class="section-header">
-    <span class="tag">Real workflow</span>
-    <h2>From several goals to one safe merge path.</h2>
-    <p class="section-sub">
-      Real teams are rarely pushing one task at a time. Switchman helps you coordinate several goals across multiple agents without letting the repo turn into merge chaos.
-    </p>
-  </div>
-
-  <div class="steps-grid">
-    <div class="step-card">
-      <div class="step-n">01</div>
-      <h3>Several goals arrive at once</h3>
-      <p>Auth hardening, a schema update, and docs changes all need to move in the same repo at the same time.</p>
-    </div>
-    <div class="step-card">
-      <div class="step-n">02</div>
-      <h3>Agents split the work safely</h3>
-      <p>Each agent gets a clear task and workspace so progress happens in parallel without duplicate effort.</p>
-    </div>
-    <div class="step-card">
-      <div class="step-n">03</div>
-      <h3>Overlap gets caught early</h3>
-      <p>If two agents reach for the same file or area, Switchman blocks the collision before it turns into wasted work.</p>
-    </div>
-    <div class="step-card">
-      <div class="step-n">04</div>
-      <h3>The right work lands next</h3>
-      <p>Finished changes go through checks, queueing, and governed landing so the clearest work reaches main safely.</p>
-    </div>
-  </div>
-</section>
-
-
+<!-- ─── FEATURES ──────────────────────────────────────────────────────────── -->
 <div class="features-bg reveal" id="features">
   <div class="features-inner">
-    <div class="section-header" style="margin-bottom: 0;">
+    <div class="section-header" style="margin-bottom:0;">
       <span class="tag">Why teams use it</span>
-      <h2>Stop coordinating parallel software work by hand.</h2>
-      <p class="section-sub" style="margin-bottom: 0;">
-        Running multiple agents across real engineering goals gets chaotic fast. Switchman gives teams one place to coordinate work, govern risk, and control what lands next.
-      </p>
+      <h2>Stop coordinating parallel AI work by hand.</h2>
+      <p class="section-sub" style="margin-bottom:0;">Running multiple agents across real engineering goals gets chaotic fast. Switchman gives teams one place to coordinate, govern risk, and control what lands next.</p>
     </div>
-
     <div class="features-grid">
-      <div class="feat">
-        <div class="feat-tag">Planning</div>
-        <h3>Turn goals into parallel work</h3>
-        <p>Break larger goals into tasks agents can take safely without duplicating effort or stepping into the same area.</p>
-      </div>
-      <div class="feat">
-        <div class="feat-tag">Ownership</div>
-        <h3>Know who is working on what</h3>
-        <p>See which files are claimed, which tasks are active, and where work is blocked or waiting next.</p>
-      </div>
-      <div class="feat">
-        <div class="feat-tag">Recovery</div>
-        <h3>Recover from drift and stale work</h3>
-        <p>Detect stuck sessions, stale tasks, and broken landing state early, then route the exact recovery step.</p>
-      </div>
-      <div class="feat">
-        <div class="feat-tag">Governance</div>
-        <h3>Catch risk before merge</h3>
-        <p>Run safety checks, policy gates, and review requirements before work lands instead of after a risky merge.</p>
-      </div>
-      <div class="feat">
-        <div class="feat-tag">Mission control</div>
-        <h3>See the repo clearly in one place</h3>
-        <p>Use <code>switchman status</code> to see repo health, active work, blocked items, queue state, and next commands.</p>
-      </div>
-      <div class="feat">
-        <div class="feat-tag">Landing</div>
-        <h3>Decide what should land next</h3>
-        <p>Queue finished work, prioritize the clearest candidates, and land changes onto main with retries, checks, and recovery paths.</p>
-      </div>
+      <div class="feat"><div class="feat-tag">Planning</div><h3>Turn goals into parallel work</h3><p>Break larger goals into tasks agents can take safely without duplicating effort or stepping into the same area.</p></div>
+      <div class="feat"><div class="feat-tag">Ownership</div><h3>Know who is working on what</h3><p>See which files are claimed, which tasks are active, and where work is blocked or waiting.</p></div>
+      <div class="feat"><div class="feat-tag">Recovery</div><h3>Recover from drift and stale work</h3><p>Detect stuck sessions, stale tasks, and broken landing state early — then route the exact recovery step.</p></div>
+      <div class="feat"><div class="feat-tag">Governance</div><h3>Catch risk before merge</h3><p>Run safety checks, policy gates, and review requirements before work lands instead of after a risky merge.</p></div>
+      <div class="feat"><div class="feat-tag">Mission control</div><h3>See the repo clearly</h3><p>Repo health, active work, blocked items, queue state, and next commands — all in one terminal view.</p></div>
+      <div class="feat"><div class="feat-tag">Landing</div><h3>Decide what should land next</h3><p>Queue finished work, prioritise the clearest candidates, and land changes onto main with retries and recovery paths.</p></div>
     </div>
   </div>
 </div>
 
+<!-- ─── INTEGRATIONS ──────────────────────────────────────────────────────── -->
 <section class="editors-strip reveal" id="integrations">
   <div class="editors-inner">
     <span class="tag">Integrations</span>
     <h2>Works with the tools your team already uses.</h2>
-    <p class="editors-note">
-      Switchman fits into the editors and agent workflows teams already use today, with native MCP support where available and a CLI path for everything else.
-    </p>
+    <p class="editors-note">Native MCP support for Claude Code and Cursor. CLI path for everything else.</p>
     <div class="editors-pills">
       <div class="pill pill-featured"><span class="pill-dot"></span>Claude Code <span class="pill-badge">Native MCP</span></div>
       <div class="pill pill-featured"><span class="pill-dot"></span>Cursor <span class="pill-badge">Native MCP</span></div>
@@ -721,15 +295,17 @@
   </div>
 </section>
 
+<!-- ─── CTA ───────────────────────────────────────────────────────────────── -->
 <section class="cta-section reveal">
-  <h2>Let your agents move fast.<br>Keep your software delivery under control.</h2>
-  <p>Open source · MIT licensed · Built for teams running multiple AI coding agents on real codebases</p>
+  <h2>Let your agents move fast.<br>Keep your repo under control.</h2>
+  <p>Open source · MIT licensed · Free for up to 3 agents</p>
   <div class="cta-btns">
     <a href="https://npmjs.com/package/switchman-dev" class="btn-cta">Install free</a>
     <a href="pro/index.html" class="btn-outline">See Pro ↗</a>
   </div>
 </section>
 
+<!-- ─── FOOTER ────────────────────────────────────────────────────────────── -->
 <footer>
   <span>switchman.dev — MIT License</span>
   <div class="footer-links">
@@ -738,68 +314,52 @@
     <a href="https://github.com/switchman-dev/switchman/issues">Issues</a>
     <a href="https://npmjs.com/package/switchman-dev">npm</a>
     <a href="pro/index.html">Pro</a>
-     <a href="terms/index.html">Terms</a>
-<a href="privacy/index.html">Privacy</a> 
-
+    <a href="terms/index.html">Terms</a>
+    <a href="privacy/index.html">Privacy</a>
   </div>
 </footer>
 
-
 <script>
-// ── NAV scroll state ──
 window.addEventListener('scroll', () => {
   document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 10);
 }, { passive: true });
 
-// ── Copy install ──
 function copyInstall(el) {
   navigator.clipboard.writeText('npm install -g switchman-dev');
   el.classList.add('copied');
   el.querySelector('.copy-hint').textContent = 'copied!';
-  setTimeout(() => {
-    el.classList.remove('copied');
-    el.querySelector('.copy-hint').textContent = 'copy';
-  }, 2000);
+  setTimeout(() => { el.classList.remove('copied'); el.querySelector('.copy-hint').textContent = 'copy'; }, 2000);
 }
 
-// ── Terminal animation ──
 const LINES = [
-  { t: 300,  agent: 'sys',     msg: 'switchman status  —  mission control ready', cls: 'tl-info' },
-  { t: 750,  agent: 'sys',     msg: '3 tasks pending  ·  2 agents active  ·  landing queue clear', cls: '' },
-  { t: 1200, agent: 'agent-1', msg: 'CLAIM   src/api/router.ts', cls: 'tl-ok' },
-  { t: 1500, agent: 'agent-1', msg: 'START   task:auth-hardening', cls: 'tl-info' },
-  { t: 2150, agent: 'agent-2', msg: 'CLAIM   src/api/router.ts  →  BLOCKED', cls: 'tl-warn' },
-  { t: 2550, agent: 'sys',     msg: 'overlap caught early  ·  route agent-2 to safe files', cls: '' },
-  { t: 3050, agent: 'agent-2', msg: 'CLAIM   src/db/migrations.ts', cls: 'tl-ok' },
-  { t: 3400, agent: 'agent-2', msg: 'START   task:schema-update', cls: 'tl-info' },
-  { t: 4150, agent: 'agent-1', msg: 'DONE    task:auth-hardening', cls: 'tl-ok' },
-  { t: 4700, agent: 'agent-2', msg: 'DONE    task:schema-update', cls: 'tl-ok' },
-  { t: 5350, agent: 'sys',     msg: 'QUEUE   2 finished branches ready to land', cls: 'tl-info' },
-  { t: 6000, agent: 'sys',     msg: 'LAND    feature/auth-hardening  ✓', cls: 'tl-ok' },
-  { t: 6650, agent: 'sys',     msg: 'LAND    feature/schema-update  ✓', cls: 'tl-ok' },
-  { t: 7350, agent: 'sys',     msg: 'GATE    ci clear  ·  safe to merge', cls: 'tl-ok' },
-  { t: 8100, agent: 'sys',     msg: '2 agents · 0 collisions · 0 risky merges', cls: 'tl-info' },
+  { t:300,  agent:'sys',     msg:'switchman status  —  mission control ready', cls:'tl-info' },
+  { t:750,  agent:'sys',     msg:'3 tasks pending  ·  2 agents active  ·  queue clear', cls:'' },
+  { t:1200, agent:'agent-1', msg:'CLAIM   src/api/router.ts', cls:'tl-ok' },
+  { t:1500, agent:'agent-1', msg:'START   task:auth-hardening', cls:'tl-info' },
+  { t:2150, agent:'agent-2', msg:'CLAIM   src/api/router.ts  →  BLOCKED', cls:'tl-warn' },
+  { t:2550, agent:'sys',     msg:'overlap caught early  ·  reroute agent-2', cls:'' },
+  { t:3050, agent:'agent-2', msg:'CLAIM   src/db/migrations.ts', cls:'tl-ok' },
+  { t:3400, agent:'agent-2', msg:'START   task:schema-update', cls:'tl-info' },
+  { t:4150, agent:'agent-1', msg:'DONE    task:auth-hardening', cls:'tl-ok' },
+  { t:4700, agent:'agent-2', msg:'DONE    task:schema-update', cls:'tl-ok' },
+  { t:5350, agent:'sys',     msg:'QUEUE   2 finished branches ready to land', cls:'tl-info' },
+  { t:6000, agent:'sys',     msg:'LAND    feature/auth-hardening  ✓', cls:'tl-ok' },
+  { t:6650, agent:'sys',     msg:'LAND    feature/schema-update  ✓', cls:'tl-ok' },
+  { t:7350, agent:'sys',     msg:'GATE    ci clear  ·  safe to merge', cls:'tl-ok' },
+  { t:8100, agent:'sys',     msg:'2 agents · 0 collisions · 0 risky merges', cls:'tl-info' },
 ];
 
 const out = document.getElementById('term-output');
 const cursor = out.querySelector('.tl-cursor');
 let running = false;
-let timers = [];
 
-function agentCls(a) {
-  if (a === 'agent-1') return 'a1';
-  if (a === 'agent-2') return 'a2';
-  return 'sys';
-}
+function agentCls(a) { return a==='agent-1'?'a1':a==='agent-2'?'a2':'sys'; }
 
 function addLine(line) {
-  const sec = (line.t / 1000).toFixed(1).padStart(4) + 's';
+  const sec = (line.t/1000).toFixed(1).padStart(4)+'s';
   const div = document.createElement('div');
   div.className = 'term-line';
-  div.innerHTML =
-    `<span class="tl-time">${sec}</span>` +
-    `<span class="tl-agent ${agentCls(line.agent)}">${line.agent}</span>` +
-    `<span class="tl-msg ${line.cls}">${line.msg}</span>`;
+  div.innerHTML = `<span class="tl-time">${sec}</span><span class="tl-agent ${agentCls(line.agent)}">${line.agent}</span><span class="tl-msg ${line.cls}">${line.msg}</span>`;
   out.insertBefore(div, cursor);
   out.scrollTop = out.scrollHeight;
 }
@@ -808,8 +368,8 @@ function runDemo() {
   if (running) return;
   running = true;
   out.querySelectorAll('.term-line').forEach(l => l.remove());
-  LINES.forEach(line => { timers.push(setTimeout(() => addLine(line), line.t)); });
-  timers.push(setTimeout(() => { running = false; setTimeout(runDemo, 1600); }, 9800));
+  LINES.forEach(line => setTimeout(() => addLine(line), line.t));
+  setTimeout(() => { running = false; setTimeout(runDemo, 1600); }, 9800);
 }
 
 const tObs = new IntersectionObserver(entries => {
@@ -817,12 +377,10 @@ const tObs = new IntersectionObserver(entries => {
 }, { threshold: 0.25 });
 tObs.observe(document.querySelector('.terminal-card'));
 
-// ── Scroll reveal ──
 const rObs = new IntersectionObserver(entries => {
   entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('on'); rObs.unobserve(e.target); } });
 }, { threshold: 0.07 });
 document.querySelectorAll('.reveal').forEach(el => rObs.observe(el));
 </script>
 </body>
-
 </html>

@@ -63,15 +63,6 @@
     .proof-stat strong { color:var(--text-2); font-weight:600; }
     .proof-dot { width:3px; height:3px; border-radius:50%; background:var(--border-2); }
 
-    /* QUOTES */
-    .proof-quotes { max-width:840px; margin:0 auto 56px; display:grid; grid-template-columns:repeat(3,1fr); gap:16px; animation:up 0.5s ease forwards 0.3s; opacity:0; }
-    .quote-card { background:var(--bg-card); border:1px solid var(--border); border-radius:12px; padding:22px 24px; text-align:left; }
-    .quote-text { font-size:14px; color:var(--text-2); line-height:1.6; margin-bottom:14px; font-style:italic; }
-    .quote-author { display:flex; align-items:center; gap:10px; }
-    .quote-avatar { width:28px; height:28px; border-radius:50%; background:var(--accent-dim); border:1px solid var(--accent-border); display:flex; align-items:center; justify-content:center; font-family:var(--mono); font-size:11px; color:var(--accent); font-weight:700; flex-shrink:0; }
-    .quote-name { font-size:12px; font-family:var(--mono); color:var(--text-3); }
-    .quote-name strong { color:var(--text-2); display:block; font-size:13px; }
-
     /* PRICING */
     .pricing-wrap { max-width:760px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:16px; animation:up 0.5s ease forwards 0.35s; opacity:0; }
     .plan-card { background:var(--bg-card); border:1px solid var(--border); border-radius:16px; padding:36px 32px; text-align:left; position:relative; transition:border-color 0.2s; }
@@ -176,7 +167,7 @@
     footer { border-top:1px solid var(--border); padding:32px 36px; display:flex; justify-content:space-between; align-items:center; font-size:14px; color:var(--text-3); font-family:var(--sans); flex-wrap:wrap; gap:12px; }
     footer a { color:var(--text-3); text-decoration:none; transition:color 0.15s; }
     footer a:hover { color:var(--text-2); }
-    .footer-links { display:flex; gap:22px; }
+    .footer-links { display:flex; gap:22px; flex-wrap:wrap; }
 
     @keyframes up { from{opacity:0;transform:translateY(14px)} to{opacity:1;transform:translateY(0)} }
     @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.55;transform:scale(.85)} }
@@ -203,7 +194,7 @@
     <button class="modal-close" onclick="closeModal()" aria-label="Close">&#x2715;</button>
     <div class="modal-plan-badge" id="modal-plan-name">Monthly</div>
     <h3>Get started with Pro</h3>
-    <p class="modal-sub" id="modal-sub">425 / seat / month · cancel anytime</p>
+    <p class="modal-sub" id="modal-sub">$25 / seat / month · cancel anytime</p>
     <hr>
     <div class="modal-step-label">Step 1 — sign in to continue</div>
     <button class="btn-github" id="github-btn" onclick="handleGitHubSignIn()">
@@ -222,7 +213,7 @@
 <!-- ─── NAV ───────────────────────────────────────────────────────────────── -->
 <nav>
   <a href="/" class="logo">
-    <img src="../switchman-logo.svg" width="24" height="24" alt="Switchman">
+    <img src="/switchman-logo.svg" width="24" height="24" alt="Switchman">
     switchman
   </a>
   <div class="nav-end">
@@ -238,28 +229,11 @@
   <p class="pro-hero-sub">Everything in the free tier, plus unlimited agents, cloud-synced team coordination, and 90-day history. All in the terminal.</p>
 
   <div class="social-proof">
-    <div class="proof-stat"><strong>1,000+</strong> developers</div>
+    <div class="proof-stat"><strong>500+</strong> installs</div>
     <div class="proof-dot"></div>
     <div class="proof-stat"><strong>r/ClaudeAI</strong> community pick</div>
     <div class="proof-dot"></div>
     <div class="proof-stat">Works with <strong>Claude Code, Cursor &amp; Aider</strong></div>
-    <div class="proof-dot"></div>
-    <div class="proof-stat">Built by <strong>Recio Ltd</strong></div>
-  </div>
-
-  <div class="proof-quotes">
-    <div class="quote-card">
-      <div class="quote-text">"Finally something that stops my agents from trampling each other. Ran 8 agents on a refactor yesterday, zero conflicts at merge."</div>
-      <div class="quote-author"><div class="quote-avatar">TK</div><div class="quote-name"><strong>Tom K.</strong> r/ClaudeAI</div></div>
-    </div>
-    <div class="quote-card">
-      <div class="quote-text">"The file locking just works. The claim system catches collisions before they happen, not after. That's the key difference."</div>
-      <div class="quote-author"><div class="quote-avatar">SR</div><div class="quote-name"><strong>S. Ramos</strong> Discord</div></div>
-    </div>
-    <div class="quote-card">
-      <div class="quote-text">"switchman merge at the end of a multi-agent run is genuinely satisfying. Everything lands cleanly every time."</div>
-      <div class="quote-author"><div class="quote-avatar">JP</div><div class="quote-name"><strong>J. Park</strong> r/ClaudeAI</div></div>
-    </div>
   </div>
 
   <!-- PRICING CARDS -->
@@ -452,28 +426,20 @@
     <a href="https://discord.gg/pnT8BEC4D">Discord</a>
     <a href="https://github.com/switchman-dev/switchman/issues">Issues</a>
     <a href="mailto:hello@switchman.dev">hello@switchman.dev</a>
-         <a href="../terms/index.html">Terms</a>
-<a href="../privacy/index.html">Privacy</a> 
+    <a href="/terms">Terms</a>
+    <a href="/privacy">Privacy</a>
   </div>
 </footer>
 
-<!-- ─── SUPABASE + LOGIC ──────────────────────────────────────────────────── -->
-
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-  // ─── CONFIG — replace these two values ────────────────────────────────────
   const SUPABASE_URL  = 'https://afilbolhlkiingnsupgr.supabase.co'
   const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFmaWxib2xobGtpaW5nbnN1cGdyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM1OTIzOTIsImV4cCI6MjA4OTE2ODM5Mn0.8TBfHfRB0vEyKPMWBd6i1DNwx1nS9UqprIAsJf35n88'
-
-  // Polar.sh product checkout URLs — replace with your real product URLs
-  // Get these from your Polar.sh dashboard > Products > Share link
   const POLAR_MONTHLY = 'https://buy.polar.sh/polar_cl_i17GENDFPcqmphxNckeir6YCDlsEnTyPTJZoI0hWPXS'
   const POLAR_ANNUAL  = 'https://buy.polar.sh/polar_cl_i17GENDFPcqmphxNckeir6YCDlsEnTyPTJZoI0hWPXS'
-  // ──────────────────────────────────────────────────────────────────────────
 
   const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON)
 
-  // Modal
   function openModal(plan) {
     const planName = document.getElementById('modal-plan-name')
     const sub      = document.getElementById('modal-sub')
@@ -534,10 +500,7 @@
     const plan = document.getElementById('modal').dataset.plan || 'monthly'
     clearError()
     setLoading(true)
-
-    // Save chosen plan — callback page reads this after GitHub redirects back
     sessionStorage.setItem('switchman_plan', plan)
-
     const { error } = await sb.auth.signInWithOAuth({
       provider: 'github',
       options: {
@@ -545,16 +508,13 @@
         scopes: 'read:user user:email',
       }
     })
-
     if (error) {
       setLoading(false)
       showError('Could not connect to GitHub. Please try again.')
       console.error('Supabase OAuth error:', error)
     }
-    // On success the browser navigates away — no need to reset loading state
   }
 
-  // Tab switcher
   function switchTab(name, btn) {
     document.querySelectorAll('.demo-panel').forEach(p => p.classList.remove('active'))
     document.querySelectorAll('.demo-tab').forEach(b => b.classList.remove('active'))
