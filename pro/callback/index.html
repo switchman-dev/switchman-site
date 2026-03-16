@@ -148,12 +148,29 @@ const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON)
   }
 
   async function init() {
-    // Supabase JS automatically reads the OAuth code/token from the URL hash
-    // and exchanges it for a session on page load.
-    const { data, error } = await sb.auth.getSession()
+    // First try to exchange the code/hash from the URL
+    const hashParams = new URLSearchParams(window.location.hash.substring(1))
+    const accessToken = hashParams.get('access_token')
 
-    if (error || !data?.session) {
-      // Session exchange failed or timed out
+    let session = null
+    let error = null
+
+    if (accessToken) {
+      // Token is in the URL hash — set the session directly
+      const result = await sb.auth.setSession({
+        access_token: accessToken,
+        refresh_token: hashParams.get('refresh_token') || '',
+      })
+      session = result.data?.session
+      error = result.error
+    } else {
+      // Try getting existing session
+      const result = await sb.auth.getSession()
+      session = result.data?.session
+      error = result.error
+    }
+
+    if (error || !session) {
       showError(
         'Sign in failed',
         error?.message || 'The sign-in session could not be verified. Please try again.'
@@ -161,8 +178,7 @@ const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON)
       return
     }
 
-    const session = data.session
-    const user    = session.user
+    const user = session.user
 
     // Read which plan the user chose (saved before OAuth redirect)
     const plan = sessionStorage.getItem('switchman_plan') || 'monthly'
@@ -173,24 +189,21 @@ const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON)
       plan === 'annual' ? 'Annual plan — 2 months free' : 'Monthly plan'
     showState('state-redirecting')
 
-    // Build the Polar checkout URL, passing the user's info as metadata
-    // Polar uses this to link the payment back to the Supabase user
-    const baseUrl   = plan === 'annual' ? POLAR_ANNUAL : POLAR_MONTHLY
-    const params    = new URLSearchParams({
-      customer_email:       user.email || '',
-      metadata_user_id:     user.id,
-      metadata_plan:        plan,
-      // Polar will redirect here after successful payment
+    // Build the Polar checkout URL
+    const baseUrl = plan === 'annual' ? POLAR_ANNUAL : POLAR_MONTHLY
+    const params  = new URLSearchParams({
+      customer_email:   user.email || '',
+      metadata_user_id: user.id,
+      metadata_plan:    plan,
       success_url: `${location.origin}/pro/success?plan=${plan}&user_id=${user.id}`,
     })
 
     // Short pause so the user can see the "Signed in" confirmation
-    // before being whisked away to Polar
     await new Promise(r => setTimeout(r, 1200))
 
     window.location.href = `${baseUrl}?${params}`
   }
-
+  
   init().catch(err => {
     console.error('Callback init error:', err)
     showError('Unexpected error', 'Something went wrong. Please go back and try again.')
