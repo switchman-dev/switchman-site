@@ -3,11 +3,74 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Switchman | The Operating System for Parallel AI Development</title>
-  <meta name="description" content="Plan work, coordinate multiple AI coding agents, prevent overlap, govern merge risk, and safely land changes on main. Free and open source.">
+
+  <!-- ─── PRIMARY SEO ──────────────────────────────────────────────────────── -->
+  <title>Switchman — Run Multiple AI Coding Agents Without Conflicts | Free & Open Source</title>
+  <meta name="description" content="Switchman coordinates multiple AI coding agents on one codebase. File locking, task queues, conflict prevention, and governed merge paths. Works with Claude Code, Cursor, and Aider. Free for up to 3 agents.">
+  <meta name="keywords" content="AI coding agents, Claude Code, parallel agents, multi-agent development, file locking, coding agent coordination, Cursor AI, AI developer tools, agent orchestration, switchman">
+  <link rel="canonical" href="https://switchman.dev/">
+
+  <!-- ─── OPEN GRAPH (LinkedIn, Facebook, Slack) ────────────────────────────── -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://switchman.dev/">
+  <meta property="og:title" content="Switchman — Run Multiple AI Coding Agents Without Conflicts">
+  <meta property="og:description" content="Coordinate multiple AI coding agents on one codebase. File locking, task queues, and conflict prevention. Free and open source. Works with Claude Code and Cursor.">
+  <meta property="og:image" content="https://switchman.dev/og-image.png">
+  <meta property="og:site_name" content="Switchman">
+
+  <!-- ─── TWITTER / X CARD ─────────────────────────────────────────────────── -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@switchman_dev">
+  <meta name="twitter:title" content="Switchman — Run Multiple AI Coding Agents Without Conflicts">
+  <meta name="twitter:description" content="Coordinate multiple AI coding agents on one codebase. File locking, task queues, conflict prevention. Free and open source.">
+  <meta name="twitter:image" content="https://switchman.dev/og-image.png">
+
+  <!-- ─── STRUCTURED DATA ───────────────────────────────────────────────────── -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Switchman",
+    "url": "https://switchman.dev",
+    "description": "Switchman coordinates multiple AI coding agents on one codebase. File locking, task queues, conflict prevention, and governed merge paths. Works with Claude Code, Cursor, and Aider.",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "macOS, Linux, Windows",
+    "offers": [
+      {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD",
+        "name": "Free tier — up to 3 agents"
+      },
+      {
+        "@type": "Offer",
+        "price": "25",
+        "priceCurrency": "USD",
+        "name": "Pro — unlimited agents",
+        "url": "https://switchman.dev/pro"
+      }
+    ],
+    "softwareVersion": "0.1.13",
+    "downloadUrl": "https://www.npmjs.com/package/switchman-dev",
+    "codeRepository": "https://github.com/switchman-dev/switchman",
+    "license": "https://opensource.org/licenses/MIT",
+    "author": {
+      "@type": "Organization",
+      "name": "Recio Ltd",
+      "url": "https://switchman.dev"
+    },
+    "keywords": "AI coding agents, Claude Code, parallel agents, multi-agent development, file locking, agent coordination"
+  }
+  </script>
+
+  <!-- ─── FONTS ─────────────────────────────────────────────────────────────── -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <!-- ─── FAVICON ───────────────────────────────────────────────────────────── -->
+  <link rel="icon" type="image/svg+xml" href="/switchman-logo.svg">
+
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
@@ -52,7 +115,7 @@
   .tl-time { color:var(--text-3); min-width:44px; font-size:11px; padding-top:1px; }
   .tl-agent { font-weight:500; min-width:72px; }
   .tl-agent.a1 { color:var(--accent); } .tl-agent.a2 { color:var(--amber); } .tl-agent.sys { color:var(--text-3); }
-  .tl-msg { color:var(--text-2); } .tl-ok { color:var(--green); } .tl-warn { color:var(--amber); } .tl-info { color:var(--accent); } .tl-err { color:var(--red); }
+  .tl-msg { color:var(--text-2); } .tl-ok { color:var(--green); } .tl-warn { color:var(--amber); } .tl-info { color:var(--accent); }
   .tl-cursor { display:inline-block; width:7px; height:13px; background:var(--accent); animation:blink 1.1s step-end infinite; vertical-align:middle; border-radius:1px; }
   @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
 
@@ -62,19 +125,15 @@
   @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.55;transform:scale(.85)} }
   .hero h1 { font-size:clamp(28px,3.6vw,58px); font-weight:600; line-height:1.12; letter-spacing:-0.03em; color:var(--text); margin-bottom:22px; opacity:0; animation:up 0.5s ease forwards 0.15s; }
   .hero h1 em { font-style:normal; color:var(--accent); }
-  .hero-sub { font-size:clamp(14px,1.5vw,17px); color:var(--text-2); line-height:1.6; max-width:440px; margin-bottom:16px; opacity:0; animation:up 0.5s ease forwards 0.25s; }
-
-  /* PRO CALLOUT IN HERO */
-  .hero-pro-callout { display:inline-flex; align-items:center; gap:6px; margin-bottom:28px; margin-top:4px; font-size:13px; font-family:var(--mono); color:var(--text-3); opacity:0; animation:up 0.5s ease forwards 0.3s; }
+  .hero-sub { font-size:clamp(14px,1.5vw,17px); color:var(--text-2); line-height:1.7; max-width:460px; margin-bottom:28px; opacity:0; animation:up 0.5s ease forwards 0.25s; }
+  .hero-pro-callout { display:inline-flex; align-items:center; gap:6px; margin-bottom:28px; font-size:13px; font-family:var(--mono); color:var(--text-3); opacity:0; animation:up 0.5s ease forwards 0.3s; }
   .hero-pro-callout a { color:var(--accent); text-decoration:none; transition:color 0.15s; }
   .hero-pro-callout a:hover { color:var(--accent-hover); }
-
   .hero-actions { display:flex; gap:12px; flex-wrap:wrap; align-items:center; margin-bottom:24px; opacity:0; animation:up 0.5s ease forwards 0.35s; }
   .btn-cta { background:var(--accent); color:#061016; font-family:var(--mono); font-size:13px; font-weight:700; padding:12px 24px; border-radius:99px; text-decoration:none; display:inline-flex; align-items:center; gap:8px; transition:background 0.15s; border:none; cursor:pointer; }
   .btn-cta:hover { background:var(--accent-hover); }
   .btn-outline { background:transparent; color:var(--text-2); font-family:var(--mono); font-size:13px; padding:12px 24px; border-radius:99px; text-decoration:none; display:inline-flex; align-items:center; gap:8px; border:1px solid var(--border-2); transition:color 0.15s,border-color 0.15s,background 0.15s; }
   .btn-outline:hover { color:var(--text); border-color:var(--accent-border); background:rgba(255,255,255,0.02); }
-
   .hero-install { display:flex; align-items:center; gap:12px; flex-wrap:wrap; opacity:0; animation:up 0.5s ease forwards 0.44s; }
   .install-cmd { background:var(--bg-card); border:1px solid var(--border); border-radius:99px; padding:9px 20px; font-family:var(--mono); font-size:12px; color:var(--accent); cursor:pointer; transition:border-color 0.15s,color 0.15s; user-select:none; display:flex; align-items:center; gap:12px; max-width:100%; }
   .install-cmd span:first-child { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
@@ -159,7 +218,6 @@
     .install-hint { display:none; }
   }
   @media (max-width:640px) {
-    /* Hide install free button — nav too cramped on small phones */
     .btn-nav-solid { display:none; }
     nav { padding:0 20px; }
   }
@@ -176,9 +234,9 @@
 </head>
 <body>
 
-<nav id="nav">
-  <a href="#" class="logo">
-    <img src="switchman-logo.svg" width="24" height="24" alt="Switchman">
+<nav id="nav" role="navigation" aria-label="Main navigation">
+  <a href="/" class="logo" aria-label="Switchman home">
+    <img src="switchman-logo.svg" width="24" height="24" alt="Switchman logo">
     switchman
   </a>
   <ul class="nav-center">
@@ -188,51 +246,51 @@
     <li><a href="https://github.com/switchman-dev/switchman">Docs</a></li>
   </ul>
   <div class="nav-end">
-    <a href="https://github.com/switchman-dev/switchman" class="btn-nav-ghost">GitHub</a>
+    <a href="https://github.com/switchman-dev/switchman" class="btn-nav-ghost" aria-label="View on GitHub">GitHub</a>
     <a href="pro/index.html" class="btn-nav-ghost">Pro</a>
     <a href="https://npmjs.com/package/switchman-dev" class="btn-nav-solid">Install free</a>
   </div>
 </nav>
 
 <!-- ─── HERO ──────────────────────────────────────────────────────────────── -->
-<section class="hero" id="demo">
+<main>
+<section class="hero" id="demo" aria-label="Hero">
   <div class="hero-left">
     <div class="hero-kicker">
       <div class="kicker-dot"></div>
-      open source · 500+ installs 
+      open source · 1,000+ developers
     </div>
 
     <h1>The operating system<br>for <em>parallel AI development.</em></h1>
 
-    <p class="hero-sub">Plan work, coordinate multiple AI coding agents, prevent overlap, and land changes safely — all from the terminal.</p>
-    <p class="hero-sub">No duplicate work. No hidden collisions. No guesswork about what lands next.</p>
+    <p class="hero-sub">Run multiple AI coding agents on one codebase without conflicts, duplicate work, or merge chaos. Switchman gives agents file locking, task queues, and a governed path to main — all from the terminal.</p>
 
     <div class="hero-pro-callout">
-      Running a team? →&nbsp;<a href="pro/index.html">Switchman Pro — unlimited agents, $25/month</a>
+      Running a team? →&nbsp;<a href="pro/index.html">Switchman Pro — unlimited agents, from $25/month</a>
     </div>
 
     <div class="hero-actions">
-      <a href="https://npmjs.com/package/switchman-dev" class="btn-cta">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/></svg>
+      <a href="https://npmjs.com/package/switchman-dev" class="btn-cta" aria-label="Install Switchman free from npm">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/></svg>
         Install free
       </a>
-      <a href="#how" class="btn-outline">See how it works ↓</a>
+      <a href="#how" class="btn-outline">See it in action ↓</a>
     </div>
 
     <div class="hero-install">
-      <div class="install-cmd" id="install-btn" onclick="copyInstall(this)">
+      <div class="install-cmd" id="install-btn" onclick="copyInstall(this)" role="button" aria-label="Copy install command">
         <span>$ npm install -g switchman-dev</span>
-        <span class="copy-hint">copy</span>
+        <span class="copy-hint" aria-hidden="true">copy</span>
       </div>
-      <span class="install-hint">then: switchman setup --agents 3</span>
+      <span class="install-hint">then: switchman demo</span>
     </div>
   </div>
 
-  <div class="hero-right">
+  <div class="hero-right" aria-hidden="true">
     <div class="terminal-card">
       <div class="term-bar">
         <div class="tdot tdot-r"></div><div class="tdot tdot-y"></div><div class="tdot tdot-g"></div>
-        <span class="term-label">switchman status</span>
+        <span class="term-label">switchman status — live agent coordination</span>
       </div>
       <div class="term-body" id="term-output">
         <span class="tl-cursor"></span>
@@ -242,49 +300,89 @@
 </section>
 
 <!-- ─── HOW IT WORKS ──────────────────────────────────────────────────────── -->
-<section class="section reveal" id="how">
+<section class="section reveal" id="how" aria-labelledby="how-heading">
   <div class="section-header">
     <span class="tag">How it works</span>
-    <h2>From goal to governed merge — in the terminal.</h2>
-    <p class="section-sub">Your agents can move fast. Switchman keeps the work planned, visible, and safe from task assignment to landing.</p>
+    <h2 id="how-heading">One command. Multiple agents. Zero conflicts.</h2>
+    <p class="section-sub">From adding a task to landing on main — Switchman keeps every agent in its lane and every merge clean.</p>
     <a href="https://discord.gg/pnT8BEC4D" class="text-link" style="color:var(--blue);font-size:16px;">
       Join the community on Discord
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
     </a>
   </div>
   <div class="steps-grid">
-    <div class="step-card"><div class="step-n">01</div><h3>Plan from a goal</h3><p>Describe what needs building. Switchman breaks it into parallel tasks so agents never duplicate work or wander into the same problem.</p></div>
-    <div class="step-card"><div class="step-n">02</div><h3>Prevent overlap early</h3><p>File claims and ownership rules catch collisions before they turn into wasted effort or merge cleanup.</p></div>
-    <div class="step-card"><div class="step-n">03</div><h3>Keep execution visible</h3><p>See what is running, blocked, stale, or ready next from one terminal dashboard with <code style="font-family:var(--mono);font-size:12px;color:var(--accent)">switchman status</code>.</p></div>
-    <div class="step-card"><div class="step-n">04</div><h3>Land changes safely</h3><p>Finished work goes through checks, policy gates, and a landing queue so the right changes reach main cleanly.</p></div>
+    <div class="step-card">
+      <div class="step-n">01</div>
+      <h3>One command to start</h3>
+      <p>Run <code style="font-family:var(--mono);font-size:12px;color:var(--accent)">switchman setup --agents 3</code> — Switchman creates agent workspaces, sets up task queues, and wires MCP config for Claude Code and Cursor automatically.</p>
+    </div>
+    <div class="step-card">
+      <div class="step-n">02</div>
+      <h3>Agents claim their files</h3>
+      <p>When an agent starts work it claims the files it needs. Any other agent trying to claim the same file is blocked immediately — before a single line of conflicting code is written.</p>
+    </div>
+    <div class="step-card">
+      <div class="step-n">03</div>
+      <h3>Watch it happen live</h3>
+      <p>Keep <code style="font-family:var(--mono);font-size:12px;color:var(--accent)">switchman status --watch</code> open in a terminal. See every agent, every file claim, every blocked collision, and every completed task in real time.</p>
+    </div>
+    <div class="step-card">
+      <div class="step-n">04</div>
+      <h3>Land cleanly every time</h3>
+      <p>Finished work goes through the CI gate, policy checks, and a priority queue. The right changes reach main one at a time — with retries, recovery paths, and a full audit trail.</p>
+    </div>
   </div>
 </section>
 
 <!-- ─── FEATURES ──────────────────────────────────────────────────────────── -->
-<div class="features-bg reveal" id="features">
+<div class="features-bg reveal" id="features" role="region" aria-labelledby="features-heading">
   <div class="features-inner">
     <div class="section-header" style="margin-bottom:0;">
       <span class="tag">Why teams use it</span>
-      <h2>Stop coordinating parallel AI work by hand.</h2>
-      <p class="section-sub" style="margin-bottom:0;">Running multiple agents across real engineering goals gets chaotic fast. Switchman gives teams one place to coordinate, govern risk, and control what lands next.</p>
+      <h2 id="features-heading">Stop coordinating parallel AI agents by hand.</h2>
+      <p class="section-sub" style="margin-bottom:0;">Running multiple AI coding agents across real engineering goals gets chaotic fast. Switchman gives teams one place to coordinate work, govern risk, and control what lands next.</p>
     </div>
     <div class="features-grid">
-      <div class="feat"><div class="feat-tag">Planning</div><h3>Turn goals into parallel work</h3><p>Break larger goals into tasks agents can take safely without duplicating effort or stepping into the same area.</p></div>
-      <div class="feat"><div class="feat-tag">Ownership</div><h3>Know who is working on what</h3><p>See which files are claimed, which tasks are active, and where work is blocked or waiting.</p></div>
-      <div class="feat"><div class="feat-tag">Recovery</div><h3>Recover from drift and stale work</h3><p>Detect stuck sessions, stale tasks, and broken landing state early — then route the exact recovery step.</p></div>
-      <div class="feat"><div class="feat-tag">Governance</div><h3>Catch risk before merge</h3><p>Run safety checks, policy gates, and review requirements before work lands instead of after a risky merge.</p></div>
-      <div class="feat"><div class="feat-tag">Mission control</div><h3>See the repo clearly</h3><p>Repo health, active work, blocked items, queue state, and next commands — all in one terminal view.</p></div>
-      <div class="feat"><div class="feat-tag">Landing</div><h3>Decide what should land next</h3><p>Queue finished work, prioritise the clearest candidates, and land changes onto main with retries and recovery paths.</p></div>
+      <div class="feat">
+        <div class="feat-tag">Task planning</div>
+        <h3>Break goals into parallel tasks</h3>
+        <p>Add tasks to a shared queue. Agents pick up work automatically — no duplicate effort, no two agents wandering into the same file.</p>
+      </div>
+      <div class="feat">
+        <div class="feat-tag">File locking</div>
+        <h3>Structural conflict prevention</h3>
+        <p>File claims are enforced at the write level — agents physically cannot edit a claimed file through the gateway. Conflicts are prevented, not detected after the fact.</p>
+      </div>
+      <div class="feat">
+        <div class="feat-tag">Stale recovery</div>
+        <h3>Detect and recover abandoned work</h3>
+        <p>Stale sessions are detected automatically. Abandoned leases are reaped, file claims released, and tasks requeued — no manual cleanup required.</p>
+      </div>
+      <div class="feat">
+        <div class="feat-tag">Policy gates</div>
+        <h3>Governance before merge</h3>
+        <p>Define change policies for sensitive areas — auth, payments, schema. Switchman requires tests, docs, and review before those changes can land.</p>
+      </div>
+      <div class="feat">
+        <div class="feat-tag">Mission control</div>
+        <h3>One terminal view for everything</h3>
+        <p>Repo health, active agents, blocked items, queue state, and exact next commands — all in <code style="font-family:var(--mono);font-size:12px;color:var(--accent)">switchman status</code>.</p>
+      </div>
+      <div class="feat">
+        <div class="feat-tag">Safe landing</div>
+        <h3>Priority queue to main</h3>
+        <p>Queue finished branches, run CI and merge gates, and land changes onto main one at a time with automatic retries and conflict recovery.</p>
+      </div>
     </div>
   </div>
 </div>
 
 <!-- ─── INTEGRATIONS ──────────────────────────────────────────────────────── -->
-<section class="editors-strip reveal" id="integrations">
+<section class="editors-strip reveal" id="integrations" aria-labelledby="integrations-heading">
   <div class="editors-inner">
     <span class="tag">Integrations</span>
-    <h2>Works with the tools your team already uses.</h2>
-    <p class="editors-note">Native MCP support for Claude Code and Cursor. CLI path for everything else.</p>
+    <h2 id="integrations-heading">Works with every AI coding tool your team uses.</h2>
+    <p class="editors-note">Native MCP support for Claude Code and Cursor means agents coordinate automatically with zero configuration. CLI path available for every other tool.</p>
     <div class="editors-pills">
       <div class="pill pill-featured"><span class="pill-dot"></span>Claude Code <span class="pill-badge">Native MCP</span></div>
       <div class="pill pill-featured"><span class="pill-dot"></span>Cursor <span class="pill-badge">Native MCP</span></div>
@@ -296,7 +394,7 @@
 </section>
 
 <!-- ─── CTA ───────────────────────────────────────────────────────────────── -->
-<section class="cta-section reveal">
+<section class="cta-section reveal" aria-label="Call to action">
   <h2>Let your agents move fast.<br>Keep your repo under control.</h2>
   <p>Open source · MIT licensed · Free for up to 3 agents</p>
   <div class="cta-btns">
@@ -304,10 +402,11 @@
     <a href="pro/index.html" class="btn-outline">See Pro ↗</a>
   </div>
 </section>
+</main>
 
 <!-- ─── FOOTER ────────────────────────────────────────────────────────────── -->
-<footer>
-  <span>switchman.dev — MIT License</span>
+<footer role="contentinfo">
+  <span>switchman.dev — MIT License — Built by <a href="https://recio.co" style="color:var(--text-3);">Recio Ltd</a></span>
   <div class="footer-links">
     <a href="https://github.com/switchman-dev/switchman">GitHub</a>
     <a href="https://discord.gg/pnT8BEC4D">Discord</a>
@@ -333,16 +432,16 @@ function copyInstall(el) {
 
 const LINES = [
   { t:300,  agent:'sys',     msg:'switchman status  —  mission control ready', cls:'tl-info' },
-  { t:750,  agent:'sys',     msg:'3 tasks pending  ·  2 agents active  ·  queue clear', cls:'' },
+  { t:750,  agent:'sys',     msg:'3 tasks queued  ·  2 agents active  ·  0 conflicts', cls:'' },
   { t:1200, agent:'agent-1', msg:'CLAIM   src/api/router.ts', cls:'tl-ok' },
   { t:1500, agent:'agent-1', msg:'START   task:auth-hardening', cls:'tl-info' },
   { t:2150, agent:'agent-2', msg:'CLAIM   src/api/router.ts  →  BLOCKED', cls:'tl-warn' },
-  { t:2550, agent:'sys',     msg:'overlap caught early  ·  reroute agent-2', cls:'' },
+  { t:2550, agent:'sys',     msg:'collision caught  ·  rerouting agent-2 safely', cls:'' },
   { t:3050, agent:'agent-2', msg:'CLAIM   src/db/migrations.ts', cls:'tl-ok' },
   { t:3400, agent:'agent-2', msg:'START   task:schema-update', cls:'tl-info' },
   { t:4150, agent:'agent-1', msg:'DONE    task:auth-hardening', cls:'tl-ok' },
   { t:4700, agent:'agent-2', msg:'DONE    task:schema-update', cls:'tl-ok' },
-  { t:5350, agent:'sys',     msg:'QUEUE   2 finished branches ready to land', cls:'tl-info' },
+  { t:5350, agent:'sys',     msg:'QUEUE   2 branches ready to land', cls:'tl-info' },
   { t:6000, agent:'sys',     msg:'LAND    feature/auth-hardening  ✓', cls:'tl-ok' },
   { t:6650, agent:'sys',     msg:'LAND    feature/schema-update  ✓', cls:'tl-ok' },
   { t:7350, agent:'sys',     msg:'GATE    ci clear  ·  safe to merge', cls:'tl-ok' },
