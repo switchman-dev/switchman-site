@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agent Chaos Score — How coordinated is your AI dev setup?</title>
+  <meta name="description" content="5 questions, 2 minutes. Find out your Agent Chaos Score and what's most likely to break in your parallel AI coding setup.">
+  <link rel="canonical" href="https://switchman.dev/quiz">
+  <meta property="og:title" content="Agent Chaos Score — How coordinated is your AI dev setup?">
+  <meta property="og:description" content="5 questions, 2 minutes. Find out what's most likely to break when you run multiple AI coding agents on the same codebase.">
+  <meta property="og:url" content="https://switchman.dev/quiz">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Agent Chaos Score — How coordinated is your AI dev setup?">
+  <meta name="twitter:description" content="5 questions, 2 minutes. Find out your Agent Chaos Score.">
+  <link rel="icon" type="image/svg+xml" href="/switchman-logo.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg:      #0b1020;
+      --bg-card: #121a2b;
+      --bg-up:   #182235;
+      --border:  #223047;
+      --border2: #2c3d58;
+      --text:    #e6eef8;
+      --text2:   #93a4ba;
+      --text3:   #5f7189;
+      --accent:  #5CF2C7;
+      --ahover:   #7EF7D3;
+      --adim:    rgba(92,242,199,0.08);
+      --aborder: rgba(92,242,199,0.22);
+      --green:   #4ade80;
+      --amber:   #fbbf24;
+      --red:     #f87171;
+      --blue:    #7dd3fc;
+      --mono:    'JetBrains Mono','Fira Code',monospace;
+      --sans:    'Inter',system-ui,sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      font-size: 15px;
+      line-height: 1.65;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      height: 54px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 32px;
+      border-bottom: 1px solid var(--border);
+      background: rgba(11,16,32,0.8);
+      backdrop-filter: blur(20px);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    .logo {
+      font-family: var(--mono);
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .nav-cta {
+      background: var(--accent);
+      color: #061016;
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 700;
+      padding: 6px 16px;
+      border-radius: 99px;
+      text-decoration: none;
+      transition: background 0.15s;
+    }
+    .nav-cta:hover { background: var(--ahover); }
+
+    /* ── LAYOUT ── */
+    .wrap {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 56px 24px 96px;
+    }
+
+    /* ── INTRO ── */
+    .intro {
+      text-align: center;
+      margin-bottom: 52px;
+    }
+    .intro-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: var(--adim);
+      border: 1px solid var(--aborder);
+      border-radius: 99px;
+      padding: 4px 14px;
+      font-size: 11px;
+      font-family: var(--mono);
+      color: var(--accent);
+      margin-bottom: 20px;
+    }
+    .kicker-dot {
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: var(--accent);
+      animation: pulse 2s ease infinite;
+    }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(.8)} }
+
+    .intro h1 {
+      font-size: clamp(26px, 5vw, 40px);
+      font-weight: 600;
+      letter-spacing: -0.03em;
+      color: var(--text);
+      line-height: 1.15;
+      margin-bottom: 14px;
+    }
+    .intro h1 em { font-style: normal; color: var(--accent); }
+    .intro p {
+      font-size: 16px;
+      color: var(--text2);
+      max-width: 460px;
+      margin: 0 auto 28px;
+      line-height: 1.7;
+    }
+    .intro-meta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      font-size: 12px;
+      font-family: var(--mono);
+      color: var(--text3);
+    }
+    .intro-meta span { display: flex; align-items: center; gap: 5px; }
+
+    /* ── PROGRESS ── */
+    .progress-wrap {
+      margin-bottom: 36px;
+    }
+    .progress-bar-bg {
+      height: 3px;
+      background: var(--border);
+      border-radius: 99px;
+      overflow: hidden;
+      margin-bottom: 8px;
+    }
+    .progress-bar-fill {
+      height: 100%;
+      background: var(--accent);
+      border-radius: 99px;
+      transition: width 0.4s ease;
+      width: 0%;
+    }
+    .progress-label {
+      font-size: 11px;
+      font-family: var(--mono);
+      color: var(--text3);
+      display: flex;
+      justify-content: space-between;
+    }
+
+    /* ── QUESTION CARD ── */
+    .q-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border2);
+      border-radius: 16px;
+      padding: 36px 36px 28px;
+      animation: fadeUp 0.3s ease forwards;
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .q-number {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+      opacity: 0.8;
+    }
+    .q-text {
+      font-size: 19px;
+      font-weight: 600;
+      color: var(--text);
+      letter-spacing: -0.02em;
+      line-height: 1.4;
+      margin-bottom: 28px;
+    }
+    .q-sub {
+      font-size: 14px;
+      color: var(--text3);
+      margin-top: -20px;
+      margin-bottom: 24px;
+      font-family: var(--mono);
+    }
+
+    /* ── OPTIONS ── */
+    .options { display: flex; flex-direction: column; gap: 10px; }
+    .option {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 18px;
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s;
+      text-align: left;
+      width: 100%;
+      font-family: inherit;
+    }
+    .option:hover {
+      border-color: var(--border2);
+      background: var(--bg-up);
+    }
+    .option.selected {
+      border-color: var(--accent);
+      background: var(--adim);
+    }
+    .option-key {
+      width: 26px; height: 26px;
+      border-radius: 6px;
+      border: 1px solid var(--border2);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--text3);
+      flex-shrink: 0;
+      transition: border-color 0.15s, color 0.15s, background 0.15s;
+    }
+    .option.selected .option-key {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: rgba(92,242,199,0.1);
+    }
+    .option-label {
+      font-size: 14px;
+      color: var(--text2);
+      line-height: 1.5;
+      padding-top: 3px;
+      transition: color 0.15s;
+    }
+    .option.selected .option-label { color: var(--text); }
+    .option-score {
+      margin-left: auto;
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--text3);
+      padding-top: 5px;
+      flex-shrink: 0;
+    }
+
+    /* ── NEXT BUTTON ── */
+    .q-footer {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 24px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+    }
+    .btn-next {
+      background: var(--accent);
+      color: #061016;
+      font-family: var(--mono);
+      font-size: 13px;
+      font-weight: 700;
+      padding: 11px 28px;
+      border-radius: 99px;
+      border: none;
+      cursor: pointer;
+      transition: background 0.15s, opacity 0.15s;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn-next:hover { background: var(--aover); }
+    .btn-next:disabled { opacity: 0.35; cursor: not-allowed; }
+
+    /* ── RESULTS ── */
+    .result-wrap {
+      display: none;
+      animation: fadeUp 0.4s ease forwards;
+    }
+    .result-wrap.show { display: block; }
+
+    .score-display {
+      text-align: center;
+      padding: 48px 32px;
+      background: var(--bg-card);
+      border: 1px solid var(--border2);
+      border-radius: 16px;
+      margin-bottom: 24px;
+      position: relative;
+      overflow: hidden;
+    }
+    .score-display::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(92,242,199,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .score-label {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text3);
+      margin-bottom: 12px;
+    }
+    .score-number {
+      font-size: 80px;
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      line-height: 1;
+      margin-bottom: 8px;
+      font-family: var(--mono);
+    }
+    .score-number.green { color: var(--green); }
+    .score-number.amber { color: var(--amber); }
+    .score-number.red   { color: var(--red); }
+
+    .score-tier {
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--text);
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+    }
+    .score-sub {
+      font-size: 15px;
+      color: var(--text2);
+      max-width: 420px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    /* ── BREAKDOWN ── */
+    .breakdown {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 20px;
+    }
+    .breakdown h3 {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 16px;
+      font-family: var(--mono);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      font-size: 11px;
+      color: var(--text3);
+    }
+    .risk-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .risk-item:last-child { border-bottom: none; }
+    .risk-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      margin-top: 5px;
+      flex-shrink: 0;
+    }
+    .risk-dot.high  { background: var(--red); }
+    .risk-dot.med   { background: var(--amber); }
+    .risk-dot.low   { background: var(--green); }
+    .risk-text { font-size: 14px; color: var(--text2); line-height: 1.5; }
+    .risk-text strong { color: var(--text); display: block; margin-bottom: 2px; }
+
+    /* ── CTA ── */
+    .result-cta {
+      background: linear-gradient(135deg, rgba(92,242,199,0.08) 0%, var(--bg-card) 60%);
+      border: 1px solid var(--aborder);
+      border-radius: 12px;
+      padding: 28px 28px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    .result-cta h3 {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--text);
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+    }
+    .result-cta p {
+      font-size: 14px;
+      color: var(--text2);
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+    .cta-btns {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: #061016;
+      font-family: var(--mono);
+      font-size: 13px;
+      font-weight: 700;
+      padding: 11px 24px;
+      border-radius: 99px;
+      text-decoration: none;
+      transition: background 0.15s;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .btn-primary:hover { background: var(--aover); }
+    .btn-ghost {
+      background: transparent;
+      color: var(--text2);
+      font-family: var(--mono);
+      font-size: 13px;
+      padding: 11px 24px;
+      border-radius: 99px;
+      text-decoration: none;
+      border: 1px solid var(--border2);
+      transition: color 0.15s, border-color 0.15s;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .btn-ghost:hover { color: var(--text); border-color: var(--aborder); }
+
+    /* ── SHARE ── */
+    .share-section {
+      text-align: center;
+      padding: 20px 0;
+    }
+    .share-label {
+      font-size: 12px;
+      font-family: var(--mono);
+      color: var(--text3);
+      margin-bottom: 12px;
+    }
+    .share-btn {
+      background: var(--bg-up);
+      border: 1px solid var(--border2);
+      color: var(--text2);
+      font-family: var(--mono);
+      font-size: 12px;
+      padding: 8px 18px;
+      border-radius: 99px;
+      cursor: pointer;
+      transition: color 0.15s, border-color 0.15s;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .share-btn:hover { color: var(--text); border-color: var(--aborder); }
+    .share-btn.copied { color: var(--green); border-color: rgba(74,222,128,0.3); }
+
+    /* ── RETRY ── */
+    .retry-btn {
+      background: none;
+      border: none;
+      color: var(--text3);
+      font-family: var(--mono);
+      font-size: 12px;
+      cursor: pointer;
+      display: block;
+      margin: 16px auto 0;
+      transition: color 0.15s;
+    }
+    .retry-btn:hover { color: var(--text2); }
+
+    @media (max-width: 480px) {
+      .q-card { padding: 24px 20px 20px; }
+      .wrap { padding: 32px 16px 64px; }
+      .score-number { font-size: 64px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="https://switchman.dev" class="logo">
+    <img src="/switchman-logo.svg" width="18" height="18" alt="Switchman">
+    switchman
+  </a>
+  <a href="https://switchman.dev/pro" class="nav-cta">Try Pro free</a>
+</nav>
+
+<div class="wrap">
+
+  <!-- INTRO -->
+  <div class="intro" id="intro">
+    <div class="intro-kicker">
+      <div class="kicker-dot"></div>
+      2 minutes · 5 questions · free
+    </div>
+    <h1>What's your<br><em>Agent Chaos Score?</em></h1>
+    <p>Running multiple AI coding agents on the same codebase? Find out how coordinated your setup is — and what's most likely to break.</p>
+    <div class="intro-meta">
+      <span>⚡ 5 questions</span>
+      <span>🔒 No sign-up</span>
+      <span>📊 Instant results</span>
+    </div>
+    <div style="margin-top: 28px;">
+      <button class="btn-primary" onclick="startQuiz()" style="margin: 0 auto;">
+        Find out my score →
+      </button>
+    </div>
+  </div>
+
+  <!-- QUIZ -->
+  <div id="quiz" style="display:none;">
+    <div class="progress-wrap">
+      <div class="progress-bar-bg">
+        <div class="progress-bar-fill" id="progress-fill"></div>
+      </div>
+      <div class="progress-label">
+        <span id="progress-text">Question 1 of 5</span>
+        <span id="progress-pct">0%</span>
+      </div>
+    </div>
+    <div id="q-container"></div>
+  </div>
+
+  <!-- RESULTS -->
+  <div class="result-wrap" id="results">
+    <div class="score-display">
+      <div class="score-label">Your Agent Chaos Score</div>
+      <div class="score-number" id="score-number"></div>
+      <div class="score-tier" id="score-tier"></div>
+      <div class="score-sub" id="score-sub"></div>
+    </div>
+
+    <div class="breakdown" id="breakdown">
+      <h3>Your risk breakdown</h3>
+      <div id="risk-items"></div>
+    </div>
+
+    <div class="result-cta" id="result-cta"></div>
+
+    <div class="share-section">
+      <div class="share-label">Share your score</div>
+      <button class="share-btn" id="share-btn" onclick="shareScore()">
+        📋 Copy result to share
+      </button>
+    </div>
+
+    <button class="retry-btn" onclick="resetQuiz()">↺ Retake the quiz</button>
+  </div>
+
+</div>
+
+<script>
+const QUESTIONS = [
+  {
+    id: 'agents',
+    text: 'How many AI coding agents do you run simultaneously on the same repo?',
+    sub: 'Count all active agent windows at once',
+    options: [
+      { key: 'A', label: 'Just one at a time', score: 0, risk: 'low' },
+      { key: 'B', label: '2 agents', score: 1, risk: 'low' },
+      { key: 'C', label: '3–5 agents', score: 2, risk: 'med' },
+      { key: 'D', label: '6 or more agents', score: 3, risk: 'high' },
+    ]
+  },
+  {
+    id: 'conflicts',
+    text: 'Have two agents ever edited the same file at the same time?',
+    sub: null,
+    options: [
+      { key: 'A', label: 'Never — I keep them in separate folders manually', score: 0, risk: 'low' },
+      { key: 'B', label: 'Once or twice — caught it early', score: 1, risk: 'low' },
+      { key: 'C', label: 'Yes, regularly — merge conflicts are normal', score: 3, risk: 'high' },
+      { key: 'D', label: 'I don\'t know — I just hope for the best', score: 3, risk: 'high' },
+    ]
+  },
+  {
+    id: 'coordination',
+    text: 'How do you currently prevent duplicate work between agents?',
+    sub: 'Be honest — what actually happens in practice',
+    options: [
+      { key: 'A', label: 'A dedicated coordination tool (MCP / task queue)', score: 0, risk: 'low' },
+      { key: 'B', label: 'I tell each agent verbally what to work on', score: 2, risk: 'med' },
+      { key: 'C', label: 'I assign separate folders and hope they stay there', score: 2, risk: 'med' },
+      { key: 'D', label: 'I don\'t — they sometimes duplicate work', score: 3, risk: 'high' },
+    ]
+  },
+  {
+    id: 'recovery',
+    text: 'When a multi-agent session produces a conflict, how long does cleanup take?',
+    sub: null,
+    options: [
+      { key: 'A', label: 'Under 5 minutes — conflicts are rare and small', score: 0, risk: 'low' },
+      { key: 'B', label: '5–20 minutes — I usually catch it quickly', score: 1, risk: 'low' },
+      { key: 'C', label: '20–60 minutes — sometimes I have to throw work away', score: 2, risk: 'med' },
+      { key: 'D', label: 'Over an hour — or I just restart the whole session', score: 3, risk: 'high' },
+    ]
+  },
+  {
+    id: 'visibility',
+    text: 'Right now, do you know which files each of your agents is actively editing?',
+    sub: 'At this exact moment during a typical session',
+    options: [
+      { key: 'A', label: 'Yes — I have a live dashboard or tool showing this', score: 0, risk: 'low' },
+      { key: 'B', label: 'Roughly — I keep a mental model or notes', score: 1, risk: 'med' },
+      { key: 'C', label: 'Not really — I check their output after the fact', score: 2, risk: 'med' },
+      { key: 'D', label: 'No — I have no idea what they\'re touching', score: 3, risk: 'high' },
+    ]
+  }
+];
+
+const TIERS = [
+  {
+    min: 0, max: 3,
+    label: '🟢 Coordinated',
+    color: 'green',
+    sub: 'Your setup is well-managed. You\'re either running a small number of agents or have good practices in place. The risks you face are manageable as you scale.',
+    cta: {
+      title: 'Ready to scale to 10+ agents?',
+      body: 'Your current setup is solid. Switchman can take you from 3 agents to 10+ with zero conflicts — and give you a live dashboard so you always know what\'s happening.',
+      primary: { label: 'Install free', href: 'https://npmjs.com/package/switchman-dev' },
+      ghost: { label: 'Learn more', href: 'https://switchman.dev' },
+    }
+  },
+  {
+    min: 4, max: 8,
+    label: '🟡 Manageable chaos',
+    color: 'amber',
+    sub: 'You\'re getting by, but your setup has real gaps. Conflicts are happening and coordination is mostly manual. This gets harder as you add more agents.',
+    cta: {
+      title: 'You\'re one session away from a painful conflict.',
+      body: 'The patterns you\'re describing are exactly what Switchman was built to fix. File locking, task queues, and a governed merge path — set up in 60 seconds.',
+      primary: { label: 'Fix it free', href: 'https://npmjs.com/package/switchman-dev' },
+      ghost: { label: 'See how it works', href: 'https://switchman.dev#how' },
+    }
+  },
+  {
+    min: 9, max: 15,
+    label: '🔴 High chaos',
+    color: 'red',
+    sub: 'Your agents are stepping on each other regularly. You\'re spending significant time cleaning up conflicts that could have been prevented entirely.',
+    cta: {
+      title: 'You need a coordination layer.',
+      body: 'High chaos scores mean you\'re losing hours every week to conflicts and cleanup. Switchman prevents this structurally — file claims are enforced before any conflicting line is written.',
+      primary: { label: 'Fix it now — free', href: 'https://npmjs.com/package/switchman-dev' },
+      ghost: { label: 'See the demo', href: 'https://switchman.dev' },
+    }
+  }
+];
+
+const RISK_MESSAGES = {
+  agents: {
+    high: { label: 'Agent count', text: 'Running 6+ agents without coordination is very high risk. Conflict probability rises exponentially with agent count.' },
+    med:  { label: 'Agent count', text: 'Running 3–5 agents without file locking means overlapping edits are likely as your tasks get more complex.' },
+    low:  { label: 'Agent count', text: 'Your agent count is manageable. Good foundation for scaling.' },
+  },
+  conflicts: {
+    high: { label: 'File conflicts', text: 'Regular merge conflicts from agents are a significant productivity drain — and a sign that structural prevention is needed.' },
+    med:  { label: 'File conflicts', text: 'Occasional conflicts suggest your manual approach is mostly working but won\'t scale.' },
+    low:  { label: 'File conflicts', text: 'Low conflict rate — good sign your agents are staying in their lanes.' },
+  },
+  coordination: {
+    high: { label: 'Coordination', text: 'No coordination means duplicate work is happening silently. You likely don\'t know how much work is being thrown away.' },
+    med:  { label: 'Coordination', text: 'Manual coordination works until it doesn\'t — one busy session and it breaks down.' },
+    low:  { label: 'Coordination', text: 'Structured coordination is the right approach. Well set up.' },
+  },
+  recovery: {
+    high: { label: 'Conflict recovery', text: 'Spending 20–60+ minutes on conflict cleanup is a sign the problem is structural, not incidental.' },
+    med:  { label: 'Conflict recovery', text: 'Regular cleanup time is adding up. Preventing conflicts is faster than resolving them.' },
+    low:  { label: 'Conflict recovery', text: 'Quick recovery time suggests conflicts are rare and small — keep it that way.' },
+  },
+  visibility: {
+    high: { label: 'Agent visibility', text: 'Not knowing what your agents are editing in real time means problems are discovered after they happen, not before.' },
+    med:  { label: 'Agent visibility', text: 'Mental models and notes don\'t scale. A live dashboard changes how you manage parallel work.' },
+    low:  { label: 'Agent visibility', text: 'Good visibility — you know what\'s happening across your agents.' },
+  }
+};
+
+// ── State ──────────────────────────────────────────────────────────────────
+let currentQ = 0;
+let answers  = {};
+let scores   = {};
+
+// ── Start ──────────────────────────────────────────────────────────────────
+function startQuiz() {
+  document.getElementById('intro').style.display = 'none';
+  document.getElementById('quiz').style.display = 'block';
+  renderQuestion(0);
+}
+
+// ── Render question ────────────────────────────────────────────────────────
+function renderQuestion(index) {
+  const q = QUESTIONS[index];
+  const pct = Math.round((index / QUESTIONS.length) * 100);
+
+  document.getElementById('progress-fill').style.width = pct + '%';
+  document.getElementById('progress-text').textContent = `Question ${index + 1} of ${QUESTIONS.length}`;
+  document.getElementById('progress-pct').textContent  = pct + '%';
+
+  const selected = answers[q.id];
+
+  const optionsHTML = q.options.map(opt => `
+    <button class="option ${selected === opt.key ? 'selected' : ''}"
+            onclick="selectOption('${q.id}', '${opt.key}', ${opt.score}, '${opt.risk}')">
+      <span class="option-key">${opt.key}</span>
+      <span class="option-label">${opt.label}</span>
+    </button>
+  `).join('');
+
+  document.getElementById('q-container').innerHTML = `
+    <div class="q-card">
+      <div class="q-number">Question ${index + 1} of ${QUESTIONS.length}</div>
+      <div class="q-text">${q.text}</div>
+      ${q.sub ? `<div class="q-sub">${q.sub}</div>` : ''}
+      <div class="options">${optionsHTML}</div>
+      <div class="q-footer">
+        <button class="btn-next" id="next-btn"
+                onclick="${index < QUESTIONS.length - 1 ? 'nextQuestion()' : 'showResults()'}"
+                ${selected ? '' : 'disabled'}>
+          ${index < QUESTIONS.length - 1 ? 'Next question →' : 'See my score →'}
+        </button>
+      </div>
+    </div>
+  `;
+}
+
+// ── Select option ──────────────────────────────────────────────────────────
+function selectOption(qId, key, score, risk) {
+  answers[qId] = key;
+  scores[qId]  = { score, risk };
+  renderQuestion(currentQ);
+}
+
+// ── Next question ──────────────────────────────────────────────────────────
+function nextQuestion() {
+  currentQ++;
+  renderQuestion(currentQ);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ── Show results ───────────────────────────────────────────────────────────
+function showResults() {
+  document.getElementById('progress-fill').style.width = '100%';
+  document.getElementById('progress-text').textContent = 'Complete';
+  document.getElementById('progress-pct').textContent  = '100%';
+
+  const totalScore = Object.values(scores).reduce((sum, s) => sum + s.score, 0);
+  const maxScore   = QUESTIONS.length * 3;
+  const pct        = Math.round((totalScore / maxScore) * 100);
+
+  const tier = TIERS.find(t => totalScore >= t.min && totalScore <= t.max) ?? TIERS[2];
+
+saveResponse(pct, tier.label, answers);
+
+  // Animate score
+  document.getElementById('score-number').className = `score-number ${tier.color}`;
+  document.getElementById('score-tier').textContent  = tier.label;
+  document.getElementById('score-sub').textContent   = tier.sub;
+
+  let count = 0;
+  const target = pct;
+  const interval = setInterval(() => {
+    count += 2;
+    document.getElementById('score-number').textContent = Math.min(count, target);
+    if (count >= target) clearInterval(interval);
+  }, 20);
+
+  // Risk breakdown
+  const riskHTML = QUESTIONS.map(q => {
+    const s = scores[q.id];
+    if (!s) return '';
+    const msg = RISK_MESSAGES[q.id]?.[s.risk];
+    if (!msg) return '';
+    return `
+      <div class="risk-item">
+        <div class="risk-dot ${s.risk}"></div>
+        <div class="risk-text">
+          <strong>${msg.label}</strong>
+          ${msg.text}
+        </div>
+      </div>
+    `;
+  }).join('');
+  document.getElementById('risk-items').innerHTML = riskHTML;
+
+  // CTA
+  const cta = tier.cta;
+  document.getElementById('result-cta').innerHTML = `
+    <h3>${cta.title}</h3>
+    <p>${cta.body}</p>
+    <div class="cta-btns">
+      <a href="${cta.primary.href}" class="btn-primary">${cta.primary.label}</a>
+      <a href="${cta.ghost.href}" class="btn-ghost">${cta.ghost.label}</a>
+    </div>
+  `;
+
+  document.getElementById('quiz').style.display    = 'none';
+  document.getElementById('results').style.display = 'block';
+  document.getElementById('results').classList.add('show');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  // Store score for sharing
+  window._quizScore = pct;
+  window._quizTier  = tier.label;
+}
+
+// ── Share ──────────────────────────────────────────────────────────────────
+function shareScore() {
+  const text = `My Agent Chaos Score: ${window._quizScore ?? '?'} — ${window._quizTier ?? ''}\n\nHow coordinated is your parallel AI dev setup? switchman.dev/quiz`;
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.getElementById('share-btn');
+    btn.textContent = '✓ Copied!';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.textContent = '📋 Copy result to share';
+      btn.classList.remove('copied');
+    }, 2500);
+  });
+}
+
+// ── Reset ──────────────────────────────────────────────────────────────────
+function resetQuiz() {
+  currentQ = 0;
+  answers  = {};
+  scores   = {};
+  document.getElementById('results').style.display = 'none';
+  document.getElementById('results').classList.remove('show');
+  document.getElementById('progress-fill').style.width = '0%';
+  document.getElementById('quiz').style.display = 'block';
+  renderQuestion(0);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+async function saveResponse(score, tier, answers) {
+  try {
+    await fetch('https://afilbolhlkiingnsupgr.supabase.co/rest/v1/quiz_responses', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFmaWxib2xobGtpaW5nbnN1cGdyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM1OTIzOTIsImV4cCI6MjA4OTE2ODM5Mn0.8TBfHfRB0vEyKPMWBd6i1DNwx1nS9UqprIAsJf35n88',
+        'Prefer': 'return=minimal',
+      },
+      body: JSON.stringify({ score, tier, answers }),
+    });
+  } catch {
+    // Best effort — never block the result display
+  }
+}
+
+</script>
+
+</body>
+</html>
