@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Switchman Pro — Unlimited agents, team coordination, cloud sync</title>
-  <meta name="description" content="Switchman Pro gives you unlimited parallel AI agents, cloud-synced team coordination, and 90-day history. $25/seat/month.">
+  <meta name="description" content="Switchman Pro gives you unlimited parallel AI agents, cloud-synced team coordination, and 90-day history. $19/seat/month.">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
@@ -194,7 +194,7 @@
     <button class="modal-close" onclick="closeModal()" aria-label="Close">&#x2715;</button>
     <div class="modal-plan-badge" id="modal-plan-name">Monthly</div>
     <h3>Get started with Pro</h3>
-    <p class="modal-sub" id="modal-sub">$25 / seat / month · cancel anytime</p>
+    <p class="modal-sub" id="modal-sub">$19 / seat / month · cancel anytime</p>
     <hr>
     <div class="modal-step-label">Step 1 — sign in to continue</div>
     <button class="btn-github" id="github-btn" onclick="handleGitHubSignIn()">
@@ -445,10 +445,10 @@
     const sub      = document.getElementById('modal-sub')
     if (plan === 'annual') {
       planName.textContent = 'Annual — Best value'
-      sub.textContent      = '$250 / seat / year · 2 months free'
+      sub.textContent      = '$190 / seat / year · 2 months free'
     } else {
       planName.textContent = 'Monthly'
-      sub.textContent      = '$25 / seat / month · cancel anytime'
+      sub.textContent      = '$19 / seat / month · cancel anytime'
     }
     document.getElementById('modal').classList.add('open')
     document.getElementById('modal').dataset.plan = plan
