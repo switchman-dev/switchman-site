@@ -306,27 +306,27 @@
     <a href="https://npmjs.com/package/switchman-dev" class="btn-nav-solid">Install free</a>
   </div>
 </nav>
-
+<!-- ─── HERO ──────────────────────────────────────────────────────────────── -->
 <!-- ─── HERO ──────────────────────────────────────────────────────────────── -->
 <main>
 <section class="hero" id="demo" aria-label="Hero">
   <div class="hero-left">
     <div class="hero-kicker">
       <div class="kicker-dot"></div>
-      open source · 1,000+ developers · works with any AI coding tool
+      open source · works with Claude Code, Cursor, Codex · built for multi-agent repos
     </div>
 
-    <h1>One command.<br><em>Multiple agents.</em><br>Zero conflicts.</h1>
+    <h1>More AI agents.<br><em>Less repo chaos.</em><br>One command to start.</h1>
 
-    <p class="hero-sub">Type one sentence. Switchman spins up agents, plans the work, locks files, prevents collisions, and lands everything cleanly on main. You watch — not manage.</p>
+    <p class="hero-sub">Switchman coordinates multi-agent coding sessions. It plans the work, creates workspaces, prevents file collisions, and gives you one safe path to main.</p>
 
     <div class="one-command-block">
       <code>$ switchman start "Add user authentication"</code>
-      <span>— that's it</span>
+      <span>— start the session, not the chaos</span>
     </div>
 
     <div class="hero-pro-callout">
-      Need unlimited agents? →&nbsp;<a href="pro/index.html">Switchman Pro — $19/month, cancel anytime</a>
+      Free includes unlimited local agents. Need shared cloud coordination and deeper analysis? →&nbsp;<a href="pro/index.html">Switchman Pro — $19/month</a>
     </div>
 
     <div class="hero-actions">
@@ -334,7 +334,7 @@
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/></svg>
         Install free
       </a>
-      <a href="#how" class="btn-outline">See it in action ↓</a>
+      <a href="#how" class="btn-outline">See how it works ↓</a>
     </div>
 
     <div class="hero-install">
@@ -342,7 +342,7 @@
         <span>$ npm install -g switchman-dev</span>
         <span class="copy-hint" aria-hidden="true">copy</span>
       </div>
-      <span class="install-hint">then: switchman start "your goal"</span>
+      <span class="install-hint">then: <code>switchman quickcheck</code> → <code>switchman start "your goal"</code></span>
     </div>
   </div>
 
@@ -363,19 +363,19 @@
 <div class="pain-banner reveal" role="region" aria-label="Developer pain points">
   <div class="pain-inner">
     <div class="pain-stat">
-      <div class="pain-stat-num">91%</div>
-      <div class="pain-stat-label">more code review time when teams run multiple AI agents without coordination</div>
-      <div class="pain-stat-source">Google DORA Report 2025</div>
+      <div class="pain-stat-num">1 repo</div>
+      <div class="pain-stat-label">multiple agents, branches, and moving parts</div>
+      <div class="pain-stat-source">where coordination breaks down fast</div>
     </div>
     <div class="pain-stat">
-      <div class="pain-stat-num">154%</div>
-      <div class="pain-stat-label">larger PRs when parallel agents work without shared file locking or task queues</div>
-      <div class="pain-stat-source">Google DORA Report 2025</div>
+      <div class="pain-stat-num">1 layer</div>
+      <div class="pain-stat-label">for tasks, file ownership, status, retries, and landing</div>
+      <div class="pain-stat-source">what Switchman adds</div>
     </div>
     <div class="pain-stat">
       <div class="pain-stat-num">0</div>
-      <div class="pain-stat-label">merge conflicts in sessions where Switchman's file locking is active</div>
-      <div class="pain-stat-source">Switchman audit log data</div>
+      <div class="pain-stat-label">reason to manually act as dispatcher once the session starts</div>
+      <div class="pain-stat-source">Switchman handles the coordination</div>
     </div>
   </div>
 </div>
@@ -384,8 +384,8 @@
 <section class="section reveal" id="how" aria-labelledby="how-heading">
   <div class="section-header">
     <span class="tag">How it works</span>
-    <h2 id="how-heading">Stop being the human middleware.</h2>
-    <p class="section-sub">Right now you're copy-pasting between Claude windows, manually deciding who works on what. Switchman takes that job away from you completely.</p>
+    <h2 id="how-heading">Stop being the human traffic controller.</h2>
+    <p class="section-sub">Your AI tools still write the code. Switchman handles coordination.</p>
     <a href="https://discord.gg/pnT8BEC4D" class="text-link" style="color:var(--blue);font-size:16px;">
       Join the community on Discord
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
@@ -394,23 +394,23 @@
   <div class="steps-grid">
     <div class="step-card">
       <div class="step-n">01</div>
-      <h3>State your goal</h3>
-      <p>Run <code style="font-family:var(--mono);font-size:12px;color:var(--accent)">switchman start "Add user authentication"</code> — Switchman scans your repo, plans the parallel work, and spins up the right number of agent workspaces automatically.</p>
+      <h3>Start with one goal</h3>
+      <p>Run <code style="font-family:var(--mono);font-size:12px;color:var(--accent)">switchman start "Add user authentication"</code>. Switchman reads the repo, plans the work, and creates the agent workspaces.</p>
     </div>
     <div class="step-card">
       <div class="step-n">02</div>
-      <h3>Agents claim their files</h3>
-      <p>When an agent starts work it claims the files it needs. Any other agent trying to claim the same file is blocked immediately — before a single line of conflicting code is written.</p>
+      <h3>Agents claim files</h3>
+      <p>Each agent claims the files it needs. Overlap gets blocked early. Conflicts do not spread.</p>
     </div>
     <div class="step-card">
       <div class="step-n">03</div>
-      <h3>Get notified, not glued to a screen</h3>
-      <p>Switchman sends Slack or desktop notifications when an agent finishes or gets blocked. Check in with <code style="font-family:var(--mono);font-size:12px;color:var(--accent)">switchman status</code> when you want — you don't have to watch a terminal to stay in control.</p>
+      <h3>Watch one dashboard</h3>
+      <p>Keep <code style="font-family:var(--mono);font-size:12px;color:var(--accent)">switchman status --watch</code> open. See what is running, blocked, stale, or ready next.</p>
     </div>
     <div class="step-card">
       <div class="step-n">04</div>
-      <h3>Land cleanly every time</h3>
-      <p>Finished work goes through CI gates, policy checks, and a priority queue. The right changes reach main one at a time — with retries, recovery paths, and a full tamper-evident audit trail.</p>
+      <h3>Land safely</h3>
+      <p>Finished work goes through gates, queueing, retries, and recovery before it reaches main.</p>
     </div>
   </div>
 </section>
@@ -420,48 +420,48 @@
   <div class="features-inner">
     <div class="section-header" style="margin-bottom:0;">
       <span class="tag">Why teams use it</span>
-      <h2 id="features-heading">Coordination your agents can't do themselves.</h2>
-      <p class="section-sub" style="margin-bottom:0;">Running multiple AI coding agents gets chaotic fast. Switchman gives teams one place to coordinate work, prevent conflicts before they happen, and control what lands next.</p>
+      <h2 id="features-heading">Because more agents should not mean more mess.</h2>
+      <p class="section-sub" style="margin-bottom:0;">AI tools help agents write code. Switchman helps them work in the same repo without stepping on each other.</p>
     </div>
 
     <div class="drift-callout">
       <div class="drift-icon">⚠</div>
       <div>
-        <h4>The problem nobody else is solving: agentic drift</h4>
-        <p>File conflicts are obvious. Agentic drift is invisible — it's when three agents build the same concept three different ways with incompatible assumptions. Code compiles. Tests pass. But your architecture is quietly broken. Switchman's shared task queue and CLAUDE.md coordination protocol prevent this before it happens.</p>
+        <h4>The real risk is drift</h4>
+        <p>Not just merge conflicts. Drift. Different agents solving the same problem in different ways. Switchman keeps tasks, claims, and landing decisions aligned.</p>
       </div>
     </div>
 
     <div class="features-grid" style="margin-top:24px;">
       <div class="feat feat-highlight">
-        <div class="feat-tag">One-command start</div>
-        <h3>switchman start "your goal"</h3>
-        <p>State what needs building. Switchman scans your stack, plans the parallel task breakdown, spins up agent workspaces, and writes coordination instructions — automatically.</p>
+        <div class="feat-tag">Fastest path</div>
+        <h3>One command to start</h3>
+        <p><code>switchman start "your goal"</code> plans the work, creates workspaces, repairs local wiring, and starts the session.</p>
       </div>
       <div class="feat">
-        <div class="feat-tag">File locking</div>
-        <h3>Structural conflict prevention</h3>
-        <p>File claims are enforced at the write level — agents physically cannot edit a claimed file through the gateway. Conflicts are prevented, not detected after the fact.</p>
+        <div class="feat-tag">Ownership</div>
+        <h3>Prevent overlap early</h3>
+        <p>File claims stop collisions before they become rewrites, merge problems, or wasted time.</p>
       </div>
       <div class="feat">
-        <div class="feat-tag">Task planning</div>
-        <h3>Parallel work, zero duplication</h3>
-        <p>Tasks go into a shared queue. Agents pick up work automatically — no two agents wander into the same file or duplicate the same implementation.</p>
+        <div class="feat-tag">Coordination</div>
+        <h3>One system for the session</h3>
+        <p>Tasks, claims, status, retries, and recovery live in one place. Humans stop acting like glue code.</p>
       </div>
       <div class="feat">
-        <div class="feat-tag">Notifications</div>
-        <h3>Get notified where you actually are</h3>
-        <p>Slack message or desktop notification the moment an agent finishes or hits a blocked claim. Start agents, go do something else, get pinged when you're needed. No terminal babysitting required.</p>
+        <div class="feat-tag">Visibility</div>
+        <h3>Know what is happening</h3>
+        <p>Use live status, notifications, and session summaries to step in only when needed.</p>
       </div>
       <div class="feat">
-        <div class="feat-tag">Policy gates</div>
-        <h3>Governance before merge</h3>
-        <p>Define change policies for sensitive areas — auth, payments, schema. Switchman requires tests, docs, and review before those changes can land on main.</p>
+        <div class="feat-tag">Governance</div>
+        <h3>Extra safety where it matters</h3>
+        <p>Require checks for high-risk areas like auth, payments, and schema changes before landing.</p>
       </div>
       <div class="feat">
-        <div class="feat-tag">Safe landing</div>
-        <h3>Priority queue to main</h3>
-        <p>Queue finished branches, run CI and merge gates, and land changes one at a time with automatic retries, conflict recovery, and a full audit trail.</p>
+        <div class="feat-tag">Landing</div>
+        <h3>Queue to main safely</h3>
+        <p>Switchman queues completed work, runs gates, retries where it should, and gives clear recovery paths.</p>
       </div>
     </div>
   </div>
@@ -471,8 +471,8 @@
 <section class="editors-strip reveal" id="integrations" aria-labelledby="integrations-heading">
   <div class="editors-inner">
     <span class="tag">Integrations</span>
-    <h2 id="integrations-heading">Works with every AI coding tool your team uses.</h2>
-    <p class="editors-note">Native MCP support for Claude Code and Cursor means agents coordinate automatically with zero configuration. The key advantage: Switchman coordinates across all your tools simultaneously — not just one.</p>
+    <h2 id="integrations-heading">Keep your tools. Add one coordination layer.</h2>
+    <p class="editors-note">Claude Code, Cursor, and Codex can all work through the same repo flow. Switchman coordinates across them.</p>
     <div class="editors-pills">
       <div class="pill pill-featured"><span class="pill-dot"></span>Claude Code <span class="pill-badge">Native MCP</span></div>
       <div class="pill pill-featured"><span class="pill-dot"></span>Cursor <span class="pill-badge">Native MCP</span></div>
@@ -482,7 +482,7 @@
       <div class="pill"><span class="pill-dot pill-dot-dim"></span>Cline <span class="pill-badge-cli">CLI</span></div>
     </div>
     <div class="editors-agnostic">
-      One coordinator for all your agents — regardless of which AI tool each agent uses
+      One repo coordination layer across all your AI coding tools
     </div>
   </div>
 </section>
@@ -491,26 +491,27 @@
   <div class="pricing-inner">
     <div class="section-header" style="margin-bottom:0;">
       <span class="tag">Pricing</span>
-      <h2 id="pricing-heading">Simple pricing.</h2>
-      <p class="section-sub" style="margin-bottom:0;">Free covers local coordination for up to 3 agents. Pro adds unlimited agents, planning, and shared cloud coordination.</p>
+      <h2 id="pricing-heading">Free for real use. Pro for deeper coordination.</h2>
+      <p class="section-sub" style="margin-bottom:0;">Free is generous. Pro adds more team depth.</p>
     </div>
     <div class="pricing-grid" style="grid-template-columns:repeat(2,1fr);">
 
       <div class="pricing-card">
         <div class="pricing-tier">Free</div>
         <div class="pricing-price">$0</div>
-        <div class="pricing-desc">For solo use and local repos.</div>
+        <div class="pricing-desc">For local repos and real multi-agent use.</div>
         <ul class="pricing-features">
-          <li><code>switchman start</code> — up to 3 concurrent agents</li>
+          <li><code>switchman start</code> with unlimited local agents</li>
           <li>File locking &amp; lease validation</li>
           <li>Local task queue &amp; MCP integration</li>
           <li>Auto CLAUDE.md generation</li>
-          <li>Desktop notifications</li>
-          <li class="dim">Unlimited agents</li>
-          <li class="dim">Planning API</li>
-          <li class="dim">Session summaries</li>
-          <li class="dim">Cloud sync</li>
-          <li class="dim">Slack notifications</li>
+          <li>Desktop and Slack notifications</li>
+          <li>Read-only session summaries</li>
+          <li>One shared cloud project for logged-in users</li>
+          <li class="dim">Deeper session analysis</li>
+          <li class="dim">Full planning API</li>
+          <li class="dim">Expanded team coordination</li>
+          <li class="dim">90-day history</li>
         </ul>
         <div class="pricing-cta">
           <a href="https://npmjs.com/package/switchman-dev" class="pricing-btn pricing-btn-outline">Install free</a>
@@ -520,15 +521,14 @@
       <div class="pricing-card featured">
         <div class="pricing-tier">Pro · $19 / month</div>
         <div class="pricing-price">$19 <span>/ month</span></div>
-        <div class="pricing-desc">For shared repos and larger agent runs.</div>
+        <div class="pricing-desc">For shared repos and team-grade control.</div>
         <ul class="pricing-features">
           <li>Everything in Free</li>
-          <li>Unlimited concurrent agents</li>
-          <li>Shared cloud coordination</li>
+          <li>Full shared cloud coordination across machines</li>
           <li>Planning API with confidence scores</li>
-          <li>Session summaries with counterfactuals</li>
+          <li>Session summaries with counterfactual analysis</li>
           <li>Cloud sync with retry &amp; offline buffer</li>
-          <li>Slack notifications</li>
+          <li>90-day audit and coordination history</li>
           <li>Priority email support</li>
         </ul>
         <div class="pricing-cta">
@@ -540,12 +540,10 @@
   </div>
 </section>
 
-
-
 <!-- ─── CTA ───────────────────────────────────────────────────────────────── -->
 <section class="cta-section reveal" aria-label="Call to action">
-  <h2>Stop managing agents.<br>Let them manage themselves.</h2>
-  <p>Open source · MIT licensed · Free for up to 3 agents · Pro at $19/month · Cancel anytime</p>
+  <h2>Run more agents.<br>Keep one clean repo.</h2>
+  <p>Open source · MIT licensed · Free for unlimited local agents · Pro at $19/month</p>
   <div class="cta-btns">
     <a href="https://npmjs.com/package/switchman-dev" class="btn-cta">Install free</a>
     <a href="pro/index.html" class="btn-outline">Get Pro — $19/month ↗</a>
@@ -566,6 +564,7 @@
     <a href="privacy/index.html">Privacy</a>
   </div>
 </footer>
+
 
 <script>
 window.addEventListener('scroll', () => {
