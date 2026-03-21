@@ -5,24 +5,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="sitemap" type="application/xml" href="/sitemap.xml">
   <!-- ─── PRIMARY SEO ──────────────────────────────────────────────────────── -->
-  <title>Switchman — One Command. Multiple AI Agents. Zero Conflicts.</title>
-  <meta name="description" content="Switchman is the operating system for parallel AI development. Type switchman start and multiple agents plan, coordinate, and ship — without file conflicts, duplicate work, or merge chaos. Works with Claude Code, Cursor, Codex, and Aider. Free for up to 3 agents.">
-  <meta name="keywords" content="AI coding agents, Claude Code, parallel agents, multi-agent development, file locking, coding agent coordination, Cursor AI, AI developer tools, agent orchestration, switchman, agentic coding, parallel AI development">
+  <title>Switchman — You ran the agents. Did they build the right thing?</title>
+  <meta name="description" content="Switchman tells you what your parallel AI agents built and whether it's safe to ship. Session summaries, semantic overlap detection, and merge confidence after every run. Works with Claude Code, Cursor, Codex, and Aider. Free forever.">
+  <meta name="keywords" content="AI coding agents, Claude Code, parallel agents, multi-agent development, agent review, agentic drift, session summary, merge confidence, coding agent coordination, Cursor AI, AI developer tools, switchman, agentic coding">
   <link rel="canonical" href="https://switchman.dev/">
 
   <!-- ─── OPEN GRAPH ────────────────────────────────────────────────────────── -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://switchman.dev/">
-  <meta property="og:title" content="Switchman — One Command. Multiple AI Agents. Zero Conflicts.">
-  <meta property="og:description" content="Type switchman start and multiple agents plan, coordinate, and ship automatically. File locking, shared task queues, conflict prevention. Free for up to 3 agents.">
+  <meta property="og:title" content="Switchman — You ran the agents. Did they build the right thing?">
+  <meta property="og:description" content="switchman review reads every worktree, flags what doesn't fit together, and tells you if it's safe to ship. Free forever.">
   <meta property="og:image" content="https://switchman.dev/og-image.png">
   <meta property="og:site_name" content="Switchman">
 
   <!-- ─── TWITTER / X CARD ─────────────────────────────────────────────────── -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:site" content="@switchman_dev">
-  <meta name="twitter:title" content="Switchman — One Command. Multiple AI Agents. Zero Conflicts.">
-  <meta name="twitter:description" content="Type switchman start and multiple agents plan, coordinate, and ship automatically. Works with Claude Code, Cursor, Codex, and Aider.">
+  <meta name="twitter:title" content="Switchman — You ran the agents. Did they build the right thing?">
+  <meta name="twitter:description" content="switchman review reads every worktree, flags what doesn't fit together, and tells you if it's safe to ship. Works with Claude Code, Cursor, Codex, and Aider.">
   <meta name="twitter:image" content="https://switchman.dev/og-image.png">
 
   <!-- ─── STRUCTURED DATA ───────────────────────────────────────────────────── -->
@@ -32,32 +32,18 @@
     "@type": "SoftwareApplication",
     "name": "Switchman",
     "url": "https://switchman.dev",
-    "description": "Switchman is the operating system for parallel AI development. File locking, shared task queues, conflict prevention, and governed merge paths. Works with Claude Code, Cursor, Codex, and Aider.",
+    "description": "Switchman tells you what your parallel AI agents built and whether it's safe to ship. Session summaries, semantic overlap detection, and merge confidence after every run. Works with Claude Code, Cursor, Codex, and Aider.",
     "applicationCategory": "DeveloperApplication",
     "operatingSystem": "macOS, Linux, Windows",
     "offers": [
-      {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "USD",
-        "name": "Free — up to 3 agents"
-      },
-      {
-        "@type": "Offer",
-        "price": "19",
-        "priceCurrency": "USD",
-        "name": "Pro — unlimited agents, full OS experience"
-      }
+      { "@type": "Offer", "price": "0", "priceCurrency": "USD", "name": "Free — full session review, unlimited agents" },
+      { "@type": "Offer", "price": "19", "priceCurrency": "USD", "name": "Pro — team sharing, 90-day history, cross-session insights" }
     ],
     "softwareVersion": "0.1.13",
     "downloadUrl": "https://www.npmjs.com/package/switchman-dev",
     "codeRepository": "https://github.com/switchman-dev/switchman",
     "license": "https://opensource.org/licenses/MIT",
-    "author": {
-      "@type": "Organization",
-      "name": "Recio Ltd",
-      "url": "https://switchman.dev"
-    },
+    "author": { "@type": "Organization", "name": "Recio Ltd", "url": "https://switchman.dev" },
     "keywords": "AI coding agents, Claude Code, parallel agents, multi-agent development, file locking, agent coordination, agentic coding"
   }
   </script>
@@ -124,21 +110,26 @@
   @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.55;transform:scale(.85)} }
   .hero h1 { font-size:clamp(28px,3.6vw,58px); font-weight:600; line-height:1.12; letter-spacing:-0.03em; color:var(--text); margin-bottom:22px; opacity:0; animation:up 0.5s ease forwards 0.15s; }
   .hero h1 em { font-style:normal; color:var(--accent); }
-  .hero-sub { font-size:clamp(14px,1.5vw,17px); color:var(--text-2); line-height:1.7; max-width:460px; margin-bottom:20px; opacity:0; animation:up 0.5s ease forwards 0.25s; }
+  .hero-sub { font-size:clamp(14px,1.5vw,17px); color:var(--text-2); line-height:1.7; max-width:460px; margin-bottom:28px; opacity:0; animation:up 0.5s ease forwards 0.25s; }
 
-  /* ONE COMMAND HIGHLIGHT */
-  .one-command-block { background:var(--bg-card); border:1px solid var(--accent-border); border-radius:10px; padding:14px 20px; margin-bottom:24px; display:flex; align-items:center; gap:12px; opacity:0; animation:up 0.5s ease forwards 0.3s; }
-  .one-command-block code { font-family:var(--mono); font-size:13px; color:var(--accent); }
-  .one-command-block span { font-size:13px; color:var(--text-3); }
+  /* HERO TESTIMONIAL */
+  .hero-testimonial { background:var(--bg-card); border:1px solid var(--border); border-left:2px solid var(--accent-border); border-radius:8px; padding:14px 18px; margin-bottom:20px; opacity:0; animation:up 0.5s ease forwards 0.28s; }
+  .hero-testimonial-quote { font-size:13px; color:var(--text-2); line-height:1.6; font-style:italic; margin-bottom:8px; }
+  .hero-testimonial-attr { font-size:11px; font-family:var(--mono); color:var(--text-3); }
 
-  .hero-pro-callout { display:inline-flex; align-items:center; gap:6px; margin-bottom:28px; font-size:13px; font-family:var(--mono); color:var(--text-3); opacity:0; animation:up 0.5s ease forwards 0.35s; }
-  .hero-pro-callout a { color:var(--accent); text-decoration:none; transition:color 0.15s; }
-  .hero-pro-callout a:hover { color:var(--accent-hover); }
-  .hero-actions { display:flex; gap:12px; flex-wrap:wrap; align-items:center; margin-bottom:24px; opacity:0; animation:up 0.5s ease forwards 0.4s; }
+  /* SOCIAL PROOF */
+  .hero-social-proof { display:flex; align-items:center; gap:16px; flex-wrap:wrap; margin-bottom:28px; opacity:0; animation:up 0.5s ease forwards 0.3s; }
+  .sp-stat { display:flex; align-items:center; gap:7px; font-family:var(--mono); font-size:12px; color:var(--text-3); }
+  .sp-stat strong { color:var(--text-2); font-weight:500; }
+  .sp-divider { width:1px; height:14px; background:var(--border-2); }
+
+  /* HERO ACTIONS */
+  .hero-actions { display:flex; gap:12px; flex-wrap:wrap; align-items:center; margin-bottom:20px; opacity:0; animation:up 0.5s ease forwards 0.38s; }
   .btn-cta { background:var(--accent); color:#061016; font-family:var(--mono); font-size:13px; font-weight:700; padding:12px 24px; border-radius:99px; text-decoration:none; display:inline-flex; align-items:center; gap:8px; transition:background 0.15s; border:none; cursor:pointer; }
   .btn-cta:hover { background:var(--accent-hover); }
   .btn-outline { background:transparent; color:var(--text-2); font-family:var(--mono); font-size:13px; padding:12px 24px; border-radius:99px; text-decoration:none; display:inline-flex; align-items:center; gap:8px; border:1px solid var(--border-2); transition:color 0.15s,border-color 0.15s,background 0.15s; }
   .btn-outline:hover { color:var(--text); border-color:var(--accent-border); background:rgba(255,255,255,0.02); }
+
   .hero-install { display:flex; align-items:center; gap:12px; flex-wrap:wrap; opacity:0; animation:up 0.5s ease forwards 0.48s; }
   .install-cmd { background:var(--bg-card); border:1px solid var(--border); border-radius:99px; padding:9px 20px; font-family:var(--mono); font-size:12px; color:var(--accent); cursor:pointer; transition:border-color 0.15s,color 0.15s; user-select:none; display:flex; align-items:center; gap:12px; max-width:100%; }
   .install-cmd span:first-child { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
@@ -147,14 +138,29 @@
   .copy-hint { font-size:10px; color:var(--text-3); opacity:0; transition:opacity 0.15s; flex-shrink:0; }
   .install-cmd:hover .copy-hint { opacity:1; }
   .install-hint { font-size:13px; color:var(--text-3); font-family:var(--mono); }
+  .hero-pro-note { opacity:0; animation:up 0.5s ease forwards 0.54s; font-size:13px; color:var(--text-3); font-family:var(--mono); margin-top:16px; }
+  .hero-pro-note a { color:var(--accent); text-decoration:none; }
+  .hero-pro-note a:hover { color:var(--accent-hover); }
 
-  /* PAIN POINT BANNER */
-  .pain-banner { background:var(--bg-card); border-top:1px solid var(--border); border-bottom:1px solid var(--border); padding:40px 36px; }
-  .pain-inner { max-width:960px; margin:0 auto; display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--border); border:1px solid var(--border); border-radius:12px; overflow:hidden; }
-  .pain-stat { background:var(--bg-card); padding:28px 28px; display:flex; flex-direction:column; gap:6px; }
-  .pain-stat-num { font-family:var(--mono); font-size:28px; font-weight:600; color:var(--accent); letter-spacing:-0.03em; }
+  /* MOBILE TERMINAL */
+  .hero-terminal-mobile { display:none; padding:24px 20px 0; }
+  .hero-terminal-mobile .terminal-card { max-width:100%; height:320px; }
+
+  /* PAIN SECTION — replaced with real developer pain */
+  .pain-banner { background:var(--bg-card); border-top:1px solid var(--border); border-bottom:1px solid var(--border); padding:48px 36px; }
+  .pain-inner { max-width:960px; margin:0 auto; }
+  .pain-headline { font-family:var(--mono); font-size:12px; letter-spacing:0.08em; text-transform:uppercase; color:var(--accent); opacity:0.72; margin-bottom:24px; }
+  .pain-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--border); border:1px solid var(--border); border-radius:12px; overflow:hidden; }
+  .pain-stat { background:var(--bg-card); padding:28px; display:flex; flex-direction:column; gap:8px; }
+  .pain-stat-scenario { font-size:13px; color:var(--text-3); font-family:var(--mono); line-height:1.5; }
+  .pain-stat-impact { font-family:var(--mono); font-size:22px; font-weight:600; color:var(--red); letter-spacing:-0.02em; }
   .pain-stat-label { font-size:13px; color:var(--text-2); line-height:1.5; }
-  .pain-stat-source { font-size:11px; color:var(--text-3); font-family:var(--mono); margin-top:4px; }
+
+  /* DRIFT CALLOUT */
+  .drift-callout { margin-top:48px; background:var(--bg-raised); border:1px solid var(--border-2); border-left:3px solid var(--accent); border-radius:10px; padding:24px 28px; display:grid; grid-template-columns:auto 1fr; gap:20px; align-items:start; }
+  .drift-icon { font-size:24px; padding-top:2px; }
+  .drift-callout h4 { font-size:15px; font-weight:600; color:var(--text); margin-bottom:6px; }
+  .drift-callout p  { font-size:14px; color:var(--text-2); line-height:1.6; }
 
   /* SECTIONS */
   .section { max-width:960px; margin:0 auto; padding:112px 36px; }
@@ -178,7 +184,7 @@
   /* FEATURES */
   .features-bg { background:var(--bg-card); border-top:1px solid var(--border); border-bottom:1px solid var(--border); padding:112px 36px; }
   .features-inner { max-width:960px; margin:0 auto; }
-  .features-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--border); border:1px solid var(--border); border-radius:12px; overflow:hidden; margin-top:48px; }
+  .features-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--border); border:1px solid var(--border); border-radius:12px; overflow:hidden; margin-top:24px; }
   .feat { background:var(--bg-card); padding:32px 28px; transition:background 0.15s; }
   .feat:hover { background:var(--bg-raised); }
   .feat-tag { font-family:var(--mono); font-size:10px; letter-spacing:0.08em; text-transform:uppercase; color:var(--accent); opacity:0.72; margin-bottom:12px; }
@@ -186,12 +192,6 @@
   .feat p   { font-size:14px; color:var(--text-2); line-height:1.6; }
   .feat-highlight { border-color:rgba(92,242,199,0.2); background:rgba(92,242,199,0.04); }
   .feat-highlight:hover { background:rgba(92,242,199,0.07); }
-
-  /* DRIFT CALLOUT */
-  .drift-callout { margin-top:48px; background:var(--bg-raised); border:1px solid var(--border-2); border-left:3px solid var(--accent); border-radius:10px; padding:24px 28px; display:grid; grid-template-columns:auto 1fr; gap:20px; align-items:start; }
-  .drift-icon { font-size:24px; padding-top:2px; }
-  .drift-callout h4 { font-size:15px; font-weight:600; color:var(--text); margin-bottom:6px; }
-  .drift-callout p { font-size:14px; color:var(--text-2); line-height:1.6; }
 
   /* EDITORS */
   .editors-strip { border-top:1px solid var(--border); padding:112px 36px; }
@@ -207,14 +207,15 @@
   .pill-badge-cli { font-size:10px; font-family:var(--mono); color:var(--text-3); background:rgba(255,255,255,0.04); border:1px solid var(--border); border-radius:99px; padding:2px 6px; margin-left:4px; }
   .editors-agnostic { margin-top:24px; font-size:13px; color:var(--text-3); font-family:var(--mono); background:var(--bg-card); border:1px solid var(--border); border-radius:8px; padding:12px 20px; }
 
-  /* PRICING STRIP */
+  /* PRICING */
   .pricing-strip { border-top:1px solid var(--border); padding:112px 36px; }
   .pricing-inner { max-width:960px; margin:0 auto; }
-  .pricing-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--border); border:1px solid var(--border); border-radius:12px; overflow:hidden; margin-top:48px; }
-  .pricing-card { background:var(--bg-card); padding:32px 24px; display:flex; flex-direction:column; gap:0; transition:background 0.15s; }
+  .pricing-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:1px; background:var(--border); border:1px solid var(--border); border-radius:12px; overflow:hidden; margin-top:48px; }
+  .pricing-card { background:var(--bg-card); padding:32px 28px; display:flex; flex-direction:column; gap:0; transition:background 0.15s; }
   .pricing-card:hover { background:var(--bg-raised); }
-  .pricing-card.featured { background:rgba(92,242,199,0.05); border-color:rgba(92,242,199,0.2); }
+  .pricing-card.featured { background:rgba(92,242,199,0.05); }
   .pricing-card.featured:hover { background:rgba(92,242,199,0.08); }
+  .pricing-recommended { display:inline-block; font-family:var(--mono); font-size:10px; letter-spacing:0.08em; text-transform:uppercase; color:#061016; background:var(--accent); border-radius:99px; padding:2px 10px; margin-bottom:10px; }
   .pricing-tier { font-family:var(--mono); font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:var(--accent); opacity:0.72; margin-bottom:10px; }
   .pricing-price { font-family:var(--mono); font-size:28px; font-weight:600; color:var(--text); letter-spacing:-0.03em; margin-bottom:4px; }
   .pricing-price span { font-size:13px; font-weight:400; color:var(--text-3); }
@@ -230,8 +231,6 @@
   .pricing-btn-outline:hover { border-color:var(--accent-border); color:var(--text); background:rgba(255,255,255,0.02); }
   .pricing-btn-solid { background:var(--accent); color:#061016; border:1px solid transparent; }
   .pricing-btn-solid:hover { background:var(--accent-hover); }
-  .pricing-annual-note { text-align:center; margin-top:20px; font-size:13px; color:var(--text-3); font-family:var(--mono); }
-  .pricing-annual-note strong { color:var(--accent); font-weight:500; }
 
   /* CTA & FOOTER */
   .cta-section { border-top:1px solid var(--border); padding:120px 36px; text-align:center; position:relative; overflow:hidden; }
@@ -249,14 +248,11 @@
   @keyframes up { from{opacity:0;transform:translateY(14px)} to{opacity:1;transform:translateY(0)} }
 
   /* RESPONSIVE */
-  @media (max-width:960px) {
-    .pricing-grid { grid-template-columns:repeat(2,1fr); }
-    .pain-inner { grid-template-columns:1fr; }
-  }
   @media (max-width:860px) {
     .hero { grid-template-columns:1fr; }
     .hero-right { display:none; }
-    .hero-left { padding:80px 24px 60px; }
+    .hero-terminal-mobile { display:block; }
+    .hero-left { padding:80px 24px 40px; }
     .nav-center { display:none; }
   }
   @media (max-width:700px) {
@@ -269,11 +265,14 @@
     footer { padding:28px 20px; }
     .install-hint { display:none; }
     .drift-callout { grid-template-columns:1fr; }
+    .pain-grid { grid-template-columns:1fr; }
+    .pain-banner { padding:40px 20px; }
   }
   @media (max-width:640px) {
     .btn-nav-solid { display:none; }
     nav { padding:0 20px; }
     .pricing-grid { grid-template-columns:1fr; }
+    .hero-terminal-mobile { padding:20px 20px 0; }
   }
   @media (max-width:480px) {
     .steps-grid { grid-template-columns:1fr; }
@@ -306,33 +305,48 @@
     <a href="https://npmjs.com/package/switchman-dev" class="btn-nav-solid">Install free</a>
   </div>
 </nav>
-<!-- ─── HERO ──────────────────────────────────────────────────────────────── -->
-<!-- ─── HERO ──────────────────────────────────────────────────────────────── -->
+
 <main>
+
+<!-- ─── HERO ──────────────────────────────────────────────────────────────── -->
 <section class="hero" id="demo" aria-label="Hero">
   <div class="hero-left">
     <div class="hero-kicker">
       <div class="kicker-dot"></div>
-      open source · works with Claude Code, Cursor, Codex · built for multi-agent repos
+      open source · Claude Code, Cursor, Codex · early access
     </div>
 
-    <h1>More AI agents.<br><em>Less repo chaos.</em><br>One command to start.</h1>
+    <h1>You ran the agents.<br>Did they build the <em>right thing?</em></h1>
 
-    <p class="hero-sub">Switchman coordinates multi-agent coding sessions. It plans the work, creates workspaces, prevents file collisions, and gives you one safe path to main.</p>
+    <p class="hero-sub"><code style="font-family:var(--mono);font-size:13px;color:var(--accent)">switchman review</code> reads every worktree, flags what doesn't fit together, and tells you if it's safe to ship — in 30 seconds.</p>
 
-    <div class="one-command-block">
-      <code>$ switchman start "Add user authentication"</code>
-      <span>— start the session, not the chaos</span>
+    <!-- Social proof — testimonial + early access -->
+    <div class="hero-testimonial">
+      <div class="hero-testimonial-quote">"Launching more agents was easy. Knowing what they actually built was not. Switchman made the output legible."</div>
+      <div class="hero-testimonial-attr">— Early access developer</div>
     </div>
 
-    <div class="hero-pro-callout">
-      Free includes unlimited local agents. Need shared cloud coordination and deeper analysis? →&nbsp;<a href="pro/index.html">Switchman Pro — $19/month</a>
+    <div class="hero-social-proof">
+      <div class="sp-stat">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <span><strong>Free</strong> forever, no card needed</span>
+      </div>
+      <div class="sp-divider"></div>
+      <div class="sp-stat">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+        <span><strong>Works</strong> with your existing tools</span>
+      </div>
+      <div class="sp-divider"></div>
+      <div class="sp-stat">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+        <span><strong>Early access</strong> — shape what ships next</span>
+      </div>
     </div>
 
     <div class="hero-actions">
       <a href="https://npmjs.com/package/switchman-dev" class="btn-cta" aria-label="Install Switchman free from npm">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/></svg>
-        Install free
+        Install free — no card needed
       </a>
       <a href="#how" class="btn-outline">See how it works ↓</a>
     </div>
@@ -342,40 +356,59 @@
         <span>$ npm install -g switchman-dev</span>
         <span class="copy-hint" aria-hidden="true">copy</span>
       </div>
-      <span class="install-hint">then: <code>switchman quickcheck</code> → <code>switchman start "your goal"</code></span>
+      <span class="install-hint">then: <code>switchman start "your goal"</code> → <code>switchman review</code></span>
     </div>
+
+    <p class="hero-pro-note">Team sharing, 90-day history, and cross-session insights → <a href="pro/index.html">Switchman Pro — $19/month</a></p>
   </div>
 
+  <!-- Desktop terminal -->
   <div class="hero-right" aria-hidden="true">
-    <div class="terminal-card">
+    <div class="terminal-card" id="terminal-desktop">
       <div class="term-bar">
         <div class="tdot tdot-r"></div><div class="tdot tdot-y"></div><div class="tdot tdot-g"></div>
-        <span class="term-label">switchman status — live agent coordination</span>
+        <span class="term-label">switchman review — session intelligence</span>
       </div>
-      <div class="term-body" id="term-output">
+      <div class="term-body" id="term-output-desktop">
         <span class="tl-cursor"></span>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ─── PAIN POINT STATS ──────────────────────────────────────────────────── -->
-<div class="pain-banner reveal" role="region" aria-label="Developer pain points">
+<!-- Mobile terminal — shown below fold on small screens -->
+<div class="hero-terminal-mobile reveal" aria-hidden="true">
+  <div class="terminal-card" id="terminal-mobile">
+    <div class="term-bar">
+      <div class="tdot tdot-r"></div><div class="tdot tdot-y"></div><div class="tdot tdot-g"></div>
+      <span class="term-label">switchman review — session intelligence</span>
+    </div>
+    <div class="term-body" id="term-output-mobile">
+      <span class="tl-cursor"></span>
+    </div>
+  </div>
+</div>
+
+<!-- ─── PAIN POINTS ───────────────────────────────────────────────────────── -->
+<div class="pain-banner reveal" role="region" aria-label="The problem Switchman solves">
   <div class="pain-inner">
-    <div class="pain-stat">
-      <div class="pain-stat-num">1 repo</div>
-      <div class="pain-stat-label">multiple agents, branches, and moving parts</div>
-      <div class="pain-stat-source">where coordination breaks down fast</div>
-    </div>
-    <div class="pain-stat">
-      <div class="pain-stat-num">1 layer</div>
-      <div class="pain-stat-label">for tasks, file ownership, status, retries, and landing</div>
-      <div class="pain-stat-source">what Switchman adds</div>
-    </div>
-    <div class="pain-stat">
-      <div class="pain-stat-num">0</div>
-      <div class="pain-stat-label">reason to manually act as dispatcher once the session starts</div>
-      <div class="pain-stat-source">Switchman handles the coordination</div>
+    <div class="pain-headline">What developers hit at the end of every parallel session</div>
+    <div class="pain-grid">
+      <div class="pain-stat">
+        <div class="pain-stat-scenario">Three agents finish. You have three worktrees full of diffs and no coherent picture of what was built.</div>
+        <div class="pain-stat-impact">20-minute review tax</div>
+        <div class="pain-stat-label">Every parallel session ends with a manual investigation you can't skip. Agents are fast. Review is the bottleneck.</div>
+      </div>
+      <div class="pain-stat">
+        <div class="pain-stat-scenario">Agent 1's middleware expects <code style="font-family:var(--mono);font-size:12px;color:var(--text-3)">req.user.id</code>. Agent 2's schema has no <code style="font-family:var(--mono);font-size:12px;color:var(--text-3)">id</code> field — only <code style="font-family:var(--mono);font-size:12px;color:var(--text-3)">userId</code>.</div>
+        <div class="pain-stat-impact">Agentic drift</div>
+        <div class="pain-stat-label">No merge conflict. No CI failure. Just a mismatch that ships and breaks in production.</div>
+      </div>
+      <div class="pain-stat">
+        <div class="pain-stat-scenario">You stare at four branches and ask: did they build the right thing, and is any of it safe to merge?</div>
+        <div class="pain-stat-impact">No answer</div>
+        <div class="pain-stat-label">Git tells you what changed. Nothing tells you whether it's coherent. That question has been yours to answer — until now.</div>
+      </div>
     </div>
   </div>
 </div>
@@ -384,8 +417,8 @@
 <section class="section reveal" id="how" aria-labelledby="how-heading">
   <div class="section-header">
     <span class="tag">How it works</span>
-    <h2 id="how-heading">Stop being the human traffic controller.</h2>
-    <p class="section-sub">Your AI tools still write the code. Switchman handles coordination.</p>
+    <h2 id="how-heading">Start a session. Review the output. Ship with confidence.</h2>
+    <p class="section-sub">Your AI tools write the code. Switchman makes the output legible, coherent, and safe to land.</p>
     <a href="https://discord.gg/pnT8BEC4D" class="text-link" style="color:var(--blue);font-size:16px;">
       Join the community on Discord
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
@@ -395,22 +428,22 @@
     <div class="step-card">
       <div class="step-n">01</div>
       <h3>Start with one goal</h3>
-      <p>Run <code style="font-family:var(--mono);font-size:12px;color:var(--accent)">switchman start "Add user authentication"</code>. Switchman reads the repo, plans the work, and creates the agent workspaces.</p>
+      <p>Run <code style="font-family:var(--mono);font-size:12px;color:var(--accent)">switchman start "Add user authentication"</code>. Switchman reads the repo, creates agent workspaces, and keeps work aligned as agents run.</p>
     </div>
     <div class="step-card">
       <div class="step-n">02</div>
-      <h3>Agents claim files</h3>
-      <p>Each agent claims the files it needs. Overlap gets blocked early. Conflicts do not spread.</p>
+      <h3>Agents coordinate automatically</h3>
+      <p>File claims, task ownership, and stale recovery happen through MCP — no prompting, no manual management. You don't see the pipes.</p>
     </div>
     <div class="step-card">
       <div class="step-n">03</div>
-      <h3>Watch one dashboard</h3>
-      <p>Keep <code style="font-family:var(--mono);font-size:12px;color:var(--accent)">switchman status --watch</code> open. See what is running, blocked, stale, or ready next.</p>
+      <h3>Review what was built</h3>
+      <p>Run <code style="font-family:var(--mono);font-size:12px;color:var(--accent)">switchman review</code>. Get a plain-English summary of what each agent produced, any semantic mismatches flagged, and a green / amber / red merge confidence score.</p>
     </div>
     <div class="step-card">
       <div class="step-n">04</div>
-      <h3>Land safely</h3>
-      <p>Finished work goes through gates, queueing, retries, and recovery before it reaches main.</p>
+      <h3>Ship through gates</h3>
+      <p>Confident in the output, run the CI gate and merge queue. Finished work lands cleanly. No surprise conflicts at main.</p>
     </div>
   </div>
 </section>
@@ -419,49 +452,50 @@
 <div class="features-bg reveal" id="features" role="region" aria-labelledby="features-heading">
   <div class="features-inner">
     <div class="section-header" style="margin-bottom:0;">
-      <span class="tag">Why teams use it</span>
-      <h2 id="features-heading">Because more agents should not mean more mess.</h2>
-      <p class="section-sub" style="margin-bottom:0;">AI tools help agents write code. Switchman helps them work in the same repo without stepping on each other.</p>
+      <span class="tag">Why developers use it</span>
+      <h2 id="features-heading">More agents are easy. Trusting their output is hard.</h2>
+      <p class="section-sub" style="margin-bottom:0;">Switchman gives you a legible record of what your agents built and a defensible answer to whether it's safe to ship.</p>
     </div>
 
+    <!-- Drift callout -->
     <div class="drift-callout">
       <div class="drift-icon">⚠</div>
       <div>
-        <h4>The real risk is drift</h4>
-        <p>Not just merge conflicts. Drift. Different agents solving the same problem in different ways. Switchman keeps tasks, claims, and landing decisions aligned.</p>
+        <h4>The real risk isn't merge conflicts — it's agentic drift</h4>
+        <p>Parallel agents can independently solve the same problem in incompatible ways. No conflict. No CI failure. Just divergence that compiles, passes, and breaks things later. Switchman detects semantic mismatches before they reach main — the thing git diff can't tell you.</p>
       </div>
     </div>
 
-    <div class="features-grid" style="margin-top:24px;">
+    <div class="features-grid">
       <div class="feat feat-highlight">
-        <div class="feat-tag">Fastest path</div>
-        <h3>One command to start</h3>
-        <p><code>switchman start "your goal"</code> plans the work, creates workspaces, repairs local wiring, and starts the session.</p>
+        <div class="feat-tag">The core feature</div>
+        <h3>switchman review</h3>
+        <p>After every session: a plain-English summary of what each agent built, semantic overlap flags, interface mismatches, and a green / amber / red merge confidence score. Run it in 30 seconds. Know what you have.</p>
       </div>
       <div class="feat">
-        <div class="feat-tag">Ownership</div>
-        <h3>Prevent overlap early</h3>
-        <p>File claims stop collisions before they become rewrites, merge problems, or wasted time.</p>
+        <div class="feat-tag">Honesty</div>
+        <h3>Four confidence states</h3>
+        <p>Green, amber, red — and <em>uncertain</em>. When Switchman can't determine coherence it says so. A tool that admits uncertainty is one you can trust when it says green.</p>
       </div>
       <div class="feat">
         <div class="feat-tag">Coordination</div>
-        <h3>One system for the session</h3>
-        <p>Tasks, claims, status, retries, and recovery live in one place. Humans stop acting like glue code.</p>
+        <h3>Invisible by design</h3>
+        <p>File claims, lease heartbeats, stale recovery — all handled by the MCP server. Agents coordinate automatically. You never type a coordination command.</p>
       </div>
       <div class="feat">
         <div class="feat-tag">Visibility</div>
-        <h3>Know what is happening</h3>
-        <p>Use live status, notifications, and session summaries to step in only when needed.</p>
+        <h3>One live dashboard</h3>
+        <p><code>switchman status --watch</code> — what's running, blocked, or done across all agents. The thing developers leave open and screenshot.</p>
       </div>
       <div class="feat">
-        <div class="feat-tag">Governance</div>
-        <h3>Extra safety where it matters</h3>
-        <p>Require checks for high-risk areas like auth, payments, and schema changes before landing.</p>
+        <div class="feat-tag">Cross-tool</div>
+        <h3>Mix Claude Code, Cursor, Codex</h3>
+        <p>Native MCP integration with all three. Coordinate agents across different tools in the same session. No other tool does this.</p>
       </div>
       <div class="feat">
         <div class="feat-tag">Landing</div>
-        <h3>Queue to main safely</h3>
-        <p>Switchman queues completed work, runs gates, retries where it should, and gives clear recovery paths.</p>
+        <h3>One governed path to main</h3>
+        <p>CI gate, merge queue, retries. Once review is green, work lands cleanly. No last-minute surprises at merge time.</p>
       </div>
     </div>
   </div>
@@ -471,8 +505,8 @@
 <section class="editors-strip reveal" id="integrations" aria-labelledby="integrations-heading">
   <div class="editors-inner">
     <span class="tag">Integrations</span>
-    <h2 id="integrations-heading">Keep your tools. Add one coordination layer.</h2>
-    <p class="editors-note">Claude Code, Cursor, and Codex can all work through the same repo flow. Switchman coordinates across them.</p>
+    <h2 id="integrations-heading">Mix your tools. Review the output in one place.</h2>
+    <p class="editors-note">Claude Code, Cursor, and Codex can all coordinate through Switchman in the same session. Native MCP means agents pick up tasks and claim files automatically — no prompting required.</p>
     <div class="editors-pills">
       <div class="pill pill-featured"><span class="pill-dot"></span>Claude Code <span class="pill-badge">Native MCP</span></div>
       <div class="pill pill-featured"><span class="pill-dot"></span>Cursor <span class="pill-badge">Native MCP</span></div>
@@ -482,54 +516,58 @@
       <div class="pill"><span class="pill-dot pill-dot-dim"></span>Cline <span class="pill-badge-cli">CLI</span></div>
     </div>
     <div class="editors-agnostic">
-      One repo coordination layer across all your AI coding tools
+      Cross-tool coordination and unified session review — no other tool does this
     </div>
   </div>
 </section>
 
+<!-- ─── PRICING ────────────────────────────────────────────────────────────── -->
 <section class="pricing-strip reveal" id="pricing" aria-labelledby="pricing-heading">
   <div class="pricing-inner">
     <div class="section-header" style="margin-bottom:0;">
       <span class="tag">Pricing</span>
-      <h2 id="pricing-heading">Free for real use. Pro for deeper coordination.</h2>
-      <p class="section-sub" style="margin-bottom:0;">Free is generous. Pro adds more team depth.</p>
+      <h2 id="pricing-heading">Free for every session. Pro for every team.</h2>
+      <p class="section-sub" style="margin-bottom:0;">Free gives you the full review experience — forever, no limits. Pro adds history, team sharing, and cross-session intelligence.</p>
     </div>
-    <div class="pricing-grid" style="grid-template-columns:repeat(2,1fr);">
+    <div class="pricing-grid">
 
       <div class="pricing-card">
         <div class="pricing-tier">Free</div>
-        <div class="pricing-price">$0</div>
-        <div class="pricing-desc">For local repos and real multi-agent use.</div>
+        <div class="pricing-price">$0 <span>forever</span></div>
+        <div class="pricing-desc">The complete session review experience for individual developers. No card. No trial timer. No artificial limits.</div>
         <ul class="pricing-features">
           <li><code>switchman start</code> with unlimited local agents</li>
-          <li>File locking &amp; lease validation</li>
-          <li>Local task queue &amp; MCP integration</li>
-          <li>Auto CLAUDE.md generation</li>
-          <li>Desktop and Slack notifications</li>
-          <li>Read-only session summaries</li>
-          <li>One shared cloud project for logged-in users</li>
-          <li class="dim">Deeper session analysis</li>
-          <li class="dim">Full planning API</li>
-          <li class="dim">Expanded team coordination</li>
-          <li class="dim">90-day history</li>
+          <li><code>switchman review</code> — full session summary after every run</li>
+          <li>Semantic overlap and interface mismatch detection</li>
+          <li>Green / amber / red merge confidence score</li>
+          <li>Automatic coordination via MCP — no prompting</li>
+          <li><code>switchman status --watch</code> live dashboard</li>
+          <li>CI gate and governed landing</li>
+          <li>14-day session history</li>
+          <li class="dim">90-day session history</li>
+          <li class="dim">Cross-session pattern detection</li>
+          <li class="dim">Team session sharing</li>
+          <li class="dim">AI task planning with repo context</li>
+          <li class="dim">Cost and token tracking over time</li>
         </ul>
         <div class="pricing-cta">
-          <a href="https://npmjs.com/package/switchman-dev" class="pricing-btn pricing-btn-outline">Install free</a>
+          <a href="https://npmjs.com/package/switchman-dev" class="pricing-btn pricing-btn-outline">Install free — no card needed</a>
         </div>
       </div>
 
       <div class="pricing-card featured">
-        <div class="pricing-tier">Pro · $19 / month</div>
+        <div class="pricing-recommended">Recommended</div>
+        <div class="pricing-tier">Pro</div>
         <div class="pricing-price">$19 <span>/ month</span></div>
-        <div class="pricing-desc">For shared repos and team-grade control.</div>
+        <div class="pricing-desc">Everything in Free, plus history, team visibility, and a system that learns your codebase over time.</div>
         <ul class="pricing-features">
           <li>Everything in Free</li>
-          <li>Full shared cloud coordination across machines</li>
-          <li>Planning API with confidence scores</li>
-          <li>Session summaries with counterfactual analysis</li>
-          <li>Cloud sync with retry &amp; offline buffer</li>
-          <li>90-day audit and coordination history</li>
-          <li>Priority email support</li>
+          <li>90-day searchable session history</li>
+          <li>Cross-session pattern detection — which parts of your codebase consistently flag amber</li>
+          <li>Team session sharing — your tech lead reads the review before the PR</li>
+          <li>AI task planning with repo context and conflict history</li>
+          <li>Cost and token tracking per session, per agent, over time</li>
+          <li>Priority email support — 48-hour response</li>
         </ul>
         <div class="pricing-cta">
           <a href="pro/index.html" class="pricing-btn pricing-btn-solid">Get Pro — $19/month</a>
@@ -540,12 +578,12 @@
   </div>
 </section>
 
-<!-- ─── CTA ───────────────────────────────────────────────────────────────── -->
+<!-- ─── FINAL CTA ─────────────────────────────────────────────────────────── -->
 <section class="cta-section reveal" aria-label="Call to action">
-  <h2>Run more agents.<br>Keep one clean repo.</h2>
-  <p>Open source · MIT licensed · Free for unlimited local agents · Pro at $19/month</p>
+  <h2>You ran the agents.<br>Now know if it's safe to ship.</h2>
+  <p>Open source · MIT licensed · Free forever · No card needed</p>
   <div class="cta-btns">
-    <a href="https://npmjs.com/package/switchman-dev" class="btn-cta">Install free</a>
+    <a href="https://npmjs.com/package/switchman-dev" class="btn-cta">Install free — no card needed</a>
     <a href="pro/index.html" class="btn-outline">Get Pro — $19/month ↗</a>
   </div>
 </section>
@@ -565,12 +603,13 @@
   </div>
 </footer>
 
-
 <script>
+// ─── NAV SCROLL ──────────────────────────────────────────────────────────────
 window.addEventListener('scroll', () => {
   document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 10);
 }, { passive: true });
 
+// ─── COPY INSTALL ─────────────────────────────────────────────────────────────
 function copyInstall(el) {
   navigator.clipboard.writeText('npm install -g switchman-dev');
   el.classList.add('copied');
@@ -578,29 +617,22 @@ function copyInstall(el) {
   setTimeout(() => { el.classList.remove('copied'); el.querySelector('.copy-hint').textContent = 'copy'; }, 2000);
 }
 
+// ─── TERMINAL ANIMATION ───────────────────────────────────────────────────────
 const LINES = [
-  { t:300,  agent:'sys',     msg:'switchman start "Add user authentication"', cls:'tl-info' },
-  { t:700,  agent:'sys',     msg:'scanning repo stack  ·  Next.js detected', cls:'' },
-  { t:1100, agent:'sys',     msg:'planning 3 parallel tasks  ·  confidence 94%', cls:'' },
-  { t:1500, agent:'sys',     msg:'spinning up 3 agent workspaces  ·  writing CLAUDE.md', cls:'' },
-  { t:2000, agent:'agent-1', msg:'CLAIM   src/api/auth/router.ts', cls:'tl-ok' },
-  { t:2200, agent:'agent-1', msg:'START   task:auth-middleware', cls:'tl-info' },
-  { t:2600, agent:'agent-2', msg:'CLAIM   src/db/schema.ts', cls:'tl-ok' },
-  { t:2900, agent:'agent-2', msg:'START   task:user-schema', cls:'tl-info' },
-  { t:3400, agent:'agent-3', msg:'CLAIM   src/api/auth/router.ts  →  BLOCKED', cls:'tl-warn' },
-  { t:3750, agent:'sys',     msg:'collision caught  ·  rerouting agent-3 safely', cls:'' },
-  { t:4100, agent:'agent-3', msg:'CLAIM   src/__tests__/auth.test.ts', cls:'tl-ok' },
-  { t:4400, agent:'agent-3', msg:'START   task:auth-tests', cls:'tl-info' },
-  { t:5200, agent:'agent-1', msg:'DONE    task:auth-middleware', cls:'tl-ok' },
-  { t:5800, agent:'agent-2', msg:'DONE    task:user-schema', cls:'tl-ok' },
-  { t:6300, agent:'agent-3', msg:'DONE    task:auth-tests', cls:'tl-ok' },
-  { t:6900, agent:'sys',     msg:'GATE    ci clear  ·  3 branches ready to land', cls:'tl-info' },
-  { t:7600, agent:'sys',     msg:'3 agents · 1 collision caught · 0 merge incidents', cls:'tl-ok' },
+  { t:300,  agent:'sys',     msg:'switchman review', cls:'tl-info' },
+  { t:800,  agent:'sys',     msg:'reading 3 worktrees  ·  analysing session output', cls:'' },
+  { t:1400, agent:'sys',     msg:'agent-1  →  JWT middleware  ·  15-min expiry  ·  src/api/auth/', cls:'tl-ok' },
+  { t:2000, agent:'sys',     msg:'agent-2  →  User model  ·  email + passwordHash  ·  src/db/', cls:'tl-ok' },
+  { t:2600, agent:'sys',     msg:'agent-3  →  14 tests  ·  login, registration, token refresh', cls:'tl-ok' },
+  { t:3300, agent:'sys',     msg:'checking semantic coherence across worktrees...', cls:'' },
+  { t:4100, agent:'sys',     msg:'⚠  MISMATCH   middleware expects req.user.id', cls:'tl-warn' },
+  { t:4500, agent:'sys',     msg:'⚠  MISMATCH   User schema has userId — not id', cls:'tl-warn' },
+  { t:5100, agent:'sys',     msg:'flagged: agent-1 + agent-2 interface contradiction', cls:'tl-warn' },
+  { t:5800, agent:'sys',     msg:'CI gate  ·  passing', cls:'tl-ok' },
+  { t:6400, agent:'sys',     msg:'─────────────────────────────────────────', cls:'' },
+  { t:6700, agent:'sys',     msg:'confidence   AMBER — review flagged items before merging', cls:'tl-warn' },
+  { t:7400, agent:'sys',     msg:'session took 4m 12s  ·  would have shipped a runtime bug', cls:'tl-info' },
 ];
-
-const out = document.getElementById('term-output');
-const cursor = out.querySelector('.tl-cursor');
-let running = false;
 
 function agentCls(a) {
   if (a==='agent-1') return 'a1';
@@ -609,32 +641,55 @@ function agentCls(a) {
   return 'sys';
 }
 
-function addLine(line) {
-  const sec = (line.t/1000).toFixed(1).padStart(4)+'s';
-  const div = document.createElement('div');
-  div.className = 'term-line';
-  div.innerHTML = `<span class="tl-time">${sec}</span><span class="tl-agent ${agentCls(line.agent)}">${line.agent}</span><span class="tl-msg ${line.cls}">${line.msg}</span>`;
-  out.insertBefore(div, cursor);
-  out.scrollTop = out.scrollHeight;
+function runTerminal(outputId) {
+  const out = document.getElementById(outputId);
+  if (!out) return null;
+  const cursor = out.querySelector('.tl-cursor');
+  let running = false;
+  let timers = [];
+
+  function addLine(line) {
+    const sec = (line.t/1000).toFixed(1).padStart(4)+'s';
+    const div = document.createElement('div');
+    div.className = 'term-line';
+    div.innerHTML = `<span class="tl-time">${sec}</span><span class="tl-agent ${agentCls(line.agent)}">${line.agent}</span><span class="tl-msg ${line.cls}">${line.msg}</span>`;
+    out.insertBefore(div, cursor);
+    out.scrollTop = out.scrollHeight;
+  }
+
+  function start() {
+    if (running) return;
+    running = true;
+    out.querySelectorAll('.term-line').forEach(l => l.remove());
+    timers = LINES.map(line => setTimeout(() => addLine(line), line.t));
+    timers.push(setTimeout(() => { running = false; timers.push(setTimeout(start, 1800)); }, 9800));
+  }
+
+  return start;
 }
 
-function runDemo() {
-  if (running) return;
-  running = true;
-  out.querySelectorAll('.term-line').forEach(l => l.remove());
-  LINES.forEach(line => setTimeout(() => addLine(line), line.t));
-  setTimeout(() => { running = false; setTimeout(runDemo, 1800); }, 9800);
-}
+// Desktop terminal — trigger on intersection
+const startDesktop = runTerminal('term-output-desktop');
+const startMobile  = runTerminal('term-output-mobile');
 
 const tObs = new IntersectionObserver(entries => {
-  if (entries[0].isIntersecting) { runDemo(); tObs.disconnect(); }
+  if (entries[0].isIntersecting && startDesktop) { startDesktop(); tObs.disconnect(); }
 }, { threshold: 0.25 });
-tObs.observe(document.querySelector('.terminal-card'));
+const desktopCard = document.getElementById('terminal-desktop');
+if (desktopCard) tObs.observe(desktopCard);
 
+const mObs = new IntersectionObserver(entries => {
+  if (entries[0].isIntersecting && startMobile) { startMobile(); mObs.disconnect(); }
+}, { threshold: 0.15 });
+const mobileCard = document.getElementById('terminal-mobile');
+if (mobileCard) mObs.observe(mobileCard);
+
+// ─── REVEAL ON SCROLL ─────────────────────────────────────────────────────────
 const rObs = new IntersectionObserver(entries => {
   entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('on'); rObs.unobserve(e.target); } });
 }, { threshold: 0.07 });
 document.querySelectorAll('.reveal').forEach(el => rObs.observe(el));
+
 </script>
 </body>
 </html>

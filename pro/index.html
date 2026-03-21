@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Switchman Pro — Unlimited agents, $19/month, cancel anytime</title>
-  <meta name="description" content="Switchman Pro gives you unlimited parallel AI agents, the full planning API, session summaries with counterfactuals, cloud sync, and Slack/desktop notifications. $19/month, cancel anytime.">
+  <title>Switchman Pro — Session history, team sharing, and codebase intelligence</title>
+  <meta name="description" content="Switchman Pro adds 90-day session history, team session sharing, cross-session pattern detection, and AI planning with repo context. Free gives you the full switchman review experience forever. $19/month, cancel anytime.">
   <link rel="canonical" href="https://switchman.dev/pro/">
-  <meta property="og:title" content="Switchman Pro — Unlimited agents for $19/month">
-  <meta property="og:description" content="Free gives you up to 3 agents. Pro removes every limit and adds the intelligence layer. $19/month, cancel anytime.">
+  <meta property="og:title" content="Switchman Pro — Free tells you what happened. Pro remembers everything.">
+  <meta property="og:description" content="Free gives you the full switchman review experience forever. Pro adds 90-day history, team sharing, and cross-session intelligence. $19/month, cancel anytime.">
   <meta property="og:url" content="https://switchman.dev/pro/">
   <meta property="og:image" content="https://switchman.dev/og-image.png">
   <link rel="icon" type="image/svg+xml" href="../switchman-logo.svg">
@@ -70,7 +70,7 @@
   .kicker-dot { width:6px; height:6px; border-radius:50%; background:var(--accent); animation:pulse 2.4s ease infinite; }
   .hero h1 { font-size:clamp(32px,4.2vw,60px); font-weight:600; line-height:1.1; letter-spacing:-0.03em; color:var(--text); margin-bottom:20px; opacity:0; animation:up 0.4s ease forwards 0.1s; }
   .hero h1 em { font-style:normal; color:var(--accent); }
-  .hero-sub { font-size:clamp(15px,1.6vw,18px); color:var(--text-2); max-width:480px; margin:0 auto 44px; opacity:0; animation:up 0.4s ease forwards 0.2s; line-height:1.7; }
+  .hero-sub { font-size:clamp(15px,1.6vw,18px); color:var(--text-2); max-width:520px; margin:0 auto 44px; opacity:0; animation:up 0.4s ease forwards 0.2s; line-height:1.7; }
 
   /* PRICING */
   .pricing-wrap { max-width:760px; margin:0 auto; padding:0 36px 24px; }
@@ -225,7 +225,7 @@
 </head>
 <body>
 
-<!-- MODAL -->
+<!-- MODAL — unchanged -->
 <div class="modal-overlay" id="modal" onclick="closeOut(event)">
   <div class="modal">
     <button class="modal-close" onclick="closeModal()" aria-label="Close">&#x2715;</button>
@@ -270,8 +270,8 @@
 <!-- HERO -->
 <section class="hero">
   <div class="kicker"><div class="kicker-dot"></div>switchman pro</div>
-  <h1>Free proves the workflow.<br><em>Pro runs it at team depth.</em></h1>
-  <p class="hero-sub">Free gives developers a real multi-agent workflow. Pro adds the deeper coordination layer: shared cloud state, full planning, counterfactual summaries, and longer history.</p>
+  <h1>Free tells you what happened.<br><em>Pro remembers everything.</em></h1>
+  <p class="hero-sub">Free gives every developer the full <code style="font-family:var(--mono);font-size:14px;color:var(--accent)">switchman review</code> experience — session summaries, semantic overlap detection, and merge confidence — forever. Pro adds 90-day history, team sharing, and a system that learns your codebase over time.</p>
 </section>
 
 <!-- PRICING CARDS -->
@@ -284,35 +284,38 @@
       <hr class="plan-divider">
       <ul class="plan-features">
         <li><span class="ck">✓</span> <code>switchman start</code> with unlimited local agents</li>
-        <li><span class="ck">✓</span> File locking &amp; lease validation</li>
-        <li><span class="ck">✓</span> Local task queue &amp; MCP integration</li>
-        <li><span class="ck">✓</span> Auto CLAUDE.md generation</li>
+        <li><span class="ck">✓</span> <code>switchman review</code> — full session summary</li>
+        <li><span class="ck">✓</span> Semantic overlap and interface mismatch detection</li>
+        <li><span class="ck">✓</span> Green / amber / red / uncertain merge confidence</li>
+        <li><span class="ck">✓</span> Automatic coordination via MCP — no prompting</li>
         <li><span class="ck">✓</span> Works with Claude Code, Cursor, Codex</li>
+        <li><span class="ck">✓</span> <code>switchman status --watch</code> live dashboard</li>
+        <li><span class="ck">✓</span> CI gate and governed landing</li>
         <li><span class="ck">✓</span> Desktop &amp; Slack notifications</li>
-        <li><span class="ck">✓</span> Read-only session summaries</li>
-        <li><span class="ck">✓</span> One shared cloud project</li>
-        <li class="off"><span class="ck">—</span> Full planning API</li>
-        <li class="off"><span class="ck">—</span> Counterfactual session analysis</li>
-        <li class="off"><span class="ck">—</span> Full team coordination</li>
-        <li class="off"><span class="ck">—</span> 90-day history</li>
+        <li><span class="ck">✓</span> 14-day session history</li>
+        <li class="off"><span class="ck">—</span> 90-day session history</li>
+        <li class="off"><span class="ck">—</span> Cross-session pattern detection</li>
+        <li class="off"><span class="ck">—</span> Team session sharing</li>
+        <li class="off"><span class="ck">—</span> AI planning with repo context</li>
+        <li class="off"><span class="ck">—</span> Cost and token tracking over time</li>
       </ul>
-      <a href="https://npmjs.com/package/switchman-dev" class="btn-secondary">Install free</a>
+      <a href="https://npmjs.com/package/switchman-dev" class="btn-secondary">Install free — no card needed</a>
     </div>
 
     <div class="plan-card pro">
-      <div class="plan-popular">Most popular</div>
+      <div class="plan-popular">Recommended</div>
       <div class="plan-name">Pro</div>
       <div class="plan-price">$19 <span>/mo</span></div>
-      <div class="plan-period">for shared repos · cancel anytime</div>
+      <div class="plan-period">per seat · cancel anytime</div>
       <hr class="plan-divider">
       <ul class="plan-features">
         <li><span class="ck">✓</span> Everything in Free</li>
-        <li><span class="ck">✓</span> Full shared cloud coordination across machines</li>
-        <li><span class="ck">✓</span> Full planning API with confidence scores</li>
-        <li><span class="ck">✓</span> Session summaries with counterfactuals</li>
-        <li><span class="ck">✓</span> Cloud sync with retry &amp; offline buffer</li>
-        <li><span class="ck">✓</span> 90-day audit and coordination history</li>
-        <li><span class="ck">✓</span> Priority email support</li>
+        <li><span class="ck">✓</span> 90-day searchable session history</li>
+        <li><span class="ck">✓</span> Cross-session pattern detection — which parts of your codebase consistently flag amber</li>
+        <li><span class="ck">✓</span> Team session sharing — your tech lead reads the review before the PR</li>
+        <li><span class="ck">✓</span> AI task planning with repo context and conflict history</li>
+        <li><span class="ck">✓</span> Cost and token tracking per session, per agent, over time</li>
+        <li><span class="ck">✓</span> Priority email support — 48-hour response</li>
       </ul>
       <button class="btn-primary" onclick="openModal()">Get Pro — $19/month</button>
     </div>
@@ -324,17 +327,44 @@
   <div class="demo-inner">
     <div class="demo-header">
       <span class="tag">Pro in action</span>
-      <h2>Same terminal. More control.</h2>
-      <p class="demo-sub">Pro does not change the workflow. It deepens it.</p>
+      <h2>The same terminal. Deeper intelligence.</h2>
+      <p class="demo-sub">Pro does not change the workflow. It deepens it — and extends it across your team.</p>
     </div>
     <div class="tabs">
-      <button class="tab active" onclick="tab('start',this)">switchman start</button>
+      <button class="tab active" onclick="tab('review',this)">switchman review</button>
+      <button class="tab" onclick="tab('start',this)">switchman start</button>
       <button class="tab" onclick="tab('notify',this)">Notifications</button>
-      <button class="tab" onclick="tab('summary',this)">Session summary</button>
       <button class="tab" onclick="tab('status',this)">Status check</button>
     </div>
 
-    <div class="panel active" id="tab-start">
+    <div class="panel active" id="tab-review">
+      <div class="term">
+        <div class="term-bar"><div class="d dr"></div><div class="d dy"></div><div class="d dg"></div><span class="tl">switchman review — session intelligence</span></div>
+        <div class="term-body">
+          <div class="r"><span class="p">$</span><span class="c">&nbsp;switchman review</span></div>
+          <div class="bl"></div>
+          <div class="r"><span class="dm">&nbsp;&nbsp; reading 3 worktrees · analysing session output</span></div>
+          <div class="bl"></div>
+          <div class="r"><span class="ok">&nbsp;&nbsp; agent-1 → JWT middleware · 15-min expiry · src/api/auth/</span></div>
+          <div class="r"><span class="ok">&nbsp;&nbsp; agent-2 → User model · email + passwordHash · src/db/</span></div>
+          <div class="r"><span class="ok">&nbsp;&nbsp; agent-3 → 14 tests · login, registration, token refresh</span></div>
+          <div class="bl"></div>
+          <div class="r"><span class="dm">&nbsp;&nbsp; checking semantic coherence across worktrees...</span></div>
+          <div class="bl"></div>
+          <div class="r"><span class="wn">&nbsp;&nbsp; ⚠  MISMATCH   middleware expects req.user.id</span></div>
+          <div class="r"><span class="wn">&nbsp;&nbsp; ⚠  MISMATCH   User schema has userId — not id</span></div>
+          <div class="r"><span class="dm">&nbsp;&nbsp;&nbsp;&nbsp; flagged: agent-1 + agent-2 interface contradiction</span></div>
+          <div class="bl"></div>
+          <div class="r"><span class="ok">&nbsp;&nbsp; CI gate · passing</span></div>
+          <div class="bl"></div>
+          <div class="r"><span class="dm">&nbsp;&nbsp; ─────────────────────────────────────────────────</span></div>
+          <div class="r"><span class="wn">&nbsp;&nbsp; confidence   AMBER — review flagged items before merging</span></div>
+          <div class="r"><span class="dm">&nbsp;&nbsp; session took 4m 12s · would have shipped a runtime bug</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel" id="tab-start">
       <div class="term">
         <div class="term-bar"><div class="d dr"></div><div class="d dy"></div><div class="d dg"></div><span class="tl">switchman start — Pro plan</span></div>
         <div class="term-body">
@@ -342,17 +372,17 @@
           <div class="bl"></div>
           <div class="r"><span class="dm">&nbsp;&nbsp; scanning repo stack · Next.js + Prisma detected</span></div>
           <div class="r"><span class="dm">&nbsp;&nbsp; reading: branch feature/47-add-auth · CLAUDE.md · issue #47</span></div>
-          <div class="r"><span class="dm">&nbsp;&nbsp; planning 4 parallel tasks · confidence 96%</span></div>
+          <div class="r"><span class="dm">&nbsp;&nbsp; reading: 6 previous sessions · 2 conflict zones identified</span></div>
+          <div class="r"><span class="dm">&nbsp;&nbsp; planning 3 parallel tasks · conflict-aware · confidence 97%</span></div>
           <div class="bl"></div>
           <div class="r"><span class="ok">&nbsp;&nbsp; ✓ </span><span class="dm">JWT middleware         agent1  p9  src/middleware/auth.ts</span></div>
-          <div class="r"><span class="ok">&nbsp;&nbsp; ✓ </span><span class="dm">Login + logout routes  agent2  p9  src/routes/auth.ts</span></div>
-          <div class="r"><span class="ok">&nbsp;&nbsp; ✓ </span><span class="dm">User schema migration  agent3  p8  prisma/schema.prisma</span></div>
-          <div class="r"><span class="ok">&nbsp;&nbsp; ✓ </span><span class="dm">Auth test suite       agent4  p6  tests/auth.test.ts</span></div>
+          <div class="r"><span class="ok">&nbsp;&nbsp; ✓ </span><span class="dm">User schema migration  agent2  p8  prisma/schema.prisma</span></div>
+          <div class="r"><span class="ok">&nbsp;&nbsp; ✓ </span><span class="dm">Auth test suite       agent3  p6  tests/auth.test.ts</span></div>
           <div class="bl"></div>
-          <div class="r"><span class="dm">&nbsp;&nbsp; Spin up 4 workspaces? [Y/n]&nbsp;</span><span class="o">Y</span></div>
+          <div class="r"><span class="dm">&nbsp;&nbsp; Note: kept src/routes/auth.ts as single-agent territory</span></div>
+          <div class="r"><span class="dm">&nbsp;&nbsp; (flagged amber in 2 of your last 3 sessions)</span></div>
           <div class="bl"></div>
-          <div class="r"><span class="ok">&nbsp;&nbsp; ✓ 4 workspaces ready · CLAUDE.md written · MCP configured</span></div>
-          <div class="r"><span class="dm">&nbsp;&nbsp; ✓ shared coordination active across your team</span></div>
+          <div class="r"><span class="ok">&nbsp;&nbsp; ✓ 3 workspaces ready · MCP configured · team coordination active</span></div>
         </div>
       </div>
     </div>
@@ -365,40 +395,16 @@
           <div class="r"><span class="ok">&nbsp;&nbsp; ✓ Slack notifications enabled · channel #dev-agents</span></div>
           <div class="bl"></div>
           <div class="r"><span class="dm">&nbsp;&nbsp; Start agents. Walk away.</span></div>
-          <div class="r"><span class="dm">&nbsp;&nbsp; Switchman pings you when attention is needed.</span></div>
+          <div class="r"><span class="dm">&nbsp;&nbsp; Get pinged when something needs your attention.</span></div>
           <div class="bl"></div>
-          <div class="r"><span class="dm">&nbsp;&nbsp; ─── Slack · #dev-agents ───</span></div>
+          <div class="r"><span class="dm">&nbsp;&nbsp; ─── Slack · #dev-agents ───────────────────────</span></div>
           <div class="bl"></div>
-          <div class="r"><span class="ok">&nbsp;&nbsp; ✓ agent1 finished "JWT middleware" in 8m 42s · 3 files changed</span></div>
+          <div class="r"><span class="ok">&nbsp;&nbsp; ✓ agent-1 finished "JWT middleware" in 8m 42s · 3 files</span></div>
           <div class="bl"></div>
-          <div class="r"><span class="wn">&nbsp;&nbsp; ⚠ agent3 blocked — src/routes/auth.ts owned by agent2</span></div>
-          <div class="r"><span class="dm">&nbsp;&nbsp;&nbsp;&nbsp; rerouting automatically · no action needed</span></div>
+          <div class="r"><span class="wn">&nbsp;&nbsp; ⚠ agent-3 blocked — src/routes/auth.ts owned by agent-2</span></div>
+          <div class="r"><span class="dm">&nbsp;&nbsp;&nbsp;&nbsp; rerouted automatically · no action needed</span></div>
           <div class="bl"></div>
-          <div class="r"><span class="ok">&nbsp;&nbsp; ✓ All 4 tasks complete · run: switchman session-summary</span></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="panel" id="tab-summary">
-      <div class="term">
-        <div class="term-bar"><div class="d dr"></div><div class="d dy"></div><div class="d dg"></div><span class="tl">switchman session-summary</span></div>
-        <div class="term-body">
-          <div class="r"><span class="p">$</span><span class="c">&nbsp;switchman session-summary</span></div>
-          <div class="bl"></div>
-          <div class="r"><span class="ok">&nbsp;&nbsp; Session complete · 4 tasks · 4 agents · 36 minutes</span></div>
-          <div class="bl"></div>
-          <div class="r"><span class="dm">&nbsp;&nbsp; Tasks completed</span></div>
-          <div class="r"><span class="ok">&nbsp;&nbsp; ✓ </span><span class="o">JWT middleware · login routes · schema migration · auth tests</span></div>
-          <div class="bl"></div>
-          <div class="r"><span class="dm">&nbsp;&nbsp; Conflicts caught early</span></div>
-          <div class="r"><span class="wn">&nbsp;&nbsp; ⚠ </span><span class="o">agent3 attempted to claim src/routes/auth.ts</span></div>
-          <div class="r"><span class="dm">&nbsp;&nbsp;&nbsp;&nbsp; already owned by agent2 · rerouted automatically</span></div>
-          <div class="bl"></div>
-          <div class="r"><span class="dm">&nbsp;&nbsp; Without Switchman</span></div>
-          <div class="r"><span class="wn">&nbsp;&nbsp; ⚠ </span><span class="o">agent2 and agent3 would have edited auth.ts at the same time</span></div>
-          <div class="r"><span class="dm">&nbsp;&nbsp;&nbsp;&nbsp; estimated conflict resolution time: ~35 minutes</span></div>
-          <div class="bl"></div>
-          <div class="r"><span class="ok">&nbsp;&nbsp; Time saved: ~35 minutes · 0 merge incidents · 0 lost work</span></div>
+          <div class="r"><span class="ok">&nbsp;&nbsp; ✓ All tasks complete · run: switchman review</span></div>
         </div>
       </div>
     </div>
@@ -407,18 +413,18 @@
       <div class="term">
         <div class="term-bar"><div class="d dr"></div><div class="d dy"></div><div class="d dg"></div><span class="tl">switchman status — check in anytime</span></div>
         <div class="term-body">
-          <div class="r"><span class="dm">&nbsp;&nbsp; No dashboard babysitting required.</span></div>
+          <div class="r"><span class="dm">&nbsp;&nbsp; No babysitting required.</span></div>
           <div class="bl"></div>
           <div class="r"><span class="p">$</span><span class="c">&nbsp;switchman status</span></div>
           <div class="bl"></div>
-          <div class="r"><span class="ok">&nbsp;&nbsp; ✦ Pro</span><span class="dm"> — 4 agents · 2 tasks remaining · 0 conflicts</span></div>
+          <div class="r"><span class="ok">&nbsp;&nbsp; ✦ Pro</span><span class="dm"> — 3 agents · 1 task remaining · 0 conflicts</span></div>
           <div class="bl"></div>
-          <div class="r"><span class="a1">&nbsp;&nbsp; agent1</span><span class="dm">  DONE    "JWT middleware"      ✓ ready to land</span></div>
-          <div class="r"><span class="a2">&nbsp;&nbsp; agent2</span><span class="dm">  ACTIVE  "Login routes"       src/routes/auth.ts · 6m elapsed</span></div>
-          <div class="r"><span class="a3">&nbsp;&nbsp; agent3</span><span class="dm">  ACTIVE  "Auth tests"         tests/auth.test.ts · 4m elapsed</span></div>
-          <div class="r"><span class="a1">&nbsp;&nbsp; agent4</span><span class="dm">  DONE    "Schema migration"   ✓ ready to land</span></div>
+          <div class="r"><span class="a1">&nbsp;&nbsp; agent-1</span><span class="dm">  DONE    "JWT middleware"      ✓ ready to review</span></div>
+          <div class="r"><span class="a2">&nbsp;&nbsp; agent-2</span><span class="dm">  ACTIVE  "User schema"        prisma/schema.prisma · 4m elapsed</span></div>
+          <div class="r"><span class="a3">&nbsp;&nbsp; agent-3</span><span class="dm">  DONE    "Auth tests"         ✓ ready to review</span></div>
           <div class="bl"></div>
-          <div class="r"><span class="dm">&nbsp;&nbsp; You get pinged when the rest finish.</span></div>
+          <div class="r"><span class="dm">&nbsp;&nbsp; You get pinged when agent-2 finishes.</span></div>
+          <div class="r"><span class="dm">&nbsp;&nbsp; Then run: switchman review</span></div>
         </div>
       </div>
     </div>
@@ -429,38 +435,38 @@
 <section class="section reveal" id="included">
   <div class="section-center">
     <span class="tag">What you get</span>
-    <h2>Pro adds the deeper coordination layer.</h2>
+    <h2>Pro adds history, team depth, and codebase intelligence.</h2>
   </div>
   <div class="grid3">
     <div class="cell">
-      <div class="cell-tag">Coordination</div>
-      <h3>Shared cloud state</h3>
-      <p>Free proves the workflow locally. Pro lets teams share the coordination layer across machines.</p>
-    </div>
-    <div class="cell">
-      <div class="cell-tag">Planning API</div>
-      <h3>Full planning depth</h3>
-      <p>Unlock the full engine behind <span class="mono-inline">switchman start</span>. Repo scanning. stack detection. confidence-scored task breakdown.</p>
-    </div>
-    <div class="cell">
-      <div class="cell-tag">Session summary</div>
-      <h3>See what was prevented</h3>
-      <p>Pro adds counterfactual analysis. Not just what happened. What would have gone wrong.</p>
-    </div>
-    <div class="cell">
-      <div class="cell-tag">Sync</div>
-      <h3>Retry and offline buffer</h3>
-      <p>Shared state syncs safely. If connectivity drops, events buffer locally and flush later.</p>
-    </div>
-    <div class="cell">
       <div class="cell-tag">History</div>
-      <h3>Longer memory</h3>
-      <p>Keep 90 days of coordination and audit history. See more. debug more. prove more.</p>
+      <h3>90-day session memory</h3>
+      <p>Every <code class="mono-inline">switchman review</code> stored and searchable. Look back at what was built last week. Understand why a file is structured the way it is. Never lose a session summary again.</p>
+    </div>
+    <div class="cell">
+      <div class="cell-tag">Pattern detection</div>
+      <h3>Learn your codebase</h3>
+      <p>Which parts of your repo consistently flag amber when agents work there in parallel? Pro surfaces patterns across sessions — so you plan better next time and the risk zones become visible.</p>
+    </div>
+    <div class="cell">
+      <div class="cell-tag">Team sharing</div>
+      <h3>Reviews your team can read</h3>
+      <p>One developer's <code class="mono-inline">switchman review</code> output visible to teammates. Your tech lead reads the session summary before the PR. Review goes faster. Context is never lost.</p>
+    </div>
+    <div class="cell">
+      <div class="cell-tag">Planning</div>
+      <h3>Task planning with conflict history</h3>
+      <p><code class="mono-inline">switchman plan</code> reads the repo and avoids conflict zones from your session history. Tasks get structured to prevent the overlaps your codebase is prone to.</p>
+    </div>
+    <div class="cell">
+      <div class="cell-tag">Cost visibility</div>
+      <h3>Token tracking over time</h3>
+      <p>Approximate API spend per agent, per task, per session — aggregated over time. The thing that matters when someone asks "how much are we spending on agent runs."</p>
     </div>
     <div class="cell">
       <div class="cell-tag">Support</div>
       <h3>Priority email support</h3>
-      <p>When teams hit a coordination problem, they get a real answer fast.</p>
+      <p>48-hour response time. When your team hits a coordination problem, you get a real answer fast — not a community forum thread.</p>
     </div>
   </div>
 </section>
@@ -477,17 +483,21 @@
     </thead>
     <tbody>
       <tr><td><code>switchman start</code></td><td><span class="tick">✓</span></td><td class="cp"><span class="tick">✓</span></td></tr>
-      <tr><td>Local agents</td><td><span class="va">Unlimited</span></td><td class="cp"><span class="va">Unlimited</span></td></tr>
-      <tr><td>File locking &amp; conflict prevention</td><td><span class="tick">✓</span></td><td class="cp"><span class="tick">✓</span></td></tr>
-      <tr><td>Auto CLAUDE.md generation</td><td><span class="tick">✓</span></td><td class="cp"><span class="tick">✓</span></td></tr>
+      <tr><td>Unlimited local agents</td><td><span class="tick">✓</span></td><td class="cp"><span class="tick">✓</span></td></tr>
+      <tr><td><code>switchman review</code> — full session summary</td><td><span class="tick">✓</span></td><td class="cp"><span class="tick">✓</span></td></tr>
+      <tr><td>Semantic overlap + interface mismatch detection</td><td><span class="tick">✓</span></td><td class="cp"><span class="tick">✓</span></td></tr>
+      <tr><td>Merge confidence (green / amber / red / uncertain)</td><td><span class="tick">✓</span></td><td class="cp"><span class="tick">✓</span></td></tr>
+      <tr><td>Automatic coordination via MCP</td><td><span class="tick">✓</span></td><td class="cp"><span class="tick">✓</span></td></tr>
       <tr><td>MCP for Claude Code, Cursor, Codex</td><td><span class="tick">✓</span></td><td class="cp"><span class="tick">✓</span></td></tr>
+      <tr><td><code>switchman status --watch</code></td><td><span class="tick">✓</span></td><td class="cp"><span class="tick">✓</span></td></tr>
+      <tr><td>CI gate and governed landing</td><td><span class="tick">✓</span></td><td class="cp"><span class="tick">✓</span></td></tr>
       <tr><td>Slack &amp; desktop notifications</td><td><span class="tick">✓</span></td><td class="cp"><span class="tick">✓</span></td></tr>
-      <tr><td>Session summaries</td><td><span class="vd">Read-only</span></td><td class="cp"><span class="va">With counterfactuals</span></td></tr>
-      <tr><td>Shared cloud coordination</td><td><span class="vd">One project</span></td><td class="cp"><span class="va">Team-grade</span></td></tr>
-      <tr><td>Full planning API</td><td><span class="cross">—</span></td><td class="cp"><span class="tick">✓</span></td></tr>
-      <tr><td>Cloud sync with offline buffer</td><td><span class="cross">—</span></td><td class="cp"><span class="tick">✓</span></td></tr>
-      <tr><td>Task history</td><td><span class="vd">7 days</span></td><td class="cp"><span class="va">90 days</span></td></tr>
-      <tr><td>Support</td><td><span class="vd">Community</span></td><td class="cp"><span class="va">Priority email</span></td></tr>
+      <tr><td>Session history</td><td><span class="vd">14 days</span></td><td class="cp"><span class="va">90 days</span></td></tr>
+      <tr><td>Cross-session pattern detection</td><td><span class="cross">—</span></td><td class="cp"><span class="tick">✓</span></td></tr>
+      <tr><td>Team session sharing</td><td><span class="cross">—</span></td><td class="cp"><span class="tick">✓</span></td></tr>
+      <tr><td>AI planning with repo context + conflict history</td><td><span class="cross">—</span></td><td class="cp"><span class="tick">✓</span></td></tr>
+      <tr><td>Cost and token tracking over time</td><td><span class="cross">—</span></td><td class="cp"><span class="tick">✓</span></td></tr>
+      <tr><td>Support</td><td><span class="vd">Community</span></td><td class="cp"><span class="va">Priority email · 48hr</span></td></tr>
     </tbody>
   </table>
 </div>
@@ -497,7 +507,7 @@
   <div class="act-inner">
     <span class="tag">Getting started</span>
     <h2>Upgrade once. Then stay in the terminal.</h2>
-    <p class="act-sub">No big setup. No extra control panel. Sign in once. Run the same flow with more depth unlocked.</p>
+    <p class="act-sub">No extra control panel. No changed workflow. Sign in once and the same two commands you already know get deeper.</p>
     <div class="steps">
       <div class="step">
         <div class="step-n">1</div>
@@ -509,7 +519,7 @@
       <div class="step">
         <div class="step-n">2</div>
         <div class="step-body">
-          <div class="step-label">Run in your terminal:</div>
+          <div class="step-label">Activate in your terminal:</div>
           <div class="step-cmd">switchman login</div>
           <div class="step-note">Cached for 24 hours. Works offline for up to 7 days.</div>
         </div>
@@ -517,7 +527,7 @@
       <div class="step">
         <div class="step-n">3</div>
         <div class="step-body">
-          <div class="step-label">Optional, but recommended:</div>
+          <div class="step-label">Optional: enable Slack or desktop notifications</div>
           <div class="step-cmd">switchman notify --slack #your-channel</div>
           <div class="step-note">Or: <code>switchman notify --desktop</code></div>
         </div>
@@ -525,9 +535,9 @@
       <div class="step">
         <div class="step-n">4</div>
         <div class="step-body">
-          <div class="step-label">Start the session:</div>
-          <div class="step-cmd">switchman start "your goal here"</div>
-          <div class="step-note">Same command. More coordination depth.</div>
+          <div class="step-label">Run a session the same way you always have:</div>
+          <div class="step-cmd">switchman start "your goal" → switchman review</div>
+          <div class="step-note">Pro is active. History accumulates. Team can see your reviews.</div>
         </div>
       </div>
     </div>
@@ -541,47 +551,47 @@
     <h2>Common questions</h2>
   </div>
   <div class="faq-item">
-    <div class="faq-q">Does Free still work properly?</div>
-    <div class="faq-a">Yes. Free is meant for real use, not a crippled trial. Unlimited local agents, notifications, read-only session summaries, and one shared cloud project stay available.</div>
+    <div class="faq-q">Does Free give me the full review experience?</div>
+    <div class="faq-a"><code>switchman review</code> — including the full session summary, semantic overlap detection, interface mismatch flagging, and merge confidence score — is free forever with no limits. Pro adds the over-time layer on top: history, team sharing, and cross-session intelligence.</div>
   </div>
   <div class="faq-item">
-    <div class="faq-q">What am I actually paying for?</div>
-    <div class="faq-a">The deeper coordination layer. Shared cloud state. full planning. counterfactual analysis. longer history. stronger team control.</div>
+    <div class="faq-q">What specifically am I paying for?</div>
+    <div class="faq-a">The over-time layer. 90-day searchable session history, cross-session pattern detection (which parts of your codebase consistently flag amber), team session sharing, AI task planning informed by your conflict history, and cost tracking across sessions.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">Why does the history limit matter?</div>
+    <div class="faq-a">Free keeps 14 days — enough for active development. The moment you want to look back at a session from three weeks ago to understand why a file is structured a certain way, or share context with a new teammate, Pro's 90-day history is what you need.</div>
   </div>
   <div class="faq-item">
     <div class="faq-q">Are notifications free?</div>
     <div class="faq-a">Yes. Slack and desktop notifications are available on both Free and Pro.</div>
   </div>
   <div class="faq-item">
-    <div class="faq-q">Do I need to watch the terminal?</div>
-    <div class="faq-a">No. Start the work. Walk away. Get pinged when attention is needed.</div>
-  </div>
-  <div class="faq-item">
     <div class="faq-q">Does Pro require a constant internet connection?</div>
-    <div class="faq-a">No. Licence checks cache locally for 24 hours. Pro can keep working offline for up to 7 days. Shared sync needs connectivity. Local coordination does not.</div>
+    <div class="faq-a">No. Licence checks cache locally for 24 hours. Pro works offline for up to 7 days. History sync needs connectivity when it writes; local coordination runs fine without it.</div>
   </div>
   <div class="faq-item">
     <div class="faq-q">Will this change my git workflow?</div>
-    <div class="faq-a">No. Switchman coordinates around git. It does not replace it. Your branches and history stay yours.</div>
+    <div class="faq-a">No. Switchman coordinates around git. It does not replace it. Your branches, history, and remotes stay exactly as they are.</div>
   </div>
   <div class="faq-item">
     <div class="faq-q">Can I cancel anytime?</div>
-    <div class="faq-a">Yes. Cancel through Polar.sh. No lock-in. No migration pain.</div>
+    <div class="faq-a">Yes. Cancel through Polar.sh at any time. Your local SQLite data and session history are always yours and are not affected by cancellation.</div>
   </div>
   <div class="faq-item">
     <div class="faq-q">Is this safe for company code?</div>
-    <div class="faq-a">Yes. Switchman coordinates metadata. It does not upload your source code. File operations stay local.</div>
+    <div class="faq-a">Yes. Switchman coordinates metadata — task state, file claims, session summaries. It does not upload your source code. All file operations stay local.</div>
   </div>
   <div class="faq-item">
     <div class="faq-q">Who is Pro really for?</div>
-    <div class="faq-a">Teams. Shared repos. People who already know the local workflow works and now want deeper coordination across machines.</div>
+    <div class="faq-a">Developers who've seen the value of Free and now want the over-time layer — searchable history, team visibility, and a system that gets smarter about their specific codebase. Also anyone who needs to show a tech lead or manager what the agents actually built and whether it was safe to ship.</div>
   </div>
 </div>
 
 <!-- CTA -->
 <section class="cta reveal">
-  <h2>Writing code is not the hard part.<br>Keeping the repo coherent is.</h2>
-  <p>$19/month · cancel anytime · Free stays free</p>
+  <h2>You ran the agents.<br>Now know if it's safe to ship.</h2>
+  <p>$19/month · cancel anytime · Free stays free forever</p>
   <div class="cta-btns">
     <button class="btn-cta" onclick="openModal()">Get Pro — $19/month</button>
     <a href="https://npmjs.com/package/switchman-dev" class="btn-outline">Install free ↗</a>
@@ -602,7 +612,6 @@
     <a href="../privacy/">Privacy</a>
   </div>
 </footer>
-
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
