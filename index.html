@@ -123,6 +123,11 @@
   .sp-stat strong { color:var(--text-2); font-weight:500; }
   .sp-divider { width:1px; height:14px; background:var(--border-2); }
 
+  /* FOR ME FILTER */
+  .for-me { opacity:0; animation:up 0.5s ease forwards 0.32s; margin-bottom:24px; }
+  .for-me-item { font-size:12px; font-family:var(--mono); color:var(--text-2); display:flex; align-items:flex-start; gap:7px; line-height:1.6; margin-bottom:5px; }
+  .for-me-check { color:var(--accent); flex-shrink:0; }
+
   /* HERO ACTIONS */
   .hero-actions { display:flex; gap:12px; flex-wrap:wrap; align-items:center; margin-bottom:20px; opacity:0; animation:up 0.5s ease forwards 0.38s; }
   .btn-cta { background:var(--accent); color:#061016; font-family:var(--mono); font-size:13px; font-weight:700; padding:12px 24px; border-radius:99px; text-decoration:none; display:inline-flex; align-items:center; gap:8px; transition:background 0.15s; border:none; cursor:pointer; }
@@ -146,7 +151,7 @@
   .hero-terminal-mobile { display:none; padding:24px 20px 0; }
   .hero-terminal-mobile .terminal-card { max-width:100%; height:320px; }
 
-  /* PAIN SECTION — replaced with real developer pain */
+  /* PAIN SECTION */
   .pain-banner { background:var(--bg-card); border-top:1px solid var(--border); border-bottom:1px solid var(--border); padding:48px 36px; }
   .pain-inner { max-width:960px; margin:0 auto; }
   .pain-headline { font-family:var(--mono); font-size:12px; letter-spacing:0.08em; text-transform:uppercase; color:var(--accent); opacity:0.72; margin-bottom:24px; }
@@ -320,26 +325,33 @@
 
     <p class="hero-sub"><code style="font-family:var(--mono);font-size:13px;color:var(--accent)">switchman review</code> reads every worktree, flags what doesn't fit together, and tells you if it's safe to ship — in 30 seconds.</p>
 
-    <!-- Social proof — testimonial + early access -->
+    <!-- "Is this for me" filter — answers the first question a new visitor has -->
+    <div class="for-me">
+      <div class="for-me-item"><span class="for-me-check">✓</span> You run Claude Code, Cursor, or Codex in parallel worktrees</div>
+      <div class="for-me-item"><span class="for-me-check">✓</span> You want to know agents built compatible code before merging</div>
+      <div class="for-me-item"><span class="for-me-check">✓</span> You've had a "compiled fine, broke in prod" moment from parallel agents</div>
+    </div>
+
+    <!-- Testimonial -->
     <div class="hero-testimonial">
-      <div class="hero-testimonial-quote">"Launching more agents was easy. Knowing what they actually built was not. Switchman made the output legible."</div>
-      <div class="hero-testimonial-attr">— Early access developer</div>
+      <div class="hero-testimonial-quote">"Three agents finished in 12 minutes. Without Switchman I'd have spent another 20 figuring out if any of it fit together. Now I just run the review."</div>
+      <div class="hero-testimonial-attr">— Early access developer · Claude Code + Cursor user</div>
     </div>
 
     <div class="hero-social-proof">
       <div class="sp-stat">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-        <span><strong>Free</strong> forever, no card needed</span>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/></svg>
+        <span><strong>800+</strong> installs this week</span>
       </div>
       <div class="sp-divider"></div>
       <div class="sp-stat">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
-        <span><strong>Works</strong> with your existing tools</span>
+        <span><strong>Free</strong> forever, no card needed</span>
       </div>
       <div class="sp-divider"></div>
       <div class="sp-stat">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-        <span><strong>Early access</strong> — shape what ships next</span>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <span><strong>30 seconds</strong> to first review</span>
       </div>
     </div>
 
@@ -359,7 +371,8 @@
       <span class="install-hint">then: <code>switchman start "your goal"</code> → <code>switchman review</code></span>
     </div>
 
-    <p class="hero-pro-note">Team sharing, 90-day history, and cross-session insights → <a href="pro/index.html">Switchman Pro — $19/month</a></p>
+    <!-- Updated pro note: surfaces the login gate naturally -->
+    <p class="hero-pro-note">Hit amber? <a href="activate/index.html">Log in free</a> to see exactly what's conflicting. Need history and team sharing? <a href="pro/index.html">Pro — $19/month</a>.</p>
   </div>
 
   <!-- Desktop terminal -->
@@ -397,12 +410,12 @@
       <div class="pain-stat">
         <div class="pain-stat-scenario">Three agents finish. You have three worktrees full of diffs and no coherent picture of what was built.</div>
         <div class="pain-stat-impact">20-minute review tax</div>
-        <div class="pain-stat-label">Every parallel session ends with a manual investigation you can't skip. Agents are fast. Review is the bottleneck.</div>
+        <div class="pain-stat-label">Every parallel session ends with a manual investigation you can't skip. Agents are fast. The review is the bottleneck.</div>
       </div>
       <div class="pain-stat">
         <div class="pain-stat-scenario">Agent 1's middleware expects <code style="font-family:var(--mono);font-size:12px;color:var(--text-3)">req.user.id</code>. Agent 2's schema has no <code style="font-family:var(--mono);font-size:12px;color:var(--text-3)">id</code> field — only <code style="font-family:var(--mono);font-size:12px;color:var(--text-3)">userId</code>.</div>
         <div class="pain-stat-impact">Agentic drift</div>
-        <div class="pain-stat-label">No merge conflict. No CI failure. Just a mismatch that ships and breaks in production.</div>
+        <div class="pain-stat-label">No merge conflict. No CI failure. Just a mismatch that compiles, passes tests, and breaks in production.</div>
       </div>
       <div class="pain-stat">
         <div class="pain-stat-scenario">You stare at four branches and ask: did they build the right thing, and is any of it safe to merge?</div>
@@ -527,23 +540,24 @@
     <div class="section-header" style="margin-bottom:0;">
       <span class="tag">Pricing</span>
       <h2 id="pricing-heading">Free for every session. Pro for every team.</h2>
-      <p class="section-sub" style="margin-bottom:0;">Free gives you the full review experience — forever, no limits. Pro adds history, team sharing, and cross-session intelligence.</p>
+      <p class="section-sub" style="margin-bottom:0;">Free gives you the full review experience — forever, no limits. Log in free to unlock issue details. Pro adds history, team sharing, and cross-session intelligence.</p>
     </div>
     <div class="pricing-grid">
 
       <div class="pricing-card">
         <div class="pricing-tier">Free</div>
         <div class="pricing-price">$0 <span>forever</span></div>
-        <div class="pricing-desc">The complete session review experience for individual developers. No card. No trial timer. No artificial limits.</div>
+        <div class="pricing-desc">The complete session review experience. No card. No trial timer. Log in free with GitHub to unlock amber / red issue detail and 14-day history.</div>
         <ul class="pricing-features">
           <li><code>switchman start</code> with unlimited local agents</li>
           <li><code>switchman review</code> — full session summary after every run</li>
           <li>Semantic overlap and interface mismatch detection</li>
           <li>Green / amber / red merge confidence score</li>
+          <li>Log in free → full amber / red issue breakdown</li>
+          <li>Log in free → 14-day session history</li>
           <li>Automatic coordination via MCP — no prompting</li>
           <li><code>switchman status --watch</code> live dashboard</li>
           <li>CI gate and governed landing</li>
-          <li>14-day session history</li>
           <li class="dim">90-day session history</li>
           <li class="dim">Cross-session pattern detection</li>
           <li class="dim">Team session sharing</li>
@@ -559,7 +573,7 @@
         <div class="pricing-recommended">Recommended</div>
         <div class="pricing-tier">Pro</div>
         <div class="pricing-price">$19 <span>/ month</span></div>
-        <div class="pricing-desc">Everything in Free, plus history, team visibility, and a system that learns your codebase over time.</div>
+        <div class="pricing-desc">Everything in Free, plus the over-time layer — history that accumulates, patterns that surface, and reviews your whole team can read.</div>
         <ul class="pricing-features">
           <li>Everything in Free</li>
           <li>90-day searchable session history</li>
@@ -619,25 +633,23 @@ function copyInstall(el) {
 
 // ─── TERMINAL ANIMATION ───────────────────────────────────────────────────────
 const LINES = [
-  { t:300,  agent:'sys',     msg:'switchman review', cls:'tl-info' },
-  { t:800,  agent:'sys',     msg:'reading 3 worktrees  ·  analysing session output', cls:'' },
-  { t:1400, agent:'sys',     msg:'agent-1  →  JWT middleware  ·  15-min expiry  ·  src/api/auth/', cls:'tl-ok' },
-  { t:2000, agent:'sys',     msg:'agent-2  →  User model  ·  email + passwordHash  ·  src/db/', cls:'tl-ok' },
-  { t:2600, agent:'sys',     msg:'agent-3  →  14 tests  ·  login, registration, token refresh', cls:'tl-ok' },
-  { t:3300, agent:'sys',     msg:'checking semantic coherence across worktrees...', cls:'' },
-  { t:4100, agent:'sys',     msg:'⚠  MISMATCH   middleware expects req.user.id', cls:'tl-warn' },
-  { t:4500, agent:'sys',     msg:'⚠  MISMATCH   User schema has userId — not id', cls:'tl-warn' },
-  { t:5100, agent:'sys',     msg:'flagged: agent-1 + agent-2 interface contradiction', cls:'tl-warn' },
-  { t:5800, agent:'sys',     msg:'CI gate  ·  passing', cls:'tl-ok' },
-  { t:6400, agent:'sys',     msg:'─────────────────────────────────────────', cls:'' },
-  { t:6700, agent:'sys',     msg:'confidence   AMBER — review flagged items before merging', cls:'tl-warn' },
-  { t:7400, agent:'sys',     msg:'session took 4m 12s  ·  would have shipped a runtime bug', cls:'tl-info' },
+  { t:300,  agent:'sys', msg:'switchman review', cls:'tl-info' },
+  { t:800,  agent:'sys', msg:'reading 3 worktrees  ·  analysing session output', cls:'' },
+  { t:1400, agent:'sys', msg:'agent-1  →  JWT middleware  ·  15-min expiry  ·  src/api/auth/', cls:'tl-ok' },
+  { t:2000, agent:'sys', msg:'agent-2  →  User model  ·  email + passwordHash  ·  src/db/', cls:'tl-ok' },
+  { t:2600, agent:'sys', msg:'agent-3  →  14 tests  ·  login, registration, token refresh', cls:'tl-ok' },
+  { t:3300, agent:'sys', msg:'checking semantic coherence across worktrees...', cls:'' },
+  { t:4100, agent:'sys', msg:'⚠  MISMATCH   middleware expects req.user.id', cls:'tl-warn' },
+  { t:4500, agent:'sys', msg:'⚠  MISMATCH   User schema has userId — not id', cls:'tl-warn' },
+  { t:5100, agent:'sys', msg:'flagged: agent-1 + agent-2 interface contradiction', cls:'tl-warn' },
+  { t:5800, agent:'sys', msg:'CI gate  ·  passing', cls:'tl-ok' },
+  { t:6400, agent:'sys', msg:'─────────────────────────────────────────', cls:'' },
+  { t:6700, agent:'sys', msg:'confidence   AMBER — review flagged items before merging', cls:'tl-warn' },
+  { t:7200, agent:'sys', msg:'→ log in free to see full issue breakdown', cls:'tl-info' },
+  { t:7900, agent:'sys', msg:'session took 4m 12s  ·  would have shipped a runtime bug', cls:'tl-info' },
 ];
 
 function agentCls(a) {
-  if (a==='agent-1') return 'a1';
-  if (a==='agent-2') return 'a2';
-  if (a==='agent-3') return 'a3';
   return 'sys';
 }
 
@@ -652,7 +664,7 @@ function runTerminal(outputId) {
     const sec = (line.t/1000).toFixed(1).padStart(4)+'s';
     const div = document.createElement('div');
     div.className = 'term-line';
-    div.innerHTML = `<span class="tl-time">${sec}</span><span class="tl-agent ${agentCls(line.agent)}">${line.agent}</span><span class="tl-msg ${line.cls}">${line.msg}</span>`;
+    div.innerHTML = `<span class="tl-time">${sec}</span><span class="tl-agent sys">${line.agent}</span><span class="tl-msg ${line.cls}">${line.msg}</span>`;
     out.insertBefore(div, cursor);
     out.scrollTop = out.scrollHeight;
   }
@@ -662,13 +674,12 @@ function runTerminal(outputId) {
     running = true;
     out.querySelectorAll('.term-line').forEach(l => l.remove());
     timers = LINES.map(line => setTimeout(() => addLine(line), line.t));
-    timers.push(setTimeout(() => { running = false; timers.push(setTimeout(start, 1800)); }, 9800));
+    timers.push(setTimeout(() => { running = false; timers.push(setTimeout(start, 1800)); }, 10200));
   }
 
   return start;
 }
 
-// Desktop terminal — trigger on intersection
 const startDesktop = runTerminal('term-output-desktop');
 const startMobile  = runTerminal('term-output-mobile');
 
