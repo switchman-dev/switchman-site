@@ -75,7 +75,7 @@
   </div>
 
   <div class="highlight-box">
-    <p><strong>The short version:</strong> The free tier collects nothing — all data stays on your machine. The Pro tier stores only what's needed to run your subscription: your email, plan status, and coordination metadata. We never store your source code.</p>
+    <p><strong>The short version:</strong> Switchman is open source and local-first. The CLI keeps coordination data on your machine, the website uses no tracking cookies, and we never store your source code.</p>
   </div>
 
   <h2>1. Who we are</h2>
@@ -84,23 +84,20 @@
 
   <h2>2. What data we collect</h2>
 
-  <p><strong>Free tier — no data collected</strong></p>
-  <p>The free tier of Switchman is a local CLI tool. All coordination data (tasks, leases, file claims) is stored in a SQLite file on your machine at <code>.switchman/switchman.db</code>. We have no access to this data and collect nothing from free tier users.</p>
+  <p><strong>Local CLI usage — no data collected by us</strong></p>
+  <p>Switchman is a local CLI tool. Coordination data such as tasks, leases, and file claims is stored in a SQLite file on your machine at <code>.switchman/switchman.db</code>. We do not receive this data.</p>
 
-  <p><strong>Pro tier — data we collect when you subscribe</strong></p>
+  <p><strong>Website and support contact data</strong></p>
   <ul>
-    <li><strong>Account data:</strong> your GitHub email address and GitHub user ID, provided via OAuth when you sign in</li>
-    <li><strong>Subscription data:</strong> your plan (monthly or annual), subscription status, and billing period — provided by Polar.sh when you pay</li>
-    <li><strong>Team data:</strong> email addresses of teammates you invite, team membership records</li>
-    <li><strong>Coordination metadata:</strong> task titles, file names, lease states — for cloud sync features</li>
+    <li><strong>Email contact data:</strong> if you email us, we receive the information you include in that message</li>
   </ul>
 
   <p><strong>We never collect:</strong></p>
   <ul>
     <li>Your source code or file contents</li>
     <li>Your git history or commit messages</li>
-    <li>Passwords (we use GitHub OAuth only)</li>
-    <li>Payment card details (handled entirely by Polar.sh and Stripe)</li>
+    <li>Passwords</li>
+    <li>Payment card details</li>
   </ul>
 
   <p><strong>Telemetry (opt-in only)</strong></p>
@@ -108,42 +105,27 @@
 
   <h2>3. How we use your data</h2>
   <ul>
-    <li><strong>Account data</strong> — to authenticate you and link your licence to your machine</li>
-    <li><strong>Subscription data</strong> — to verify your Pro licence when you run <code>switchman login</code></li>
-    <li><strong>Team data</strong> — to send team invites and manage shared coordination state</li>
-    <li><strong>Coordination metadata</strong> — to sync task and lease state across your team's machines</li>
+    <li><strong>Email contact data</strong> — to respond when you contact us for support or questions</li>
   </ul>
   <p>We do not use your data for advertising, profiling, or any purpose beyond operating the service.</p>
 
   <h2>4. Legal basis for processing (GDPR)</h2>
   <p>For users in the UK and EU, we process your personal data on the following legal bases:</p>
   <ul>
-    <li><strong>Contract performance</strong> — processing necessary to provide the Pro subscription you signed up for</li>
+    <li><strong>Contract performance</strong> — processing necessary to respond to requests you make through the website or by email</li>
     <li><strong>Legitimate interests</strong> — basic security logging and fraud prevention</li>
     <li><strong>Consent</strong> — optional telemetry, which you can withdraw at any time</li>
   </ul>
 
   <h2>5. Data storage and security</h2>
-  <p>Pro account data is stored in <strong>Supabase</strong>, hosted in the EU (eu-west region). Supabase is SOC 2 Type II certified and GDPR compliant.</p>
-  <p>Credentials stored locally on your machine (<code>~/.switchman/credentials.json</code>) are written with restricted file permissions (mode 600 — readable only by you).</p>
-  <p>Payment data is processed and stored by <strong>Polar.sh</strong> and <strong>Stripe</strong>. We never see or store your payment card details.</p>
+  <p>Any website or support contact data we hold is stored using standard business systems with appropriate access controls.</p>
 
   <h2>6. Data sharing</h2>
-  <p>We share your data only with the following third parties, solely to operate the service:</p>
-  <ul>
-    <li><strong>Supabase</strong> — database and authentication infrastructure (EU hosting)</li>
-    <li><strong>Polar.sh</strong> — payment processing and subscription management</li>
-    <li><strong>Stripe</strong> — payment processing (via Polar)</li>
-    <li><strong>GitHub</strong> — OAuth authentication</li>
-  </ul>
   <p>We do not sell your data. We do not share your data with advertisers or data brokers.</p>
 
   <h2>7. Data retention</h2>
   <ul>
-    <li><strong>Active Pro accounts:</strong> data retained for the duration of your subscription</li>
-    <li><strong>Cancelled accounts:</strong> account data deleted within 90 days of cancellation</li>
-    <li><strong>Team invites:</strong> deleted after acceptance or 30 days, whichever comes first</li>
-    <li><strong>Coordination metadata:</strong> retained for 90 days (Pro) or 7 days (free tier, local only)</li>
+    <li><strong>Email contact data:</strong> retained only as long as needed to respond and maintain basic support records</li>
   </ul>
 
   <h2>8. Your rights (GDPR)</h2>
@@ -160,13 +142,13 @@
   <p>You also have the right to lodge a complaint with the <strong>Information Commissioner's Office (ICO)</strong> at <a href="https://ico.org.uk" target="_blank" rel="noopener">ico.org.uk</a>.</p>
 
   <h2>9. Cookies</h2>
-  <p>The switchman.dev website uses no tracking cookies. The Pro sign-in page uses session storage (not cookies) to preserve your plan selection during the GitHub OAuth flow. This data is cleared after sign-in.</p>
+  <p>The switchman.dev website uses no tracking cookies.</p>
 
   <h2>10. Children</h2>
   <p>Switchman is not directed at children under 16. We do not knowingly collect personal data from children.</p>
 
   <h2>11. Changes to this policy</h2>
-  <p>We may update this privacy policy from time to time. We will notify Pro subscribers of material changes by email. The "last updated" date at the top of this page reflects the most recent revision.</p>
+  <p>We may update this privacy policy from time to time. The "last updated" date at the top of this page reflects the most recent revision.</p>
 
   <h2>12. Contact</h2>
   <p>For privacy questions or data requests: <a href="mailto:hello@switchman.dev">hello@switchman.dev</a></p>
@@ -177,7 +159,6 @@
   <span>switchman.dev — Recio Ltd</span>
   <div class="footer-links">
     <a href="/">Home</a>
-    <a href="/pro">Pro</a>
     <a href="/terms">Terms</a>
     <a href="https://github.com/switchman-dev/switchman">GitHub</a>
     <a href="mailto:hello@switchman.dev">hello@switchman.dev</a>

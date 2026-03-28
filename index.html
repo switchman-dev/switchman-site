@@ -35,10 +35,12 @@
     "description": "Switchman tells you what your parallel AI agents built and whether it's safe to ship. Session summaries, semantic overlap detection, and merge confidence after every run. Works with Claude Code, Cursor, Codex, and Aider.",
     "applicationCategory": "DeveloperApplication",
     "operatingSystem": "macOS, Linux, Windows",
-    "offers": [
-      { "@type": "Offer", "price": "0", "priceCurrency": "USD", "name": "Free — full session review, unlimited agents" },
-      { "@type": "Offer", "price": "19", "priceCurrency": "USD", "name": "Pro — team sharing, 90-day history, cross-session insights" }
-    ],
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD",
+      "name": "Open source — full session review, planning, and usage tracking"
+    },
     "softwareVersion": "0.1.13",
     "downloadUrl": "https://www.npmjs.com/package/switchman-dev",
     "codeRepository": "https://github.com/switchman-dev/switchman",
@@ -300,13 +302,12 @@
   <ul class="nav-center">
     <li><a href="#how">How it works</a></li>
     <li><a href="#features">Features</a></li>
-    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#pricing">Open source</a></li>
     <li><a href="#integrations">Integrations</a></li>
     <li><a href="https://docs.switchman.dev/">Docs</a></li>
   </ul>
   <div class="nav-end">
     <a href="https://github.com/switchman-dev/switchman" class="btn-nav-ghost" aria-label="View on GitHub">GitHub</a>
-    <a href="pro/index.html" class="btn-nav-ghost">Pro</a>
     <a href="https://npmjs.com/package/switchman-dev" class="btn-nav-solid">Install free</a>
   </div>
 </nav>
@@ -371,8 +372,7 @@
       <span class="install-hint">then: <code>switchman start "your goal"</code> → <code>switchman review</code></span>
     </div>
 
-    <!-- Updated pro note: surfaces the login gate naturally -->
-    <p class="hero-pro-note">Hit amber? <a href="activate/index.html">Log in free</a> to see exactly what's conflicting. Need history and team sharing? <a href="pro/index.html">Pro — $19/month</a>.</p>
+    <p class="hero-pro-note">Open source, MIT licensed, and fully usable without an account. Install it, run your agents, and review the session locally.</p>
   </div>
 
   <!-- Desktop terminal -->
@@ -538,53 +538,31 @@
 <section class="pricing-strip reveal" id="pricing" aria-labelledby="pricing-heading">
   <div class="pricing-inner">
     <div class="section-header" style="margin-bottom:0;">
-      <span class="tag">Pricing</span>
-      <h2 id="pricing-heading">Free for every session. Pro for every team.</h2>
-      <p class="section-sub" style="margin-bottom:0;">Free gives you the full review experience — forever, no limits. Log in free to unlock issue details. Pro adds history, team sharing, and cross-session intelligence.</p>
+      <span class="tag">Open source</span>
+      <h2 id="pricing-heading">One product. No login. No paid gate.</h2>
+      <p class="section-sub" style="margin-bottom:0;">Switchman is now a single open source workflow. The local experience, planning, review history, and usage tracking are all available out of the box.</p>
     </div>
     <div class="pricing-grid">
 
       <div class="pricing-card">
-        <div class="pricing-tier">Free</div>
+        <div class="pricing-tier">Switchman</div>
         <div class="pricing-price">$0 <span>forever</span></div>
-        <div class="pricing-desc">The complete session review experience. No card. No trial timer. Log in free with GitHub to unlock amber / red issue detail and 14-day history.</div>
+        <div class="pricing-desc">The full open source workflow. No account and no artificial feature split.</div>
         <ul class="pricing-features">
           <li><code>switchman start</code> with unlimited local agents</li>
           <li><code>switchman review</code> — full session summary after every run</li>
           <li>Semantic overlap and interface mismatch detection</li>
           <li>Green / amber / red merge confidence score</li>
-          <li>Log in free → full amber / red issue breakdown</li>
-          <li>Log in free → 14-day session history</li>
+          <li>Searchable session history with <code>switchman review --history</code></li>
+          <li>Cross-session pattern detection with <code>switchman insights</code></li>
           <li>Automatic coordination via MCP — no prompting</li>
           <li><code>switchman status --watch</code> live dashboard</li>
           <li>CI gate and governed landing</li>
-          <li class="dim">90-day session history</li>
-          <li class="dim">Cross-session pattern detection</li>
-          <li class="dim">Team session sharing</li>
-          <li class="dim">AI task planning with repo context</li>
-          <li class="dim">Cost and token tracking over time</li>
+          <li>AI task planning with repo context</li>
+          <li>Cost and token tracking over time</li>
         </ul>
         <div class="pricing-cta">
-          <a href="https://npmjs.com/package/switchman-dev" class="pricing-btn pricing-btn-outline">Install free — no card needed</a>
-        </div>
-      </div>
-
-      <div class="pricing-card featured">
-        <div class="pricing-recommended">Recommended</div>
-        <div class="pricing-tier">Pro</div>
-        <div class="pricing-price">$19 <span>/ month</span></div>
-        <div class="pricing-desc">Everything in Free, plus the over-time layer — history that accumulates, patterns that surface, and reviews your whole team can read.</div>
-        <ul class="pricing-features">
-          <li>Everything in Free</li>
-          <li>90-day searchable session history</li>
-          <li>Cross-session pattern detection — which parts of your codebase consistently flag amber</li>
-          <li>Team session sharing — your tech lead reads the review before the PR</li>
-          <li>AI task planning with repo context and conflict history</li>
-          <li>Cost and token tracking per session, per agent, over time</li>
-          <li>Priority email support — 48-hour response</li>
-        </ul>
-        <div class="pricing-cta">
-          <a href="pro/index.html" class="pricing-btn pricing-btn-solid">Get Pro — $19/month</a>
+          <a href="https://npmjs.com/package/switchman-dev" class="pricing-btn pricing-btn-solid">Install from npm</a>
         </div>
       </div>
 
@@ -598,7 +576,7 @@
   <p>Open source · MIT licensed · Free forever · No card needed</p>
   <div class="cta-btns">
     <a href="https://npmjs.com/package/switchman-dev" class="btn-cta">Install free — no card needed</a>
-    <a href="pro/index.html" class="btn-outline">Get Pro — $19/month ↗</a>
+    <a href="https://github.com/switchman-dev/switchman" class="btn-outline">View on GitHub ↗</a>
   </div>
 </section>
 </main>
@@ -611,7 +589,6 @@
     <a href="https://discord.gg/pnT8BEC4D">Discord</a>
     <a href="https://github.com/switchman-dev/switchman/issues">Issues</a>
     <a href="https://npmjs.com/package/switchman-dev">npm</a>
-    <a href="pro/index.html">Pro</a>
     <a href="terms/index.html">Terms</a>
     <a href="privacy/index.html">Privacy</a>
   </div>
@@ -637,7 +614,7 @@ const LINES = [
   { t:800,  agent:'sys', msg:'reading 3 worktrees  ·  analysing session output', cls:'' },
   { t:1400, agent:'sys', msg:'agent-1  →  JWT middleware  ·  15-min expiry  ·  src/api/auth/', cls:'tl-ok' },
   { t:2000, agent:'sys', msg:'agent-2  →  User model  ·  email + passwordHash  ·  src/db/', cls:'tl-ok' },
-  { t:2600, agent:'sys', msg:'agent-3  →  14 tests  ·  login, registration, token refresh', cls:'tl-ok' },
+  { t:2600, agent:'sys', msg:'agent-3  →  14 tests  ·  auth middleware, sessions, refresh flow', cls:'tl-ok' },
   { t:3300, agent:'sys', msg:'checking semantic coherence across worktrees...', cls:'' },
   { t:4100, agent:'sys', msg:'⚠  MISMATCH   middleware expects req.user.id', cls:'tl-warn' },
   { t:4500, agent:'sys', msg:'⚠  MISMATCH   User schema has userId — not id', cls:'tl-warn' },
@@ -645,7 +622,7 @@ const LINES = [
   { t:5800, agent:'sys', msg:'CI gate  ·  passing', cls:'tl-ok' },
   { t:6400, agent:'sys', msg:'─────────────────────────────────────────', cls:'' },
   { t:6700, agent:'sys', msg:'confidence   AMBER — review flagged items before merging', cls:'tl-warn' },
-  { t:7200, agent:'sys', msg:'→ log in free to see full issue breakdown', cls:'tl-info' },
+  { t:7200, agent:'sys', msg:'→ flagged issues surfaced in the review before merge', cls:'tl-info' },
   { t:7900, agent:'sys', msg:'session took 4m 12s  ·  would have shipped a runtime bug', cls:'tl-info' },
 ];
 
