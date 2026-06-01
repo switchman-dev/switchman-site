@@ -178,9 +178,53 @@
   /* COMMAND SHOWCASE */
   .cmd-showcase { margin-top:32px; display:flex; flex-direction:column; gap:12px; }
   .cmd-block { background:var(--bg-card); border:1px solid var(--border); border-radius:10px; padding:16px 20px; font-family:var(--mono); font-size:13px; }
-  .cmd-block .prompt { color:var(--text-3); } 
+  .cmd-block .prompt { color:var(--text-3); }
   .cmd-block .cmd { color:var(--accent); }
   .cmd-block .comment { color:var(--text-3); font-size:11px; margin-top:4px; }
+
+  /* DEMO BANNER */
+  .demo-banner { background:linear-gradient(135deg,rgba(92,242,199,0.06) 0%,rgba(92,242,199,0.02) 100%); border:1px solid rgba(92,242,199,0.18); border-radius:12px; padding:28px 32px; display:flex; align-items:center; justify-content:space-between; gap:24px; margin-top:32px; flex-wrap:wrap; }
+  .demo-banner-text h3 { font-size:16px; font-weight:600; color:var(--text); margin-bottom:6px; }
+  .demo-banner-text p  { font-size:14px; color:var(--text-2); line-height:1.6; max-width:500px; }
+  .demo-cmd { font-family:var(--mono); font-size:13px; background:var(--bg-card); border:1px solid var(--border); border-radius:8px; padding:10px 18px; color:var(--accent); white-space:nowrap; }
+
+  /* AUTO-TRIGGER SECTION */
+  .autotrigger-section { background:var(--bg-card); border-top:1px solid var(--border); border-bottom:1px solid var(--border); padding:112px 36px; }
+  .autotrigger-inner { max-width:960px; margin:0 auto; }
+  .autotrigger-grid { display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-top:40px; }
+  .trigger-card { background:var(--bg); border:1px solid var(--border); border-radius:12px; padding:28px; }
+  .trigger-card.featured { border-color:rgba(92,242,199,0.22); background:rgba(92,242,199,0.03); }
+  .trigger-card-tag { font-family:var(--mono); font-size:10px; letter-spacing:0.08em; text-transform:uppercase; color:var(--accent); opacity:0.72; margin-bottom:12px; }
+  .trigger-card h3 { font-size:15px; font-weight:600; color:var(--text); margin-bottom:8px; }
+  .trigger-card p  { font-size:14px; color:var(--text-2); line-height:1.6; margin-bottom:16px; }
+  .trigger-cmd-block { background:rgba(0,0,0,0.3); border:1px solid var(--border); border-radius:8px; padding:12px 16px; font-family:var(--mono); font-size:12px; color:var(--accent); }
+  .trigger-cmd-block .tc-comment { color:var(--text-3); font-size:11px; margin-top:4px; }
+
+  /* PR COMMENT PREVIEW */
+  .pr-section { max-width:960px; margin:0 auto; padding:112px 36px; }
+  .pr-preview { margin-top:40px; background:var(--bg-card); border:1px solid var(--border); border-radius:12px; overflow:hidden; }
+  .pr-preview-bar { background:var(--bg-raised); border-bottom:1px solid var(--border); padding:12px 20px; display:flex; align-items:center; gap:10px; }
+  .pr-preview-bar-avatar { width:28px; height:28px; border-radius:50%; background:linear-gradient(135deg,var(--accent-dim),var(--accent-glow)); border:1px solid var(--accent-border); display:flex; align-items:center; justify-content:center; font-size:12px; }
+  .pr-preview-bar-label { font-size:13px; color:var(--text-2); }
+  .pr-preview-bar-label strong { color:var(--text); }
+  .pr-preview-bar-badge { margin-left:auto; font-family:var(--mono); font-size:10px; padding:3px 10px; border-radius:99px; }
+  .pr-preview-bar-badge.amber { background:rgba(251,191,36,0.12); border:1px solid rgba(251,191,36,0.28); color:var(--amber); }
+  .pr-preview-body { padding:24px 28px; }
+  .pr-preview-body h4 { font-size:15px; font-weight:600; color:var(--text); margin-bottom:4px; }
+  .pr-preview-body .pr-summary { font-size:13px; color:var(--text-2); margin-bottom:20px; }
+  .pr-table { width:100%; border-collapse:collapse; font-family:var(--mono); font-size:12px; margin-bottom:20px; }
+  .pr-table th { text-align:left; color:var(--text-3); font-weight:400; padding:6px 12px; border-bottom:1px solid var(--border); }
+  .pr-table td { padding:8px 12px; border-bottom:1px solid rgba(34,48,71,0.5); color:var(--text-2); }
+  .pr-table td.amber { color:var(--amber); }
+  .pr-table td.green { color:var(--green); }
+  .pr-signals { margin-bottom:16px; }
+  .pr-signals h5 { font-size:12px; font-weight:600; color:var(--text); margin-bottom:8px; font-family:var(--mono); }
+  .pr-signal-item { font-size:12px; color:var(--text-2); font-family:var(--mono); margin-bottom:4px; display:flex; gap:8px; }
+  .pr-signal-item::before { content:'—'; color:var(--text-3); }
+  .pr-next { font-size:13px; color:var(--text-2); background:var(--bg-raised); border:1px solid var(--border); border-radius:8px; padding:12px 16px; margin-bottom:16px; }
+  .pr-next code { font-family:var(--mono); font-size:12px; color:var(--accent); }
+  .pr-star { font-size:12px; color:var(--text-3); font-family:var(--mono); border-top:1px solid var(--border); padding-top:12px; margin-top:4px; }
+  .pr-star a { color:var(--accent); text-decoration:none; }
 
   /* FEATURES */
   .features-bg { background:var(--bg-card); border-top:1px solid var(--border); border-bottom:1px solid var(--border); padding:112px 36px; }
@@ -230,6 +274,7 @@
     .hero-terminal-mobile { display:block; }
     .hero-left { padding:80px 24px 40px; }
     .nav-center { display:none; }
+    .autotrigger-grid { grid-template-columns:1fr; }
   }
   @media (max-width:700px) {
     .features-grid { grid-template-columns:1fr; }
@@ -237,11 +282,12 @@
     .steps-grid::before { display:none; }
     .step-card { border-right:none; border-bottom:1px solid var(--border); }
     .step-card:last-child { border-bottom:none; }
-    .section,.features-bg,.editors-strip,.cta-section { padding-left:20px; padding-right:20px; }
+    .section,.features-bg,.editors-strip,.cta-section,.autotrigger-section,.pr-section { padding-left:20px; padding-right:20px; }
     footer { padding:28px 20px; }
     .drift-callout { grid-template-columns:1fr; }
     .pain-grid { grid-template-columns:1fr; }
     .pain-banner { padding:40px 20px; }
+    .demo-banner { flex-direction:column; align-items:flex-start; }
   }
   @media (max-width:640px) {
     .btn-nav-solid { display:none; }
@@ -267,9 +313,9 @@
   </a>
   <ul class="nav-center">
     <li><a href="#how">How it works</a></li>
+    <li><a href="#auto">Auto-trigger</a></li>
     <li><a href="#features">Features</a></li>
     <li><a href="#integrations">Integrations</a></li>
-    
     <li><a href="https://github.com/switchman-dev/switchman">GitHub</a></li>
   </ul>
   <div class="nav-end">
@@ -292,7 +338,6 @@
 
     <p class="hero-sub">Run your agents however you want. When they're done, one command tells you if it's safe to merge — before anything touches main.</p>
 
-    <!-- Confidence badges -->
     <div class="confidence-row">
       <div class="conf-badge conf-green">● GREEN</div>
       <div class="conf-badge conf-amber">● AMBER</div>
@@ -300,7 +345,6 @@
       <span class="conf-label">← your answer, in seconds</span>
     </div>
 
-    <!-- For me filter -->
     <div class="for-me">
       <div class="for-me-item"><span class="for-me-check">✓</span> You run Claude Code, Cursor, or Codex in parallel worktrees</div>
       <div class="for-me-item"><span class="for-me-check">✓</span> You want to catch semantic drift before it reaches main</div>
@@ -308,9 +352,7 @@
     </div>
 
     <div class="hero-actions">
-      <a href="https://npmjs.com/package/switchman-dev" class="btn-cta" aria-label="Install Switchman free from npm">
-        Install now
-      </a>
+      <a href="https://npmjs.com/package/switchman-dev" class="btn-cta" aria-label="Install Switchman free from npm">Install now</a>
       <a href="#how" class="btn-outline">See how it works ↓</a>
     </div>
 
@@ -324,15 +366,16 @@
     <p class="hero-pro-note">Open source, MIT licensed. No setup required — use it after your agents finish, before you merge.</p>
   </div>
 
-  <!-- Desktop terminal -->
   <div class="hero-right" aria-hidden="true">
     <div class="terminal-card" id="terminal-desktop">
       <div class="term-bar">
         <div class="tdot tdot-r"></div><div class="tdot tdot-y"></div><div class="tdot tdot-g"></div>
-        <span class="term-label">switchman review --pr-ready --all-worktrees</span>
+        <span class="term-label">switchman demo</span>
       </div>
-      <div class="term-body" id="term-output-desktop">
-        <span class="tl-cursor"></span>
+      <div class="term-body">
+        <div style="color:#5CF2C7;font-family:var(--mono);font-size:12.5px;line-height:1.8;">$ switchman demo</div>
+        <div id="term-lines-desktop"></div>
+        <div id="term-cursor-desktop" style="display:inline-block;width:7px;height:13px;background:#5CF2C7;border-radius:1px;vertical-align:middle;animation:blink 1.1s step-end infinite;"></div>
       </div>
     </div>
   </div>
@@ -343,10 +386,12 @@
   <div class="terminal-card" id="terminal-mobile">
     <div class="term-bar">
       <div class="tdot tdot-r"></div><div class="tdot tdot-y"></div><div class="tdot tdot-g"></div>
-      <span class="term-label">switchman review --pr-ready --all-worktrees</span>
+      <span class="term-label">switchman demo</span>
     </div>
-    <div class="term-body" id="term-output-mobile">
-      <span class="tl-cursor"></span>
+    <div class="term-body">
+      <div style="color:#5CF2C7;font-family:var(--mono);font-size:12.5px;line-height:1.8;">$ switchman demo</div>
+      <div id="term-lines-mobile"></div>
+      <div id="term-cursor-mobile" style="display:inline-block;width:7px;height:13px;background:#5CF2C7;border-radius:1px;vertical-align:middle;animation:blink 1.1s step-end infinite;"></div>
     </div>
   </div>
 </div>
@@ -417,6 +462,92 @@
       <div class="comment"># CI gate — fails if confidence is red</div>
     </div>
   </div>
+
+  <!-- Try it in 2 minutes -->
+  <div class="demo-banner">
+    <div class="demo-banner-text">
+      <h3>Try it in 2 minutes — no repo needed</h3>
+      <p>Creates a throwaway repo, runs two agents that conflict, and shows you an amber catch in real time. The fastest way to see what Switchman actually does.</p>
+    </div>
+    <div class="demo-cmd">$ switchman demo</div>
+  </div>
+</section>
+
+<!-- ─── AUTO-TRIGGER ──────────────────────────────────────────────────────── -->
+<div class="autotrigger-section reveal" id="auto" role="region" aria-labelledby="auto-heading">
+  <div class="autotrigger-inner">
+    <div class="section-header" style="margin-bottom:0;">
+      <span class="tag">Auto-trigger</span>
+      <h2 id="auto-heading">Runs without thinking about it.</h2>
+      <p class="section-sub" style="margin-bottom:0;">Install once, forget about it. Switchman fires automatically when your agents finish — no manual step, no context switch, no forgetting.</p>
+    </div>
+    <div class="autotrigger-grid">
+      <div class="trigger-card featured">
+        <div class="trigger-card-tag">Claude Code — one command</div>
+        <h3>Hook into every session end</h3>
+        <p>Installs a Stop hook in your repo's <code style="font-family:var(--mono);font-size:12px;color:var(--accent)">.claude/settings.local.json</code>. Every time a Claude Code session ends, Switchman runs silently in the background. Nothing else to configure.</p>
+        <div class="trigger-cmd-block">
+          $ switchman claude hooks install
+          <div class="tc-comment"># runs switchman agent-complete automatically on session end</div>
+        </div>
+      </div>
+      <div class="trigger-card">
+        <div class="trigger-card-tag">Watch mode — any agent</div>
+        <h3>Scan when worktrees go quiet</h3>
+        <p>Polls all worktrees continuously. When activity stops for 5 seconds, a scan fires automatically. Works with any agent — no hook support required.</p>
+        <div class="trigger-cmd-block">
+          $ switchman watch
+          <div class="tc-comment"># or run as a background daemon:</div>
+          $ switchman monitor start
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── PR COMMENT ────────────────────────────────────────────────────────── -->
+<section class="pr-section reveal" id="ci" aria-labelledby="pr-heading">
+  <div class="section-header">
+    <span class="tag">CI &amp; PR integration</span>
+    <h2 id="pr-heading">The report lives where review already happens.</h2>
+    <p class="section-sub">One command drops a GitHub Actions workflow that posts the merge confidence result as a PR comment — visible to your whole team, not just you.</p>
+  </div>
+
+  <div class="cmd-showcase" style="margin-bottom:32px;">
+    <div class="cmd-block">
+      <div><span class="prompt">$</span> <span class="cmd">switchman gate install-ci</span></div>
+      <div class="comment"># drops .github/workflows/switchman-gate.yml — done</div>
+    </div>
+  </div>
+
+  <div class="pr-preview">
+    <div class="pr-preview-bar">
+      <div class="pr-preview-bar-avatar">🤖</div>
+      <span class="pr-preview-bar-label"><strong>switchman-bot</strong> commented on this pull request</span>
+      <span class="pr-preview-bar-badge amber">● AMBER</span>
+    </div>
+    <div class="pr-preview-body">
+      <h4>Switchman Merge Confidence</h4>
+      <p class="pr-summary">🟡 <strong>Amber</strong> — Review before merging. Parallel agent changes detected.</p>
+      <table class="pr-table">
+        <tr><th>Signal</th><th>Value</th></tr>
+        <tr><td>Merge confidence</td><td class="amber">amber</td></tr>
+        <tr><td>Gate status</td><td class="tl-red" style="color:var(--red)">blocked</td></tr>
+        <tr><td>AI gate</td><td>warn</td></tr>
+        <tr><td>Non-compliant worktrees</td><td>1</td></tr>
+        <tr><td>Stale worktrees</td><td class="green">0</td></tr>
+      </table>
+      <div class="pr-signals">
+        <h5>Review Signals</h5>
+        <div class="pr-signal-item">Semantic conflicts: 1</div>
+        <div class="pr-signal-item">Ownership conflicts: 1</div>
+      </div>
+      <div class="pr-next">
+        Review flagged worktrees locally with <code>switchman review --pr-ready --all-worktrees</code> before merging.
+      </div>
+      <div class="pr-star">⭐ Switchman caught a risky merge? <a href="https://github.com/switchman-dev/switchman">Star us on GitHub</a> — the ask only appears when it's earned it.</div>
+    </div>
+  </div>
 </section>
 
 <!-- ─── FEATURES ──────────────────────────────────────────────────────────── -->
@@ -455,7 +586,7 @@
       <div class="feat">
         <div class="feat-tag">CI integration</div>
         <h3>switchman gate ci</h3>
-        <p>Blocks merges when confidence is red. Runs in GitHub Actions with a single workflow step. The last line of defence before anything touches main.</p>
+        <p>Blocks merges when confidence is red. One command installs a GitHub Actions workflow. Posts the result as a PR comment visible to your whole team.</p>
       </div>
       <div class="feat">
         <div class="feat-tag">Coordination (optional)</div>
@@ -465,7 +596,7 @@
       <div class="feat">
         <div class="feat-tag">Visibility</div>
         <h3>Live session dashboard</h3>
-        <p><code>switchman status --watch</code> — what's running, blocked, or done across all agents. The thing developers leave open on a second screen.</p>
+        <p><code style="font-family:var(--mono);font-size:12px">switchman status --watch</code> — what's running, blocked, or done across all agents. The thing developers leave open on a second screen.</p>
       </div>
     </div>
   </div>
@@ -478,7 +609,7 @@
     <h2 id="integrations-heading">Use whatever agents you already use.</h2>
     <p class="editors-note">No changes to your workflow. Run Claude Code, Cursor, Codex, or Aider however you normally would — then run Switchman when they're done.</p>
     <div class="editors-pills">
-      <div class="pill pill-featured"><span class="pill-dot"></span>Claude Code <span class="pill-badge">Native MCP</span></div>
+      <div class="pill pill-featured"><span class="pill-dot"></span>Claude Code <span class="pill-badge">Native MCP + hooks</span></div>
       <div class="pill pill-featured"><span class="pill-dot"></span>Cursor <span class="pill-badge">Native MCP</span></div>
       <div class="pill pill-featured"><span class="pill-dot"></span>OpenAI Codex <span class="pill-badge">Native MCP</span></div>
       <div class="pill"><span class="pill-dot pill-dot-dim"></span>Windsurf <span class="pill-badge-cli">MCP install</span></div>
@@ -490,7 +621,6 @@
     </div>
   </div>
 </section>
-
 
 <!-- ─── FINAL CTA ─────────────────────────────────────────────────────────── -->
 <section class="cta-section reveal" aria-label="Call to action">
@@ -505,7 +635,7 @@
 
 <!-- ─── FOOTER ────────────────────────────────────────────────────────────── -->
 <footer role="contentinfo">
-  <span>switchman.dev — MIT License — Built by <a href="https://recio.co" style="color:var(--text-3);">Recio Ltd</a></span>
+  <span>switchman.dev — MIT License</span>
   <div class="footer-links">
     <a href="https://github.com/switchman-dev/switchman">GitHub</a>
     <a href="https://discord.gg/pnT8BEC4D">Discord</a>
@@ -528,51 +658,65 @@ function copyInstall(el) {
   setTimeout(() => { el.classList.remove('copied'); el.querySelector('.copy-hint').textContent = 'copy'; }, 2000);
 }
 
-const LINES = [
-  { t:300,  msg:'$ switchman review --pr-ready --all-worktrees', cls:'tl-info' },
-  { t:900,  msg:'scanning 3 worktrees...', cls:'' },
-  { t:1500, msg:'agent-1  →  JWT middleware · src/api/auth/', cls:'tl-ok' },
-  { t:2000, msg:'agent-2  →  User model · src/db/schema/', cls:'tl-ok' },
-  { t:2500, msg:'agent-3  →  14 auth tests · src/tests/', cls:'tl-ok' },
-  { t:3200, msg:'checking semantic coherence...', cls:'' },
-  { t:4000, msg:'⚠  DRIFT   middleware expects req.user.id', cls:'tl-warn' },
-  { t:4500, msg:'⚠  DRIFT   schema has userId — not id', cls:'tl-warn' },
-  { t:5000, msg:'interface contradiction: agent-1 ↔ agent-2', cls:'tl-warn' },
-  { t:5700, msg:'CI gate · passing', cls:'tl-ok' },
-  { t:6300, msg:'─────────────────────────────────────────', cls:'' },
-  { t:6600, msg:'confidence   AMBER — review before merging', cls:'tl-warn' },
-  { t:7200, msg:'PR report written to .switchman/review.md', cls:'tl-info' },
-  { t:7800, msg:'caught a runtime bug before it reached main ✓', cls:'tl-ok' },
+const DEMO_LINES = [
+  { t: 400,  text: 'creating two agent worktrees...', color: '#6e7681' },
+  { t: 900,  text: '✓  agent-1  →  src/api/auth.ts', color: '#4ade80' },
+  { t: 1300, text: '✓  agent-2  →  src/db/schema.ts', color: '#4ade80' },
+  { t: 1800, text: 'agents working independently...', color: '#6e7681', gap: true },
+  { t: 2600, text: 'checking semantic coherence...', color: '#6e7681' },
+  { t: 3400, text: '⚠  DRIFT    agent-1 expects req.user<span style="color:#f87171">.id</span>', color: '#fbbf24', html: true },
+  { t: 3900, text: '⚠  DRIFT    agent-2 schema has <span style="color:#f87171">userId</span> — not <span style="color:#f87171">id</span>', color: '#fbbf24', html: true },
+  { t: 4400, text: '⚠  CONFLICT interface contradiction · agent-1 ↔ agent-2', color: '#fbbf24' },
+  { t: 5000, text: '──────────────────────────────────────────────', color: '#30363d', gap: true },
+  { t: 5200, text: 'AMBER', color: '#fbbf24', badge: true },
+  { t: 5800, text: 'caught a runtime bug before it reached main  ✓', color: '#4ade80', gap: true },
+  { t: 6400, text: 'want to see more?  switchman review --pr-ready', color: '#5CF2C7', small: true },
 ];
 
-function runTerminal(outputId) {
-  const out = document.getElementById(outputId);
-  if (!out) return null;
-  const cursor = out.querySelector('.tl-cursor');
-  let running = false;
-  let timers = [];
+function renderDemoLine(container, l) {
+  const div = document.createElement('div');
+  div.style.opacity = '0';
+  div.style.transition = 'opacity 0.15s ease';
+  div.style.fontFamily = 'var(--mono)';
+  div.style.fontSize = '12.5px';
+  div.style.lineHeight = '1.8';
+  if (l.gap) div.style.marginTop = '8px';
 
-  function addLine(line) {
-    const div = document.createElement('div');
-    div.className = 'term-line';
-    div.innerHTML = `<span class="tl-time">${(line.t/1000).toFixed(1).padStart(4)}s</span><span class="tl-agent sys">→</span><span class="tl-msg ${line.cls}">${line.msg}</span>`;
-    out.insertBefore(div, cursor);
-    out.scrollTop = out.scrollHeight;
+  if (l.badge) {
+    div.innerHTML = '<span style="background:rgba(251,191,36,0.15);border:1px solid rgba(251,191,36,0.35);color:#fbbf24;font-size:12px;font-weight:600;padding:3px 10px;border-radius:5px;letter-spacing:0.04em;">AMBER</span><span style="color:#e6eef8;margin-left:10px;">review before merging</span>';
+  } else if (l.html) {
+    div.innerHTML = '<span style="color:' + l.color + ';">' + l.text + '</span>';
+  } else if (l.small) {
+    div.innerHTML = '<span style="color:' + l.color + ';font-size:12px;">' + l.text + '</span>';
+  } else {
+    div.innerHTML = '<span style="color:' + l.color + ';">' + l.text + '</span>';
   }
 
-  function start() {
-    if (running) return;
-    running = true;
-    out.querySelectorAll('.term-line').forEach(l => l.remove());
-    timers = LINES.map(line => setTimeout(() => addLine(line), line.t));
-    timers.push(setTimeout(() => { running = false; timers.push(setTimeout(start, 2000)); }, 10000));
-  }
-
-  return start;
+  container.appendChild(div);
+  requestAnimationFrame(() => requestAnimationFrame(() => { div.style.opacity = '1'; }));
 }
 
-const startDesktop = runTerminal('term-output-desktop');
-const startMobile  = runTerminal('term-output-mobile');
+function runDemo(linesId) {
+  const container = document.getElementById(linesId);
+  if (!container) return;
+  let restarting = false;
+
+  function run() {
+    container.innerHTML = '';
+    restarting = false;
+    DEMO_LINES.forEach(l => {
+      setTimeout(() => { if (!restarting) renderDemoLine(container, l); }, l.t);
+    });
+    setTimeout(() => {
+      if (!restarting) { restarting = true; setTimeout(run, 2500); }
+    }, 8500);
+  }
+
+  return run;
+}
+
+const startDesktop = runDemo('term-lines-desktop');
+const startMobile  = runDemo('term-lines-mobile');
 
 const tObs = new IntersectionObserver(entries => {
   if (entries[0].isIntersecting && startDesktop) { startDesktop(); tObs.disconnect(); }
